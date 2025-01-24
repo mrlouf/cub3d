@@ -4,23 +4,39 @@ NAME		:= 	cub3D
 
 # -=-=-=-=-    PATH -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
 
-INCS		:=	includes
+INCS		:=	incs
 
-LIBFTDIR	:=	libft
+LIBFTDIR	:=	libs/libft
+PRINTFDIR	:= 	libs/libft/ft_printf/
 
-MLXDIR		:= 	MLX42
+MLXDIR		:= 	libs/mlx42
+MLX42LIB	:=	$(MLXDIR)/build/libmlx42.a
 
 # -=-=-=-=-    FILES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
-SRC			:=	
+SRC 		:= 	main/main.c			\
+				main/cub3d.c		\
+				init/init.c			
 
-MLX_FLAG	:=	.mlx_flag
+SRCDIR		= src
+SRCS		= $(addprefix $(SRCDIR)/, $(SRC))
 
-HEADER		:=	$(INCLUDES)/
+OBJDIR		= .obj
+OBJS		= $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
+OBJDIRS		= $(OBJDIR)/main		\
+			$(OBJDIR)/parser		\
+			$(OBJDIR)/utils
+
+DEPDIR		= .dep
+DEPS		= $(addprefix $(DEPDIR)/, $(SRC:.c=.d))
+DEPDIRS		= $(DEPDIR)/main		\
+			$(DEPDIR)/parser		\
+			$(DEPDIR)/utils
+
+HEADER		:=	main/cub3d.h		\
+				init/init.h			
 
 MAKE		:=	Makefile
-
-OBJS		:=	$(SRC:%.c=%.o)
 
 LIBS		:=	$(LIBFTDIR)/libft.a $(MLXDIR)/build/libmlx42.a /usr/lib/x86_64-linux-gnu/libglfw.so \
 				-lm -ldl -Ofast -pthread -lglfw
@@ -31,34 +47,60 @@ CC			:=	-cc
 
 CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g#-lglfw
 
-INCLUDE		:=	-Iincludes
+DFLAGS		:= 	-MMD -MP 
+
+INCLUDE		:=	-I./$(INCS) -I./$(LIBFTDIR)/includes -I./$(MLXDIR)/include
+
+RM			:=	/bin/rm -fr
 
 # -=-=-=-=-    TARGETS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
-all: make_libft libmlx $(NAME)
+all: libft mlx $(NAME)
 
-libmlx:
-	@cmake -DDEBUG=1 $(MLXDIR) -B $(MLXDIR)/build && make -C $(MLXDIR)/build -j4
+libft:
+	make -C $(LIBFTDIR)
 
-%.o: %.c $(HEADER) Makefile
-	$(CC) $(CFLAGS) $(INCLUDE) $(LIBS) -c $< -o $@
+mlx:
+	@if [ ! -d "$(MLXDIR)" ]; then \
+		echo "MLX42 library not found, cloning from GitHub..."; \
+		git clone https://github.com/42-Fundacion-Telefonica/MLX42.git $(MLXDIR); \
+	fi
+	@if [ ! -d "$(MLXDIR)/build/" ]; then \
+		@cmake -DDEBUG=1 $(MLXDIR) -B $(MLXDIR)/build && make -C $(MLXDIR)/build -j4; \
+	fi
 
-$(NAME): $(OBJS) $(SRCS) Makefile includes/fdf.h
+$(OBJDIR)/main/main.o: $(SRCDIR)/main/main.c Makefile
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(DFLAGS) $(INCLUDE) -c $< -o $@ -MF $(DEPDIR)/$(<:.c=.d) -MT $@
+	@mkdir -p $(DEPDIR)/main
+	@mv $(DEPDIR)$(<:.c=.d) $(DEPDIR)/main/
+
+# -=-=-=-=-    RULES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile
+	@mkdir -p $(@D)
+	$(CC) $(FLAGS) $(DFLAGS) $(INCLUDE) -c $< -o $@
+	@mkdir -p $(DEPDIR) $(DEPDIRS)
+	@mv $(patsubst %.o,%.d,$@) $(subst $(OBJDIR),$(DEPDIR),$(@D))/
+
+$(NAME): $(OBJS) $(SRCS) Makefile
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) $(LIBS) -o $(NAME)
-
-make_libft:
-	make -C libft
 
 bonus: all
 
 clean:
-	/bin/rm -f $(OBJS)
+	@make clean -C $(LIBFTDIR)
+	@make clean -C $(PRINTFDIR)
+	@$(RM) $(OBJDIR) $(DEPDIR) 
+	@echo "$(RED)Cleaned object files and dependencies$(DEF_COLOR)"
 
 fclean: clean
-	/bin/rm -f $(NAME)
-	make fclean -C libft
-	rm -fr MLX42/build
+	@$(RM) minishell $(PRINTFDIR)libftprintf.a $(LIBFTDIR)libft.a
+	@echo "$(RED)Cleaned all binaries$(DEF_COLOR)"
+	@$(RM) MLX42/build
 
 re: fclean all
 
-.PHONY:  all clean fclean re bonus make_libft libmlx
+-include $(OBJS:.o=.d)
+
+.PHONY:  all clean fclean re bonus libft mlx
