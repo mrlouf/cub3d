@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 18:24:55 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/25 12:42:53 by nponchon         ###   ########.fr       */
+/*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
+/*   Updated: 2025/01/25 12:46:54 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../incs/cub3d.h"
+#include "../../incs/raycast.h"
 
-int	cub_cub3d(char **av)
+int	cub_raycast(void)
 {
-	(void)av;
-	if (cub_init())
-		return (1);
-	if (cub_parse())
-		return (1);
-	if (cub_raycast())
-		return (1);
+	printf("cub_raycast\n");
 	return (0);
 }

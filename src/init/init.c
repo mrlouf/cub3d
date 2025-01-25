@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/24 19:46:06 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/25 12:47:22 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	cub_init(void)
 {
-	ft_printf("cub_init\n");
+	printf("cub_init\n");
 	return (0);
 }

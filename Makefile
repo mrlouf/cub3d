@@ -16,7 +16,9 @@ MLX42LIB	:=	$(MLXDIR)/build/libmlx42.a
 
 SRC 		:= 	main/main.c			\
 				main/cub3d.c		\
-				init/init.c			
+				init/init.c			\
+				parse/parse.c		\
+				raycast/raycast.c
 
 SRCDIR		= src
 SRCS		= $(addprefix $(SRCDIR)/, $(SRC))
@@ -33,8 +35,10 @@ DEPDIRS		= $(DEPDIR)/main		\
 			$(DEPDIR)/parser		\
 			$(DEPDIR)/utils
 
-HEADER		:=	main/cub3d.h		\
-				init/init.h			
+HEADER		:=	incs/cub3d.h		\
+				incs/init.h			\
+				incs/parse.h		\
+				incs/raycast.h		
 
 MAKE		:=	Makefile
 
@@ -66,22 +70,15 @@ mlx:
 		git clone https://github.com/42-Fundacion-Telefonica/MLX42.git $(MLXDIR); \
 	fi
 	@if [ ! -d "$(MLXDIR)/build/" ]; then \
-		@cmake -DDEBUG=1 $(MLXDIR) -B $(MLXDIR)/build && make -C $(MLXDIR)/build -j4; \
+		cmake -DDEBUG=1 $(MLXDIR) -B $(MLXDIR)/build && make -C $(MLXDIR)/build -j4; \
 	fi
-
-$(OBJDIR)/main/main.o: $(SRCDIR)/main/main.c Makefile
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) $(DFLAGS) $(INCLUDE) -c $< -o $@ -MF $(DEPDIR)/$(<:.c=.d) -MT $@
-	@mkdir -p $(DEPDIR)/main
-	@mv $(DEPDIR)$(<:.c=.d) $(DEPDIR)/main/
 
 # -=-=-=-=-    RULES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile
 	@mkdir -p $(@D)
-	$(CC) $(FLAGS) $(DFLAGS) $(INCLUDE) -c $< -o $@
-	@mkdir -p $(DEPDIR) $(DEPDIRS)
-	@mv $(patsubst %.o,%.d,$@) $(subst $(OBJDIR),$(DEPDIR),$(@D))/
+	@mkdir -p $(DEPDIR)/$(dir $<)
+	$(CC) $(CFLAGS) $(DFLAGS) $(INCLUDE) -c $< -o $@ -MF $(DEPDIR)/$(<:.c=.d) -MT $@
 
 $(NAME): $(OBJS) $(SRCS) Makefile
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) $(LIBS) -o $(NAME)
@@ -101,6 +98,6 @@ fclean: clean
 
 re: fclean all
 
--include $(OBJS:.o=.d)
+-include $(DEPS)
 
 .PHONY:  all clean fclean re bonus libft mlx
