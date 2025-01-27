@@ -6,14 +6,14 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/25 12:46:48 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:29:53 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
 
-int	cub_parse(void)
+int	cub_parse(t_cub *cub)
 {
-	printf("cub_parse\n");
+	(void)cub;
 	return (0);
 }

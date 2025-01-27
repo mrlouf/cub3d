@@ -18,7 +18,9 @@ SRC 		:= 	main/main.c			\
 				main/cub3d.c		\
 				init/init.c			\
 				parse/parse.c		\
-				raycast/raycast.c
+				raycast/raycast.c	\
+				raycast/draw.c		\
+				utils/utils.c
 
 SRCDIR		= src
 SRCS		= $(addprefix $(SRCDIR)/, $(SRC))
@@ -38,7 +40,8 @@ DEPDIRS		= $(DEPDIR)/main		\
 HEADER		:=	incs/cub3d.h		\
 				incs/init.h			\
 				incs/parse.h		\
-				incs/raycast.h		
+				incs/raycast.h		\
+				incs/utils.h
 
 MAKE		:=	Makefile
 
@@ -49,11 +52,11 @@ LIBS		:=	$(LIBFTDIR)/libft.a $(MLXDIR)/build/libmlx42.a /usr/lib/x86_64-linux-gn
 
 CC			:=	-cc
 
-CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g#-lglfw
+CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g -fsanitize=address#-lglfw
 
 DFLAGS		:= 	-MMD -MP 
 
-INCLUDE		:=	-I./$(INCS) -I./$(LIBFTDIR)/includes -I./$(MLXDIR)/include
+INCLUDE		:=	-I/incs -I./$(LIBFTDIR)/includes -I./$(MLXDIR)/include
 
 RM			:=	/bin/rm -fr
 
@@ -92,7 +95,7 @@ clean:
 	@echo "$(RED)Cleaned object files and dependencies$(DEF_COLOR)"
 
 fclean: clean
-	@$(RM) minishell $(PRINTFDIR)libftprintf.a $(LIBFTDIR)libft.a
+	@$(RM) $(NAME) $(PRINTFDIR)libftprintf.a $(LIBFTDIR)libft.a
 	@echo "$(RED)Cleaned all binaries$(DEF_COLOR)"
 	@$(RM) MLX42/build
 

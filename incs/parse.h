@@ -6,15 +6,15 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:36:02 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/25 12:36:34 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/27 10:59:44 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "./cub3d.h"
+# include "cub3d.h"
 
-int	cub_parse(void);
+int	cub_parse(t_cub *cub);
 
 #endif
