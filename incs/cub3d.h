@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/27 14:12:54 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:01:00 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ typedef struct player
 	double		rot_speed;
 }	t_player;
 
+typedef struct s_ray
+{
+	double	camera_x;
+}	t_ray;
+
 typedef struct s_cub
 {
 	int			**matrix;
@@ -48,6 +53,7 @@ typedef struct s_cub
 	mlx_image_t	*img;
 	mlx_t		*mlx;
 	t_player	*player;
+	t_ray		*ray;
 }	t_cub;
 
 // PROTOTYPES

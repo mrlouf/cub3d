@@ -6,12 +6,16 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/27 15:38:51 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:42:53 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/raycast.h"
 
+/*
+	Draws the floor by painting the bottom half of the screen
+	in a certain colour.
+*/
 void	cub_draw_floor(t_cub *cub)
 {
 	uint32_t	i;

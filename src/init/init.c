@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/27 12:58:43 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:54:53 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ static void	cub_init_matrix(t_cub *cub)
 
 int	cub_init(t_cub *cub, char **av)
 {
+	cub->matrix = NULL;
 	cub->map = ft_strdup(av[1]);
 	cub->img = NULL;
 	cub->mlx = NULL;
