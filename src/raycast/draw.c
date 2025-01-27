@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/27 15:42:53 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/27 20:17:39 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,10 @@ void	cub_draw_floor(t_cub *cub)
 		}
 		i++;
 	}
+	mlx_image_to_window(cub->mlx, cub->img, 0, 0);
+}
+
+void	cub_draw(t_cub *cub)
+{
+	cub_draw_floor(cub);
 }

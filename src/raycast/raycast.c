@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/27 15:40:24 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/27 20:29:25 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	cub_hook(void *param)
 
 /*
 	Used to reset the image before drawing the new frame by setting all
-	pixels to black.
+	pixels to a certain colour.
 */
 static void	cub_reset_image(t_cub *cub)
 {
@@ -45,6 +45,24 @@ static void	cub_reset_image(t_cub *cub)
 	}
 }
 
+static void	cub_draw_minimap(t_cub *cub)
+{
+	int	i;
+	int	j;
+
+	i = WINDOW_WIDTH / 3;
+	while (i < WINDOW_WIDTH / 3 + MINIMAP_WIDTH)
+	{
+		j = MINIMAP_HEIGHT * 3;
+		while (j < WINDOW_HEIGHT)
+		{
+			mlx_put_pixel(cub->img, i, j, 0x009900FF);
+			j++;
+		}
+		i++;
+	}
+}
+
 static void	cub_draw_image(void *param)
 {
 	t_cub		*cub;
@@ -52,7 +70,24 @@ static void	cub_draw_image(void *param)
 	cub = param;
 	cub_reset_image(cub);
 	cub_draw_floor(cub);
+	cub_draw_minimap(cub);
 	mlx_image_to_window(cub->mlx, cub->img, 0, 0);
+}
+
+static void	cub_init_ray(t_cub *cub)
+{
+	int		x;
+
+	x = 0;
+	while (x < WINDOW_WIDTH)
+	{
+		cub->ray->camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
+		cub->ray->dir_x = \
+			cub->player->dir.x + cub->player->plane.x * cub->ray->camera_x;
+		cub->ray->dir_y = \
+			cub->player->dir.y + cub->player->plane.y * cub->ray->camera_x;
+		x++;
+	}
 }
 
 /*
@@ -78,5 +113,6 @@ int	cub_raycast(t_cub *cub)
 {
 	if (cub_init_window(cub))
 		return (1);
+	cub_init_ray(cub);
 	return (0);
 }

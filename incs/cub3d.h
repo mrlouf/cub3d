@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/27 16:01:00 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/27 20:20:01 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,21 @@
 
 // DEFINES
 
-# define WINDOW_WIDTH	320
-# define WINDOW_HEIGHT	200
+# define WINDOW_WIDTH	640
+# define WINDOW_HEIGHT	400
+# define MINIMAP_WIDTH	200
+# define MINIMAP_HEIGHT	100
 # define TILE_SIZE		64
 
 // STRUCTURES
 
-typedef struct vector
+typedef struct s_vector
 {
 	double	x;
 	double	y;
 }	t_vector;
 
-typedef struct player
+typedef struct s_player
 {
 	t_vector	pos;
 	t_vector	dir;
@@ -44,6 +46,8 @@ typedef struct player
 typedef struct s_ray
 {
 	double	camera_x;
+	double	dir_x;
+	double	dir_y;
 }	t_ray;
 
 typedef struct s_cub
