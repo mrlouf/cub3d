@@ -6,12 +6,13 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 13:17:07 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 14:59:33 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/init.h"
 
+// ! TO BE DELETED BEFORE SUBMISSION, OBVIOUSLY
 int	g_map[24][24] = {
 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -52,18 +53,23 @@ static int	cub_player_init(t_cub *cub)
 	return (0);
 }
 
+/*
+	Allocates pointers for the minimap matrix.
+	!Currently copies manually the test map defined in the file,
+	!but it will need to be modified to accommodated any other map read.
+*/
 static int	cub_init_minimap(t_cub *cub)
 {
 	int	i;
 	int	j;
 
-	cub->map = ft_calloc(sizeof(int *), WINDOW_HEIGHT + 1);
+	cub->map = ft_calloc(sizeof(int *), 24 + 1);
 	if (!cub->map)
 		return (1);
 	i = -1;
-	while (++i < WINDOW_HEIGHT)
+	while (++i < 25)
 	{
-		cub->map[i] = ft_calloc(sizeof(int), WINDOW_WIDTH + 1);
+		cub->map[i] = ft_calloc(sizeof(int), 24 + 1);
 		if (!cub->map[i])
 		{
 			ft_free_narray((void **)cub->map, i);
@@ -82,9 +88,6 @@ static int	cub_init_minimap(t_cub *cub)
 
 int	cub_init(t_cub *cub, char **av)
 {
-	cub->ray = malloc(sizeof(t_ray));
-	if (!cub->ray)
-		return (1);
 	cub->map = NULL;
 	cub->filename = ft_strdup(av[1]);
 	if (!cub->filename)

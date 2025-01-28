@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 13:16:41 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 14:59:42 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,20 @@ typedef struct s_ray
 	double	camera_x;
 	double	dir_x;
 	double	dir_y;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	double	sided_x;
+	double	sided_y;
+	double	delta_dx;
+	double	delta_dy;
+	double	wall_d;
+	int		side;
+	int		wall_h;
+	int		start;
+	int		end;
+	double	wall_x;
 }	t_ray;
 
 typedef struct s_cub
@@ -64,7 +78,6 @@ typedef struct s_cub
 	mlx_image_t	*img;
 	mlx_t		*mlx;
 	t_player	*player;
-	t_ray		*ray;
 }	t_cub;
 
 // PROTOTYPES
