@@ -28,14 +28,16 @@ SRCS		= $(addprefix $(SRCDIR)/, $(SRC))
 OBJDIR		= .obj
 OBJS		= $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 OBJDIRS		= $(OBJDIR)/main		\
-			$(OBJDIR)/parser		\
+			$(OBJDIR)/parse			\
 			$(OBJDIR)/utils
 
 DEPDIR		= .dep
 DEPS		= $(addprefix $(DEPDIR)/, $(SRC:.c=.d))
 DEPDIRS		= $(DEPDIR)/main		\
-			$(DEPDIR)/parser		\
-			$(DEPDIR)/utils
+			$(DEPDIR)/parse			\
+			$(DEPDIR)/utils			\
+			$(DEPDIR)/raycast		\
+			$(DEPDIR)/init
 
 HEADER		:=	incs/cub3d.h		\
 				incs/init.h			\
@@ -50,11 +52,11 @@ LIBS		:=	$(LIBFTDIR)/libft.a $(MLXDIR)/build/libmlx42.a /usr/lib/x86_64-linux-gn
 
 # -=-=-=-=-    FLAGS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
 
-CC			:=	-cc
+CC			:=	cc
 
-CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g -fsanitize=address#-lglfw
+CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g -fsanitize=address
 
-DFLAGS		:= 	-MMD -MP 
+DFLAGS		:= 	-MT $@ -MMD -MP
 
 INCLUDE		:=	-I/incs -I./$(LIBFTDIR)/includes -I./$(MLXDIR)/include
 
@@ -80,10 +82,11 @@ mlx:
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile
 	@mkdir -p $(@D)
-	@mkdir -p $(DEPDIR)/$(dir $<)
-	$(CC) $(CFLAGS) $(DFLAGS) $(INCLUDE) -c $< -o $@ -MF $(DEPDIR)/$(<:.c=.d) -MT $@
+	$(CC) $(CFLAGS) $(INCLUDE) -MT $@ -MMD -MP -c $< -o $@
+	@mkdir -p $(DEPDIR) $(DEPDIRS)
+	@mv $(patsubst %.o,%.d,$@) $(subst $(OBJDIR),$(DEPDIR),$(@D))/
 
-$(NAME): $(OBJS) $(SRCS) Makefile
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) $(LIBS) -o $(NAME)
 
 bonus: all
