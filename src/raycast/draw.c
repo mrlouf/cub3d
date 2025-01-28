@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 12:38:56 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:20:11 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ static void	cub_reset_image(t_cub *cub)
 	}
 }
 
-static void	cub_draw_minipx(mlx_image_t *img, int j, int i, int colour)
+static void	cub_draw_minipx(t_cub *cub, int j, int i, int colour)
 {
 	int	ii;
 	int	jj;
 
-	ii = i + MINIMAP_PX;
-	jj = j + MINIMAP_PX;
+	ii = i + cub->minimap_px;
+	jj = j + cub->minimap_px;
 	while (i < ii && i < WINDOW_WIDTH)
 	{
 		while (j < jj && j < WINDOW_HEIGHT)
-			mlx_put_pixel(img, j++, i, colour);
-		j -= MINIMAP_PX;
+			mlx_put_pixel(cub->img, j++, i, colour);
+		j -= cub->minimap_px;
 		i++;
 	}
 }
@@ -67,15 +67,15 @@ static void	cub_draw_minimap(t_cub *cub)
 		while (++j < 25)
 		{
 			if (cub->map[i][j] > 0)
-				cub_draw_minipx(cub->img, j * MINIMAP_PX, \
-					i * MINIMAP_PX, 0x66CC00FF);
+				cub_draw_minipx(cub, j * cub->minimap_px, \
+					i * cub->minimap_px, 0x66CC00FF);
 			else
-				cub_draw_minipx(cub->img, j * MINIMAP_PX, \
-					i * MINIMAP_PX, 0x003300FF);
+				cub_draw_minipx(cub, j * cub->minimap_px, \
+					i * cub->minimap_px, 0x003300FF);
 		}
 	}
-	cub_draw_minipx(cub->img, cub->player->pos.y * MINIMAP_PX, \
-		cub->player->pos.x * MINIMAP_PX, 0xFF0000FF);
+	cub_draw_minipx(cub, cub->player->pos.y * cub->minimap_px, \
+		cub->player->pos.x * cub->minimap_px, 0xFF000002);
 }
 
 /*

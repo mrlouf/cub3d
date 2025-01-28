@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 12:20:24 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:17:07 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,10 @@ static int	cub_player_init(t_cub *cub)
 	return (0);
 }
 
-static int	cub_init_matrix(t_cub *cub)
+static int	cub_init_minimap(t_cub *cub)
 {
 	int	i;
+	int	j;
 
 	cub->map = ft_calloc(sizeof(int *), WINDOW_HEIGHT + 1);
 	if (!cub->map)
@@ -69,20 +70,12 @@ static int	cub_init_matrix(t_cub *cub)
 			return (1);
 		}
 	}
-	for (i = 0; i < 24; i++)
+	i = -1;
+	while (++i < 24)
 	{
-		for (int j = 0; j < 24; j++)
-		{
+		j = -1;
+		while (++j < 24)
 			cub->map[i][j] = g_map[i][j];
-		}
-	}
-	for (i = 0; i < 24; i++)
-	{
-		for (int j = 0; j < 24; j++)
-		{
-			printf("%d ", cub->map[i][j]);
-		}
-		printf("\n");
 	}
 	return (0);
 }
@@ -94,9 +87,13 @@ int	cub_init(t_cub *cub, char **av)
 		return (1);
 	cub->map = NULL;
 	cub->filename = ft_strdup(av[1]);
+	if (!cub->filename)
+		return (1);
 	cub->img = NULL;
 	cub->mlx = NULL;
-	cub_init_matrix(cub);
+	cub->minimap_px = 2;
+	if (cub_init_minimap(cub))
+		return (1);
 	if (cub_player_init(cub))
 		return (1);
 	return (0);

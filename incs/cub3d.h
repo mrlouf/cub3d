@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 12:36:42 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:16:41 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define WINDOW_HEIGHT	400
 # define MINIMAP_WIDTH	200
 # define MINIMAP_HEIGHT	100
-# define MINIMAP_PX		4
+# define MINIMAP_PX		10
 # define TILE_SIZE		64
 
 // TEST MAP FOR DEVELOPPING, TO BE DELETED BEFORE SUBMISSION
@@ -57,6 +57,7 @@ typedef struct s_ray
 
 typedef struct s_cub
 {
+	int			minimap_px;
 	int			**px;
 	int			**map;
 	char		*filename;

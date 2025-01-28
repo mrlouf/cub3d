@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 12:04:57 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:23:09 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ static void	cub_hook(void *param)
 	cub = param;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_KP_ADD))
+		while (cub->minimap_px < 10)
+			cub->minimap_px++;
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_KP_SUBTRACT))
+		while (cub->minimap_px > 1)
+			cub->minimap_px--;
 }
 
 static int	cub_init_ray(t_cub *cub)
