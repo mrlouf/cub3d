@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 19:48:22 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 20:01:33 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	cub_hook(void *param)
 
 	cub = param;
 	rotation = 0.05;
-	move = 0.05;
+	move = 0.075;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_KP_ADD))
@@ -102,8 +102,8 @@ void	cub_loop(void *param)
 
 int	cub_raycast(t_cub *cub)
 {
-	if (cub_init_pixels(cub))
-		return (1);
+	//if (cub_init_pixels(cub))
+	//	return (1);
 	if (cub_start(cub))
 		return (1);
 	return (0);

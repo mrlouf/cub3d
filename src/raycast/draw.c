@@ -6,11 +6,12 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 17:05:57 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 21:06:18 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/raycast.h"
+#include "../../incs/utils.h"
 
 /*
 	Used to reset the image before drawing the new frame by setting all
@@ -37,16 +38,16 @@ static void	cub_reset_image(t_cub *cub)
 	as a block of predefined-size instead of a single pixel.
 	Used to zoom in and out of the minimap.
 */
-static void	cub_draw_minipx(t_cub *cub, int j, int i, int colour)
+void	cub_draw_minipx(t_cub *cub, int j, int i, int colour)
 {
 	int	ii;
 	int	jj;
 
 	ii = i + cub->minimap_px;
 	jj = j + cub->minimap_px;
-	while (i < ii && i < WINDOW_WIDTH)
+	while (i < ii && i < WINDOW_WIDTH && i > 0)
 	{
-		while (j < jj && j < WINDOW_HEIGHT)
+		while (j < jj && j < WINDOW_HEIGHT && j > 0)
 			mlx_put_pixel(cub->img, j++, i, colour);
 		j -= cub->minimap_px;
 		i++;
@@ -81,6 +82,8 @@ static void	cub_draw_minimap(t_cub *cub)
 	}
 	cub_draw_minipx(cub, cub->player->pos.y * cub->minimap_px, \
 		cub->player->pos.x * cub->minimap_px, 0xFF000002);
+	cub_dda(cub, cub->player->pos, cub->player->dir, 0xFF000002);
+	printf("px=%f, py=%f, planex=%f, planey=%f\n", cub->player->pos.x, cub->player->pos.y, cub->player->plane.x, cub->player->plane.y);
 }
 
 /*
@@ -267,12 +270,12 @@ void	cub_draw(t_cub *cub)
 {
 	t_ray	ray;
 
-	if (cub_init_pixels(cub))
-		return ;
+	//if (cub_init_pixels(cub))
+	//	return ;
 	cub_reset_image(cub);
 	cub_draw_floor(cub);
 	cub_cast_ray(cub, &ray);
 	cub_draw_minimap(cub);
 	mlx_image_to_window(cub->mlx, cub->img, 0, 0);
-	ft_free_narray((void **)cub->px, WINDOW_HEIGHT);
+	//ft_free_narray((void **)cub->px, WINDOW_HEIGHT);
 }

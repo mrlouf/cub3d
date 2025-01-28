@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 14:59:42 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 20:28:35 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ typedef struct s_player
 	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
-	double		move_speed;
-	double		rot_speed;
+	double		move;
+	double		rotation;
 }	t_player;
 
 typedef struct s_ray
@@ -68,6 +68,15 @@ typedef struct s_ray
 	int		end;
 	double	wall_x;
 }	t_ray;
+
+typedef struct s_delta
+{
+	float	x;
+	float	y;
+	float	dx;
+	float	dy;
+	float	step;
+}	t_delta;
 
 typedef struct s_cub
 {
