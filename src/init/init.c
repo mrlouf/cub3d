@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 11:13:57 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:20:24 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,14 @@ static int	cub_init_matrix(t_cub *cub)
 		{
 			cub->map[i][j] = g_map[i][j];
 		}
+	}
+	for (i = 0; i < 24; i++)
+	{
+		for (int j = 0; j < 24; j++)
+		{
+			printf("%d ", cub->map[i][j]);
+		}
+		printf("\n");
 	}
 	return (0);
 }

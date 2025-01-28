@@ -27,9 +27,6 @@ SRCS		= $(addprefix $(SRCDIR)/, $(SRC))
 
 OBJDIR		= .obj
 OBJS		= $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
-OBJDIRS		= $(OBJDIR)/main		\
-			$(OBJDIR)/parse			\
-			$(OBJDIR)/utils
 
 DEPDIR		= .dep
 DEPS		= $(addprefix $(DEPDIR)/, $(SRC:.c=.d))
