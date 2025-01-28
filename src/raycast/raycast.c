@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 17:47:01 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 19:48:22 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 static void	cub_hook(void *param)
 {
 	t_cub	*cub;
+	double	rotation;
+	double	move;
 
 	cub = param;
+	rotation = 0.05;
+	move = 0.05;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_KP_ADD))
@@ -29,29 +33,37 @@ static void	cub_hook(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_KP_SUBTRACT))
 		if (cub->minimap_px > 1)
 			cub->minimap_px--;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_Q))
-		cub->player->dir.y -= 0.1;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_E))
-		cub->player->dir.y += 0.1;
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
+	{
+		double olddx = cub->player->dir.x;
+		cub->player->dir.x = cub->player->dir.x * cos(-rotation) - cub->player->dir.y * sin(-rotation);
+		cub->player->dir.y = olddx * sin(-rotation) + cub->player->dir.y * cos(-rotation);
+		double oldpx = cub->player->plane.x;
+		cub->player->plane.x = cub->player->plane.x * cos(-rotation) - cub->player->plane.y * sin(-rotation);
+		cub->player->plane.y = oldpx * sin(-rotation) + cub->player->plane.y * cos(-rotation);
+	}
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+	{
+		double olddx = cub->player->dir.x;
+		cub->player->dir.x = cub->player->dir.x * cos(rotation) - cub->player->dir.y * sin(rotation);
+		cub->player->dir.y = olddx * sin(rotation) + cub->player->dir.y * cos(rotation);
+		double oldpx = cub->player->plane.x;
+		cub->player->plane.x = cub->player->plane.x * cos(rotation) - cub->player->plane.y * sin(rotation);
+		cub->player->plane.y = oldpx * sin(rotation) + cub->player->plane.y * cos(rotation);
+	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
 	{
-		if (cub->player->pos.x > 1.1)
-			cub->player->pos.x -= 0.1;
+		if(cub->map[(int)(cub->player->pos.x + cub->player->dir.x * move)][(int)cub->player->pos.y] == 0)
+			cub->player->pos.x += cub->player->dir.x * move;
+		if(cub->map[(int)cub->player->pos.x][(int)(cub->player->pos.y + cub->player->dir.y * move)] == 0)
+			cub->player->pos.y += cub->player->dir.y * move;
 	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
 	{
-		if (cub->player->pos.x < 23.0)
-			cub->player->pos.x += 0.1;
-	}
-		if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
-	{
-		if (cub->player->pos.y > 1.0)
-			cub->player->pos.y -= 0.1;
-	}
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
-	{
-		if (cub->player->pos.y < 23.0)
-			cub->player->pos.y += 0.1;
+		if(cub->map[(int)(cub->player->pos.x + cub->player->dir.x * move)][(int)cub->player->pos.y] == 0)
+			cub->player->pos.x -= cub->player->dir.x * move;
+		if(cub->map[(int)cub->player->pos.x][(int)(cub->player->pos.y + cub->player->dir.y * move)] == 0)
+			cub->player->pos.y -= cub->player->dir.y * move;
 	}
 }
 
