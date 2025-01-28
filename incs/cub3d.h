@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/27 20:20:01 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:07:06 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # define MINIMAP_WIDTH	200
 # define MINIMAP_HEIGHT	100
 # define TILE_SIZE		64
+
+// TEST MAP FOR DEVELOPPING, TO BE DELETED
+
+extern int	g_map[24][24];
 
 // STRUCTURES
 
@@ -52,8 +56,8 @@ typedef struct s_ray
 
 typedef struct s_cub
 {
-	int			**matrix;
-	char		*map;
+	int			**map;
+	char		*filename;
 	mlx_image_t	*img;
 	mlx_t		*mlx;
 	t_player	*player;

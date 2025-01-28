@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/27 20:29:25 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:00:13 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void	cub_draw_image(void *param)
 	mlx_image_to_window(cub->mlx, cub->img, 0, 0);
 }
 
-static void	cub_init_ray(t_cub *cub)
+static int	cub_init_ray(t_cub *cub)
 {
 	int		x;
 
@@ -88,6 +88,7 @@ static void	cub_init_ray(t_cub *cub)
 			cub->player->dir.y + cub->player->plane.y * cub->ray->camera_x;
 		x++;
 	}
+	return (0);
 }
 
 /*
@@ -111,8 +112,9 @@ static int	cub_init_window(t_cub *cub)
 
 int	cub_raycast(t_cub *cub)
 {
+	if (cub_init_ray(cub))
+		return (1);
 	if (cub_init_window(cub))
 		return (1);
-	cub_init_ray(cub);
 	return (0);
 }
