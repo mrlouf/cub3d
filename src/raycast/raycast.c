@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 15:01:59 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:47:01 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,35 @@ static void	cub_hook(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub->mlx);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_KP_ADD))
-		while (cub->minimap_px < 10)
+		if (cub->minimap_px < 10)
 			cub->minimap_px++;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_KP_SUBTRACT))
-		while (cub->minimap_px > 1)
+		if (cub->minimap_px > 1)
 			cub->minimap_px--;
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_Q))
+		cub->player->dir.y -= 0.1;
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_E))
+		cub->player->dir.y += 0.1;
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
+	{
+		if (cub->player->pos.x > 1.1)
+			cub->player->pos.x -= 0.1;
+	}
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
+	{
+		if (cub->player->pos.x < 23.0)
+			cub->player->pos.x += 0.1;
+	}
+		if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+	{
+		if (cub->player->pos.y > 1.0)
+			cub->player->pos.y -= 0.1;
+	}
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
+	{
+		if (cub->player->pos.y < 23.0)
+			cub->player->pos.y += 0.1;
+	}
 }
 
 /*

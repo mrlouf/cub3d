@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 17:02:48 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:05:57 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,11 +201,15 @@ static void	cub_calculate_wall_height(t_ray *ray)
 static void	cub_update_pixels(t_cub *cub, t_ray *ray, int x)
 {
 	int	i;
+	int colour;
 
 	i = ray->start;
+	colour = 0x660000FF;
+	if (ray->side != 0)
+		colour = 0x330000FF;
 	while (i < ray->end)
 	{
-		mlx_put_pixel(cub->img, x, i, 0x660000FF);
+		mlx_put_pixel(cub->img, x, i, colour);
 		i++;
 	}
 }
