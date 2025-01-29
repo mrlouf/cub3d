@@ -6,12 +6,17 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:32:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 20:39:36 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:00:19 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/utils.h"
 
+/*
+	Good old line drawing algo from FDF. It takes a start point and an
+	end point as parameters and draws a line between the two points, with the
+	colour as the last parameter.
+*/
 void	cub_dda(t_cub *cub, t_vector start, t_vector end, int colour)
 {
 	t_delta	delta;
@@ -31,9 +36,7 @@ void	cub_dda(t_cub *cub, t_vector start, t_vector end, int colour)
 	while (i++ <= delta.step)
 	{
 		if ((uint32_t)delta.x * cub->minimap_px < WINDOW_WIDTH
-			&& (uint32_t)delta.y * cub->minimap_px < WINDOW_HEIGHT
-			&& (uint32_t)delta.x * cub->minimap_px > 0
-			&& (uint32_t)delta.y * cub->minimap_px > 0)
+			&& (uint32_t)delta.y * cub->minimap_px < WINDOW_HEIGHT)
 		{
 			cub_draw_minipx(cub, delta.y * cub->minimap_px, \
 		delta.x * cub->minimap_px, colour);
@@ -42,22 +45,6 @@ void	cub_dda(t_cub *cub, t_vector start, t_vector end, int colour)
 		delta.y += delta.dy;
 	}
 }
-
-/*
-void	cub_draw_line(t_fdf *fdf, int x, int y)
-{
-	if (x == fdf->map->rows && y == fdf->map->cols)
-		return ;
-	if (x + 1 < fdf->map->rows)
-	{
-		drawing_algo(fdf, fdf->map->fgrid[x][y], fdf->map->fgrid[x + 1][y]);
-	}
-	if (y + 1 < fdf->map->cols)
-	{
-		drawing_algo(fdf, fdf->map->fgrid[x][y], fdf->map->fgrid[x][y + 1]);
-	}
-}
-*/
 
 void	cub_clean(t_cub *cub)
 {

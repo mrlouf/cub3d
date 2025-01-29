@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 20:28:35 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:12:11 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 # define CUB3D_H
 
 # include <stdio.h>
+# include <math.h>
 
 # include "../libs/libft/libft.h"
 # include "../libs/mlx42/include/MLX42/MLX42.h"
 
 // DEFINES
 
-# define WINDOW_WIDTH	640
-# define WINDOW_HEIGHT	400
+# define WINDOW_WIDTH	720
+# define WINDOW_HEIGHT	480
 # define MINIMAP_WIDTH	200
 # define MINIMAP_HEIGHT	100
 # define MINIMAP_PX		10
@@ -44,7 +45,8 @@ typedef struct s_player
 	t_vector	pos;
 	t_vector	dir;
 	t_vector	plane;
-	double		move;
+	double		angle;
+	double		speed;
 	double		rotation;
 }	t_player;
 
@@ -94,7 +96,11 @@ typedef struct s_cub
 int		cub_cub3d(char **av);
 int		cub_init(t_cub *cub, char **av);
 int		cub_parse(t_cub *cub);
-int		cub_raycast(t_cub *cub);
+int		cub_start(t_cub *cub);
+void	cub_draw(t_cub *cub);
+void	cub_hook(void *param);
+int		cub_raycasting(t_cub *cub, t_ray *ray);
+void	cub_update_pixels(t_cub *cub, t_ray *ray, int x);
 void	cub_clean(t_cub *cub);
 
 #endif

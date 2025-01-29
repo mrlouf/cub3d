@@ -14,12 +14,14 @@ MLX42LIB	:=	$(MLXDIR)/build/libmlx42.a
 
 # -=-=-=-=-    FILES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
-SRC 		:= 	main/main.c			\
-				main/cub3d.c		\
-				init/init.c			\
-				parse/parse.c		\
-				raycast/raycast.c	\
-				raycast/draw.c		\
+SRC 		:= 	main/main.c				\
+				main/cub3d.c			\
+				init/init.c				\
+				parse/parse.c			\
+				rendering/raycast.c		\
+				rendering/draw.c		\
+				rendering/draw_utils.c	\
+				hooks/hooks.c			\
 				utils/utils.c
 
 SRCDIR		= src
@@ -33,14 +35,16 @@ DEPS		= $(addprefix $(DEPDIR)/, $(SRC:.c=.d))
 DEPDIRS		= $(DEPDIR)/main		\
 			$(DEPDIR)/parse			\
 			$(DEPDIR)/utils			\
-			$(DEPDIR)/raycast		\
-			$(DEPDIR)/init
+			$(DEPDIR)/rendering		\
+			$(DEPDIR)/init			\
+			$(DEPDIR)/hooks
 
 HEADER		:=	incs/cub3d.h		\
 				incs/init.h			\
 				incs/parse.h		\
-				incs/raycast.h		\
-				incs/utils.h
+				incs/rendering.h	\
+				incs/utils.h		\
+				incs/hooks.h
 
 MAKE		:=	Makefile
 

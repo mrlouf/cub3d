@@ -6,11 +6,12 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/28 14:59:33 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:10:57 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/init.h"
+#include "math.h"
 
 // ! TO BE DELETED BEFORE SUBMISSION, OBVIOUSLY
 int	g_map[24][24] = {
@@ -50,6 +51,9 @@ static int	cub_player_init(t_cub *cub)
 	cub->player->dir.y = 0;
 	cub->player->plane.x = 0;
 	cub->player->plane.y = 0.66;
+	cub->player->speed = 0.10;
+	cub->player->rotation = 0.05;
+	cub->player->angle = atan2(cub->player->dir.y, cub->player->dir.x);
 	return (0);
 }
 
