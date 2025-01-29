@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:05:26 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/29 16:35:57 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:53:46 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	Rotates the player to the right by changing its direction,
 	but also the plane to keep the same POV.
 */
-static void	cub_rotate_right(t_cub *cub)
+void	cub_rotate_right(t_cub *cub)
 {
 	double	olddirx;
 	double	oldplanex;
@@ -38,7 +38,7 @@ static void	cub_rotate_right(t_cub *cub)
 	Rotates the player to the left by changing its direction,
 	but also the plane to keep the camera pointed and keep the same POV.
 */
-static void	cub_rotate_left(t_cub *cub)
+void	cub_rotate_left(t_cub *cub)
 {
 	double	olddirx;
 	double	oldplanex;
@@ -54,35 +54,6 @@ static void	cub_rotate_left(t_cub *cub)
 	cub->player->plane.y = oldplanex * sin(cub->player->rotation) \
 		+ cub->player->plane.y * cos(cub->player->rotation);
 	cub->player->angle += cub->player->rotation;
-}
-
-/*
-	Moves the player forward after having done a preliminary collision check
-	so as to not collide with any wall.
-*/
-static void	cub_move_backward(t_cub *cub)
-{
-	if (cub->map[(int)(cub->player->pos.x - cub->player->dir.x \
-		* cub->player->speed)][(int)cub->player->pos.y] == 0)
-		cub->player->pos.x -= cub->player->dir.x * cub->player->speed;
-	if (cub->map[(int)cub->player->pos.x][(int)(cub->player->pos.y \
-		- cub->player->dir.y * cub->player->speed)] == 0)
-		cub->player->pos.y -= cub->player->dir.y * cub->player->speed;
-}
-
-/*
-	Moves the player forward after having done a preliminary collision check
-	so as to not collide with any wall. Takes a second parameter
-	to set the speed to walk or sprint.
-*/
-static void	cub_move_forward(t_cub *cub, double speed)
-{
-	if (cub->map[(int)(cub->player->pos.x + cub->player->dir.x \
-		* speed)][(int)cub->player->pos.y] == 0)
-		cub->player->pos.x += cub->player->dir.x * speed;
-	if (cub->map[(int)cub->player->pos.x][(int)(cub->player->pos.y \
-		+ cub->player->dir.y * speed)] == 0)
-		cub->player->pos.y += cub->player->dir.y * speed;
 }
 
 /*
@@ -103,9 +74,9 @@ void	cub_hook(void *param)
 		if (cub->minimap_px > 1)
 			cub->minimap_px--;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
-		cub_rotate_right(cub);
+		cub_move_right(cub, cub->player->speed);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
-		cub_rotate_left(cub);
+		cub_move_left(cub, cub->player->speed);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
 		cub_move_forward(cub, cub->player->speed);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) \

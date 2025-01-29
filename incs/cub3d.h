@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/29 14:12:11 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/29 18:35:12 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,14 @@ typedef struct s_delta
 
 typedef struct s_cub
 {
-	int			minimap_px;
-	int			**px;
-	int			**map;
-	char		*filename;
-	mlx_image_t	*img;
-	mlx_t		*mlx;
-	t_player	*player;
+	int				minimap_px;
+	int				**px;
+	int				**map;
+	char			*filename;
+	mlx_image_t		*img;
+	mlx_texture_t	*icon;
+	mlx_t			*mlx;
+	t_player		*player;
 }	t_cub;
 
 // PROTOTYPES

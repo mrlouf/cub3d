@@ -22,6 +22,7 @@ SRC 		:= 	main/main.c				\
 				rendering/draw.c		\
 				rendering/draw_utils.c	\
 				hooks/hooks.c			\
+				hooks/movements.c		\
 				utils/utils.c
 
 SRCDIR		= src
