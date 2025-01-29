@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:05:26 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/29 15:48:45 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:35:57 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
 	Rotates the player to the right by changing its direction,
-	but also the plane to keep the camera pointed and keep the same POV.
+	but also the plane to keep the same POV.
 */
 static void	cub_rotate_right(t_cub *cub)
 {
@@ -59,16 +59,14 @@ static void	cub_rotate_left(t_cub *cub)
 /*
 	Moves the player forward after having done a preliminary collision check
 	so as to not collide with any wall.
-	TODO
-	Fine-tune the collision check to avoid clipping into walls
 */
 static void	cub_move_backward(t_cub *cub)
 {
-	if (cub->map[(int)(cub->player->pos.x + cub->player->dir.x \
+	if (cub->map[(int)(cub->player->pos.x - cub->player->dir.x \
 		* cub->player->speed)][(int)cub->player->pos.y] == 0)
 		cub->player->pos.x -= cub->player->dir.x * cub->player->speed;
 	if (cub->map[(int)cub->player->pos.x][(int)(cub->player->pos.y \
-		+ cub->player->dir.y * cub->player->speed)] == 0)
+		- cub->player->dir.y * cub->player->speed)] == 0)
 		cub->player->pos.y -= cub->player->dir.y * cub->player->speed;
 }
 
@@ -76,8 +74,6 @@ static void	cub_move_backward(t_cub *cub)
 	Moves the player forward after having done a preliminary collision check
 	so as to not collide with any wall. Takes a second parameter
 	to set the speed to walk or sprint.
-	TODO
-	Fine-tune the collision check to avoid clipping into walls
 */
 static void	cub_move_forward(t_cub *cub, double speed)
 {
