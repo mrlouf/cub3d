@@ -6,11 +6,27 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 10:57:35 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:10:23 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
+
+void	cub_skip_header(int fd, int *i)
+{
+	char	*line;
+
+	*i = 0;
+	line = get_next_line(fd);
+	while (line && *i < 6)
+	{
+		if (line[0] != '\n')
+			(*i)++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+}
 
 int	check_line_start(char *line)
 {

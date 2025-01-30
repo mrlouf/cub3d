@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 14:24:46 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/01/10 15:48:07 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:46:00 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	ft_free(char **str)
 	if (!str)
 		return ;
 	i = 0;
-	if (!str)
-		return ;
 	while (str[i])
 	{
 		free(str[i]);

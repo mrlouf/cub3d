@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 11:11:47 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:12:43 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	cub_check_map_define_symbols(t_parser *parser)
 	parser->symbols[4] = "W";
 	parser->symbols[5] = "E";
 	parser->symbols[6] = " ";
+	parser->symbols[7] = NULL;
 }
 
 int	cub_check_map_symbols(t_parser *parser, char **map)

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
 /*   Updated: 2025/01/30 14:05:51 by nponchon         ###   ########.fr       */
@@ -62,10 +62,10 @@ static void	cub_draw_minimap(t_cub *cub)
 	int	j;
 
 	i = -1;
-	while (++i < 24)
+	while (++i < cub->rows)
 	{
 		j = -1;
-		while (++j < 24)
+		while (++j < cub->cols)
 		{
 			if (cub->map[i][j] > 0)
 				cub_draw_minipx(cub, j * cub->minimap_px, \
@@ -94,14 +94,14 @@ void	cub_draw_background(t_cub *cub)
 	{
 		j = -1;
 		while (++j < WINDOW_HEIGHT / 2)
-			mlx_put_pixel(cub->img, i, j, 0x6CBBFFFF);
+			mlx_put_pixel(cub->img, i, j, cub->c_color);
 	}
 	i = -1;
 	while (++i < WINDOW_WIDTH)
 	{
 		j = WINDOW_HEIGHT / 2 - 1;
 		while (++j < WINDOW_HEIGHT)
-			mlx_put_pixel(cub->img, i, j, 0x8B4513FF);
+			mlx_put_pixel(cub->img, i, j, cub->f_color);
 	}
 }
 

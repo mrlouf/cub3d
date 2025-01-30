@@ -84,9 +84,17 @@ typedef struct s_delta
 typedef struct s_cub
 {
 	int				minimap_px;
+	int				rows;
+	int				cols;
 	int				**px;
 	int				**map;
+	unsigned int	f_color;
+	unsigned int	c_color;
 	char			*filename;
+	char			*no_t;
+	char			*so_t;
+	char			*ea_t;
+	char			*we_t;
 	mlx_image_t		*img;
 	mlx_texture_t	*icon;
 	mlx_t			*mlx;
@@ -97,7 +105,7 @@ typedef struct s_cub
 
 int		cub_cub3d(char **av);
 int		cub_init(t_cub *cub, char **av);
-int		cub_parse(char *filename);
+int		cub_parse(t_cub *cub, char *filename);
 int		cub_start(t_cub *cub);
 void	cub_draw(t_cub *cub);
 void	cub_hook(void *param);
