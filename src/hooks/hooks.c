@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:05:26 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 10:09:24 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:46:39 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,4 @@ void	cub_hook(void *param)
 		cub_move_forward(cub, cub->player->speed * 1.5);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
 		cub_move_backward(cub);
-	printf("dirx=%f, diry=%f\n", cub->player->dir.x, cub->player->dir.y);
 }

@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:40:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 10:41:42 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:47:45 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ void	cub_move_left(t_cub *cub, double speed)
 		cub->player->pos.y += cub->player->dir.x * speed;
 }
 
+/*
+	Moves the player to the right after having done a collision check
+	so as to not collide with any wall.
+*/
 void	cub_move_right(t_cub *cub, double speed)
 {
 	if (cub->map[(int)(cub->player->pos.x + cub->player->dir.y \

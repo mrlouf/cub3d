@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/29 18:49:12 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:10:14 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	cub_draw_minipx(t_cub *cub, int j, int i, int colour)
 
 	ii = i + cub->minimap_px;
 	jj = j + cub->minimap_px;
-	while (i < ii && i < WINDOW_WIDTH && i > 0)
+	while (i < ii && i < WINDOW_WIDTH && i >= 0)
 	{
-		while (j < jj && j < WINDOW_HEIGHT && j > 0)
+		while (j < jj && j < WINDOW_HEIGHT && j >= 0)
 			mlx_put_pixel(cub->img, j++, i, colour);
 		j -= cub->minimap_px;
 		i++;
@@ -62,10 +62,10 @@ static void	cub_draw_minimap(t_cub *cub)
 	int	j;
 
 	i = -1;
-	while (++i < 25)
+	while (++i < 24)
 	{
 		j = -1;
-		while (++j < 25)
+		while (++j < 24)
 		{
 			if (cub->map[i][j] > 0)
 				cub_draw_minipx(cub, j * cub->minimap_px, \

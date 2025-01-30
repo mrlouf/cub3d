@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/29 12:23:01 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:04:48 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include <stdlib.h>
 
 /*
-	Initialisises a single ray with basic information needed to compute
-	the distance to the wall later.
+	Initialises a single ray with basic information needed to compute
+	the distance to the wall later like the direction, position and delta.
 */
 static void	cub_init_ray(t_ray *ray, int x, t_player *player)
 {
@@ -28,12 +28,18 @@ static void	cub_init_ray(t_ray *ray, int x, t_player *player)
 		player->dir.y + player->plane.y * ray->camera_x;
 	ray->map_x = (int)player->pos.x;
 	ray->map_y = (int)player->pos.y;
-	ray->delta_dx = fabs(1 / ray->dir_x);
-	ray->delta_dy = fabs(1 / ray->dir_y);
+	if (ray->dir_x == 0)
+		ray->delta_dx = INFINITY;
+	else
+		ray->delta_dx = fabs(1 / ray->dir_x);
+	if (ray->dir_y == 0)
+		ray->delta_dy = INFINITY;
+	else
+		ray->delta_dy = fabs(1 / ray->dir_y);
 }
 
 /*
-	Calculates the step of each ray, ie. the 'direction' of the vector.
+	Calculates the step of each ray.
 */
 static void	cub_calculate_step(t_ray *ray, t_player *player)
 {
@@ -105,7 +111,7 @@ static void	cub_calculate_wall_height(t_ray *ray)
 		ray->start = 0;
 	ray->end = ray->wall_h / 2 + WINDOW_HEIGHT / 2;
 	if (ray->end >= WINDOW_HEIGHT)
-		ray->end = WINDOW_HEIGHT - 1;
+		ray->end = WINDOW_HEIGHT;
 }
 
 /*
