@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_array.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:10:55 by nponchon          #+#    #+#             */
-/*   Updated: 2024/11/26 17:15:57 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:50:15 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,5 @@ void	ft_print_array(char **array)
 
 	i = -1;
 	while (array[++i])
-		ft_printf("%s\n", array[i]);
+		ft_putendl_fd(array[i], 1);
 }

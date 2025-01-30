@@ -6,15 +6,13 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:38:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/24 19:47:36 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/27 12:41:12 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef INIT_H
 # define INIT_H
 
-# include "./cub3d.h"
-
-int	cub_init(void);
+# include "cub3d.h"
 
 #endif

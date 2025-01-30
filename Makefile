@@ -14,31 +14,45 @@ MLX42LIB	:=	$(MLXDIR)/build/libmlx42.a
 
 # -=-=-=-=-    FILES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
-SRC 		:= 	main/main.c			\
-				main/cub3d.c		\
-				init/init.c			\
-				parse/parse.c		\
-				raycast/raycast.c
+SRC 		:= 	main/main.c				\
+				main/cub3d.c			\
+				init/init.c				\
+				parse/parse.c			\
+				parse/parse_format.c	\
+				parse/parse_populator.c \
+				parse/parse_content.c	\
+				parse/parse_map.c		\
+				parse/parse_map_utils.c	\
+				parse/transfer.c		\
+				parse/transfer_utils.c	\
+				rendering/raycast.c		\
+				rendering/draw.c		\
+				rendering/draw_utils.c	\
+				hooks/hooks.c			\
+				hooks/movements.c		\
+				utils/utils.c
 
 SRCDIR		= src
 SRCS		= $(addprefix $(SRCDIR)/, $(SRC))
 
 OBJDIR		= .obj
 OBJS		= $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
-OBJDIRS		= $(OBJDIR)/main		\
-			$(OBJDIR)/parser		\
-			$(OBJDIR)/utils
 
 DEPDIR		= .dep
 DEPS		= $(addprefix $(DEPDIR)/, $(SRC:.c=.d))
 DEPDIRS		= $(DEPDIR)/main		\
-			$(DEPDIR)/parser		\
-			$(DEPDIR)/utils
+			$(DEPDIR)/parse			\
+			$(DEPDIR)/utils			\
+			$(DEPDIR)/rendering		\
+			$(DEPDIR)/init			\
+			$(DEPDIR)/hooks
 
 HEADER		:=	incs/cub3d.h		\
 				incs/init.h			\
 				incs/parse.h		\
-				incs/raycast.h		
+				incs/rendering.h	\
+				incs/utils.h		\
+				incs/hooks.h
 
 MAKE		:=	Makefile
 
@@ -47,13 +61,13 @@ LIBS		:=	$(LIBFTDIR)/libft.a $(MLXDIR)/build/libmlx42.a /usr/lib/x86_64-linux-gn
 
 # -=-=-=-=-    FLAGS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
 
-CC			:=	-cc
+CC			:=	cc
 
-CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g#-lglfw
+CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g -fsanitize=address #-lglfw
 
-DFLAGS		:= 	-MMD -MP 
+DFLAGS		:= 	-MT $@ -MMD -MP
 
-INCLUDE		:=	-I./$(INCS) -I./$(LIBFTDIR)/includes -I./$(MLXDIR)/include
+INCLUDE		:=	-I/incs -I./$(LIBFTDIR)/includes -I./$(MLXDIR)/include
 
 RM			:=	/bin/rm -fr
 
@@ -77,10 +91,11 @@ mlx:
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile
 	@mkdir -p $(@D)
-	@mkdir -p $(DEPDIR)/$(dir $<)
-	$(CC) $(CFLAGS) $(DFLAGS) $(INCLUDE) -c $< -o $@ -MF $(DEPDIR)/$(<:.c=.d) -MT $@
+	$(CC) $(CFLAGS) $(INCLUDE) -MT $@ -MMD -MP -c $< -o $@
+	@mkdir -p $(DEPDIR) $(DEPDIRS)
+	@mv $(patsubst %.o,%.d,$@) $(subst $(OBJDIR),$(DEPDIR),$(@D))/
 
-$(NAME): $(OBJS) $(SRCS) Makefile
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) $(LIBS) -o $(NAME)
 
 bonus: all
@@ -92,7 +107,7 @@ clean:
 	@echo "$(RED)Cleaned object files and dependencies$(DEF_COLOR)"
 
 fclean: clean
-	@$(RM) minishell $(PRINTFDIR)libftprintf.a $(LIBFTDIR)libft.a
+	@$(RM) $(NAME) $(PRINTFDIR)libftprintf.a $(LIBFTDIR)libft.a
 	@echo "$(RED)Cleaned all binaries$(DEF_COLOR)"
 	@$(RM) MLX42/build
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:45:35 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/01/09 18:28:38 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:41:33 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ ssize_t		ft_write_dec(int n);
 ssize_t		ft_write_uns(unsigned int n);
 
 void		ft_free(char **str);
+void		ft_free_narray(void **array, int n);
 char		*get_next_line(int fd);
 char		*ft_free_gnl(char **str);
 int			ft_array_count(char **ptr);
@@ -126,5 +127,7 @@ t_list		*ft_lstsort(t_list *l, int (*cmp)(const void *, const void *, \
 	size_t));
 int			ft_strcmp(char *s1, char *s2);
 char		*ft_strdup_lower(const char *str);
+void		ft_exit_error(char *msg, int code);
+char		**ft_array_flip(char **arr, int rows, int cols);
 
 #endif
