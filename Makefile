@@ -14,10 +14,15 @@ MLX42LIB	:=	$(MLXDIR)/build/libmlx42.a
 
 # -=-=-=-=-    FILES -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
-SRC 		:= 	main/main.c			\
-				main/cub3d.c		\
-				init/init.c			\
-				parse/parse.c		\
+SRC 		:= 	main/main.c				\
+				main/cub3d.c			\
+				init/init.c				\
+				parse/parse.c			\
+				parse/parse_format.c	\
+				parse/parse_populator.c \
+				parse/parse_content.c	\
+				parse/parse_map.c		\
+				parse/parse_map_utils.c	\
 				raycast/raycast.c
 
 SRCDIR		= src
@@ -49,7 +54,7 @@ LIBS		:=	$(LIBFTDIR)/libft.a $(MLXDIR)/build/libmlx42.a /usr/lib/x86_64-linux-gn
 
 CC			:=	-cc
 
-CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g#-lglfw
+CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g #-fsanitize=address #-lglfw
 
 DFLAGS		:= 	-MMD -MP 
 
@@ -92,7 +97,7 @@ clean:
 	@echo "$(RED)Cleaned object files and dependencies$(DEF_COLOR)"
 
 fclean: clean
-	@$(RM) minishell $(PRINTFDIR)libftprintf.a $(LIBFTDIR)libft.a
+	@$(RM) cub3D $(PRINTFDIR)libftprintf.a $(LIBFTDIR)libft.a
 	@echo "$(RED)Cleaned all binaries$(DEF_COLOR)"
 	@$(RM) MLX42/build
 

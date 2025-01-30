@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:45:35 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/01/09 18:28:38 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:41:33 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,7 @@ t_list		*ft_lstsort(t_list *l, int (*cmp)(const void *, const void *, \
 	size_t));
 int			ft_strcmp(char *s1, char *s2);
 char		*ft_strdup_lower(const char *str);
+void		ft_exit_error(char *msg, int code);
+char		**ft_array_flip(char **arr, int rows, int cols);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/25 12:46:39 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:48:19 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 # include <stdio.h>
 
 # include "../libs/libft/libft.h"
+# include "../libs/libft/ft_printf/includes/ft_printf.h"
 # include "../libs/mlx42/include/MLX42/MLX42.h"
 
-# include "./init.h"
-# include "./parse.h"
-# include "./raycast.h"
+# include "init.h"
+# include "parse.h"
+# include "raycast.h"
 
 int	cub_cub3d(char **av);
 
