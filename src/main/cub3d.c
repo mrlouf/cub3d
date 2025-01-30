@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:24:55 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:53:05 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:36:32 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	cub_loop(void *param)
 	cub = param;
 	cub_hook(cub);
 	cub_draw(cub);
+	printf("pos_x=%f pos_y=%f dir_x=%f dir_y=%f plane_x=%f plane_y=%f\n", \
+	cub->player->pos.x, cub->player->pos.y, cub->player->dir.x, cub->player->dir.y, cub->player->plane.x, cub->player->plane.y);
 }
 
 void	cub_set_mouse(t_cub *cub)
