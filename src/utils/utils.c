@@ -6,11 +6,13 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:32:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:27:32 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:48:49 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/utils.h"
+
+void	cub_draw_minipx(t_cub *cub, int j, int i, int colour);
 
 /*
 	Good old line drawing algo from FDF. It takes a start point and an

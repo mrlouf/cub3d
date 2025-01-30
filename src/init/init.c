@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:26:36 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:08:45 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	cub_player_init(t_cub *cub)
 	if (!cub->player)
 		return (1);
 	cub->player->plane.x = 0;
-	cub->player->plane.y = 0.66;
+	cub->player->plane.y = -0.66;
 	cub->player->speed = 0.10;
 	cub->player->rotation = 0.05;
 	cub->player->angle = atan2(cub->player->dir.y, cub->player->dir.x);
