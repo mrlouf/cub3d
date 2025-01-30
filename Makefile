@@ -37,20 +37,22 @@ SRCS		= $(addprefix $(SRCDIR)/, $(SRC))
 
 OBJDIR		= .obj
 OBJS		= $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
-OBJDIRS		= $(OBJDIR)/main		\
-			$(OBJDIR)/parser		\
-			$(OBJDIR)/utils
 
 DEPDIR		= .dep
 DEPS		= $(addprefix $(DEPDIR)/, $(SRC:.c=.d))
 DEPDIRS		= $(DEPDIR)/main		\
-			$(DEPDIR)/parser		\
-			$(DEPDIR)/utils
+			$(DEPDIR)/parse			\
+			$(DEPDIR)/utils			\
+			$(DEPDIR)/rendering		\
+			$(DEPDIR)/init			\
+			$(DEPDIR)/hooks
 
 HEADER		:=	incs/cub3d.h		\
 				incs/init.h			\
 				incs/parse.h		\
-				incs/raycast.h		
+				incs/rendering.h	\
+				incs/utils.h		\
+				incs/hooks.h
 
 MAKE		:=	Makefile
 
@@ -59,13 +61,13 @@ LIBS		:=	$(LIBFTDIR)/libft.a $(MLXDIR)/build/libmlx42.a /usr/lib/x86_64-linux-gn
 
 # -=-=-=-=-    FLAGS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
 
-CC			:=	-cc
+CC			:=	cc
 
 CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g -fsanitize=address #-lglfw
 
-DFLAGS		:= 	-MMD -MP 
+DFLAGS		:= 	-MT $@ -MMD -MP
 
-INCLUDE		:=	-I./$(INCS) -I./$(LIBFTDIR)/includes -I./$(MLXDIR)/include
+INCLUDE		:=	-I/incs -I./$(LIBFTDIR)/includes -I./$(MLXDIR)/include
 
 RM			:=	/bin/rm -fr
 
@@ -89,10 +91,11 @@ mlx:
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c Makefile
 	@mkdir -p $(@D)
-	@mkdir -p $(DEPDIR)/$(dir $<)
-	$(CC) $(CFLAGS) $(DFLAGS) $(INCLUDE) -c $< -o $@ -MF $(DEPDIR)/$(<:.c=.d) -MT $@
+	$(CC) $(CFLAGS) $(INCLUDE) -MT $@ -MMD -MP -c $< -o $@
+	@mkdir -p $(DEPDIR) $(DEPDIRS)
+	@mv $(patsubst %.o,%.d,$@) $(subst $(OBJDIR),$(DEPDIR),$(@D))/
 
-$(NAME): $(OBJS) $(SRCS) Makefile
+$(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) $(LIBS) -o $(NAME)
 
 bonus: all
@@ -104,7 +107,7 @@ clean:
 	@echo "$(RED)Cleaned object files and dependencies$(DEF_COLOR)"
 
 fclean: clean
-	@$(RM) cub3D $(PRINTFDIR)libftprintf.a $(LIBFTDIR)libft.a
+	@$(RM) $(NAME) $(PRINTFDIR)libftprintf.a $(LIBFTDIR)libft.a
 	@echo "$(RED)Cleaned all binaries$(DEF_COLOR)"
 	@$(RM) MLX42/build
 

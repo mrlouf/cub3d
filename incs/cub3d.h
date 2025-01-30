@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:20:25 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:26:10 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CUB3D_H
 
 # include <stdio.h>
+# include <math.h>
 
 # include "../libs/libft/libft.h"
 # include "../libs/libft/ft_printf/includes/ft_printf.h"
