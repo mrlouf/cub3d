@@ -6,11 +6,12 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:24:55 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/29 18:54:46 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/30 09:12:44 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/cub3d.h"
+#include "../../incs/hooks.h"
 
 /*
 	The main loop used in during the execution of cub3d and repeated
@@ -60,7 +61,6 @@ int	cub_start(t_cub *cub)
 	cub->img = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!cub->mlx || !cub->img)
 		return (1);
-	cub->icon = mlx_load_png("./icon.png");
 	mlx_set_icon(cub->mlx, cub->icon);
 	cub_set_mouse(cub);
 	cub_draw(cub);
