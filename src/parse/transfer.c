@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:14:15 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:04:23 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	cub_convert_map(t_cub *cub, t_parser *parser)
 	{
 		allocate_map_row(cub, parser, i);
 		j = -1;
-		while (++j < parser->cols)
+		while (++j < parser->cols && parser->map[i][j])
 		{
 			if (ft_isspace(parser->map[i][j]))
 				cub->map[i][j] = 0;

@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:10:23 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:29:21 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,11 @@ int	cub_check_map_borders(t_parser *parser, char **map)
 				|| trim[0] == 'S' || trim[ft_strlen(trim) - 1] == 'S'
 				|| trim[0] == 'E' || trim[ft_strlen(trim) - 1] == 'E'
 				|| trim[0] == 'W' || trim[ft_strlen(trim) - 1] == 'W')
-				return (ft_putendl_fd("Error: Map: player on border", 2), 1);
+				return (free(trim),
+					ft_putendl_fd("Error: Map: player on border", 2), 1);
 			if (trim[0] != '1' || trim[ft_strlen(trim) - 1] != '1')
-				return (ft_putendl_fd("Error: Map: open wall", 2), 1);
+				return (free(trim),
+					ft_putendl_fd("Error: Map: open wall", 2), 1);
 			free(trim);
 		}
 		i++;

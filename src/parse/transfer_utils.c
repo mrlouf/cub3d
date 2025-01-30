@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:13:22 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:14:07 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,20 @@ void	allocate_map_row(t_cub *cub, t_parser *parser, int i)
 
 void	cub_parser_clean(t_parser *parser)
 {
-	ft_free(parser->map);
-	free(parser->symbols);
-	free(parser->no_text);
-	free(parser->so_text);
-	free(parser->ea_text);
-	free(parser->we_text);
-	free(parser->c_color);
-	free(parser->f_color);
+	if (parser->map)
+		ft_free(parser->map);
+	if (parser->symbols)
+		free(parser->symbols);
+	if (parser->no_text)
+		free(parser->no_text);
+	if (parser->so_text)
+		free(parser->so_text);
+	if (parser->ea_text)
+		free(parser->ea_text);
+	if (parser->we_text)
+		free(parser->we_text);
+	if (parser->c_color)
+		free(parser->c_color);
+	if (parser->f_color)
+		free(parser->f_color);
 }
