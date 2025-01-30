@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 14:07:45 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:26:00 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,6 @@
 # define MINIMAP_HEIGHT	100
 # define MINIMAP_PX		10
 # define TILE_SIZE		64
-
-// TEST MAP FOR DEVELOPPING, TO BE DELETED BEFORE SUBMISSION
-
-extern int	g_map[24][24];
 
 // STRUCTURES
 
