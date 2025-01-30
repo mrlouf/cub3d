@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:24:55 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 09:12:44 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:02:11 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	cub_cub3d(char **av)
 		return (1);
 	if (cub_init(cub, av))
 		return (1);
-	if (cub_parse(cub))
+	if (cub_parse(av[1]))
 		return (1);
 	if (cub_start(cub))
 		return (1);

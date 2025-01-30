@@ -18,6 +18,11 @@ SRC 		:= 	main/main.c				\
 				main/cub3d.c			\
 				init/init.c				\
 				parse/parse.c			\
+				parse/parse_format.c	\
+				parse/parse_populator.c \
+				parse/parse_content.c	\
+				parse/parse_map.c		\
+				parse/parse_map_utils.c	\
 				rendering/raycast.c		\
 				rendering/draw.c		\
 				rendering/draw_utils.c	\
@@ -56,7 +61,7 @@ LIBS		:=	$(LIBFTDIR)/libft.a $(MLXDIR)/build/libmlx42.a /usr/lib/x86_64-linux-gn
 
 CC			:=	cc
 
-CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g -fsanitize=address
+CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g #-fsanitize=address #-lglfw
 
 DFLAGS		:= 	-MT $@ -MMD -MP
 
