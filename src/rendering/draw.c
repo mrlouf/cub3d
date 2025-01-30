@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 11:10:14 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:05:51 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	cub_draw_background(t_cub *cub)
 
 /*
 	The main function for drawing all components: floor, ceiling,
-	minimap and the rest. Sends the complete image to the mlx window.
+	minimap and the raycasting part.
 */
 void	cub_draw(t_cub *cub)
 {
@@ -116,5 +116,4 @@ void	cub_draw(t_cub *cub)
 	cub_draw_background(cub);
 	cub_raycasting(cub, &ray);
 	cub_draw_minimap(cub);
-	mlx_image_to_window(cub->mlx, cub->img, 0, 0);
 }
