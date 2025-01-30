@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:40:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/29 18:49:07 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:41:42 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ void	cub_move_forward(t_cub *cub, double speed)
 		cub->player->pos.y += cub->player->dir.y * speed;
 }
 
+/*
+	Moves the player to the left after having done a collision check
+	so as to not collide with any wall.
+*/
 void	cub_move_left(t_cub *cub, double speed)
 {
-	if (cub->map[(int)(cub->player->pos.x + cub->player->dir.y \
+	if (cub->map[(int)(cub->player->pos.x + -cub->player->dir.y \
 		* speed)][(int)cub->player->pos.y] == 0)
-		cub->player->pos.x += cub->player->dir.y * speed;
+		cub->player->pos.x += -cub->player->dir.y * speed;
 	if (cub->map[(int)cub->player->pos.x][(int)(cub->player->pos.y \
 		+ cub->player->dir.x * speed)] == 0)
 		cub->player->pos.y += cub->player->dir.x * speed;
@@ -53,10 +57,10 @@ void	cub_move_left(t_cub *cub, double speed)
 
 void	cub_move_right(t_cub *cub, double speed)
 {
-	if (cub->map[(int)(cub->player->pos.x + cub->player->dir.x \
+	if (cub->map[(int)(cub->player->pos.x + cub->player->dir.y \
 		* speed)][(int)cub->player->pos.y] == 0)
-		cub->player->pos.x -= cub->player->dir.y * speed;
+		cub->player->pos.x += cub->player->dir.y * speed;
 	if (cub->map[(int)cub->player->pos.x][(int)(cub->player->pos.y \
-		+ cub->player->dir.y * speed)] == 0)
-		cub->player->pos.y -= cub->player->dir.x * speed;
+		+ -cub->player->dir.x * speed)] == 0)
+		cub->player->pos.y += -cub->player->dir.x * speed;
 }
