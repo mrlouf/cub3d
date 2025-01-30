@@ -12,6 +12,8 @@
 
 #include "../../incs/utils.h"
 
+void	cub_draw_minipx(t_cub *cub, int j, int i, int colour);
+
 /*
 	Good old line drawing algo from FDF. It takes a start point and an
 	end point as parameters and draws a line between the two points, with the
