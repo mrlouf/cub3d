@@ -23,7 +23,14 @@ SRC 		:= 	main/main.c				\
 				parse/parse_content.c	\
 				parse/parse_map.c		\
 				parse/parse_map_utils.c	\
-				raycast/raycast.c
+				parse/transfer.c		\
+				parse/transfer_utils.c	\
+				rendering/raycast.c		\
+				rendering/draw.c		\
+				rendering/draw_utils.c	\
+				hooks/hooks.c			\
+				hooks/movements.c		\
+				utils/utils.c
 
 SRCDIR		= src
 SRCS		= $(addprefix $(SRCDIR)/, $(SRC))
@@ -54,7 +61,7 @@ LIBS		:=	$(LIBFTDIR)/libft.a $(MLXDIR)/build/libmlx42.a /usr/lib/x86_64-linux-gn
 
 CC			:=	-cc
 
-CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g #-fsanitize=address #-lglfw
+CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g -fsanitize=address #-lglfw
 
 DFLAGS		:= 	-MMD -MP 
 

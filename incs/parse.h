@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:36:02 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 11:12:09 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:22:18 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PARSE_H
 
 # include <sys/stat.h>
-# include "./cub3d.h"
+# include "cub3d.h"
 
 //ERROR messages
 # define MEM_ERR "Error: memory allocation failed"
@@ -40,6 +40,8 @@
 # define MAP_N_PLAYER_ERR "Error: map: more than one player"
 # define MAP_VOID_ERR "Error: map: open void"
 
+int		cub_parse(t_cub *cub, char *filename);
+
 typedef struct s_parser
 {
 	int		n_t[4];
@@ -56,8 +58,6 @@ typedef struct s_parser
 	char	**symbols;
 }	t_parser;
 
-int		cub_parse(char *filename);
-
 //FORMAT checks
 int		cub_format_checks(t_parser *parser, char *filename);
 int		cub_check_format_extension(char *filename, char *extension);
@@ -71,6 +71,7 @@ int		cub_check_format_colors(t_parser *parser, char *filename);
 //POPULATOR functions
 void	cub_populate_parser(t_parser *parser, char *filename);
 void	cub_populate_map(t_parser *parser, char *filename);
+void	cub_skip_header(int fd, int *i);
 void	cub_allocate_parser_map(t_parser *parser, char *filename);
 int		cub_get_map_rows(char *filename);
 void	cub_populate_textures(t_parser *parser, char *filename);
@@ -87,5 +88,12 @@ int		cub_check_map_space(t_parser *parser, char **map, int i, int j);
 int		cub_check_map_player(char **map);
 int		cub_check_map_symbols(t_parser *parser, char **map);
 void	cub_check_map_define_symbols(t_parser *parser);
+
+//TRANSFER functions
+void	cub_transfer_data(t_cub *cub, t_parser *parser);
+void	cub_convert_map(t_cub *cub, t_parser *parser);
+void	allocate_map_row(t_cub *cub, t_parser *parser, int i);
+void	cub_set_player(t_cub *cub, t_parser *parser, int i, int j);
+void	cub_parser_clean(t_parser *parser);
 
 #endif
