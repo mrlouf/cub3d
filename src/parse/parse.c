@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/29 16:18:45 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:38:38 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	cub_init_parser(t_parser *parser)
 		parser->n_c[i] = 0;
 }
 
-int	cub_parse(char *filename)
+int	cub_parse(t_cub *cub, char *filename)
 {
 	t_parser	parser;
 
@@ -78,5 +78,6 @@ int	cub_parse(char *filename)
 	cub_populate_parser(&parser, filename);
 	if (cub_content_checks(&parser))
 		return (1);
+	cub_transfer_data(cub, &parser);
 	return (0);
 }

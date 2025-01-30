@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:32:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/29 14:00:19 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/30 16:27:32 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,11 @@ void	cub_clean(t_cub *cub)
 	if (cub->filename)
 		free(cub->filename);
 	if (cub->map)
-		ft_free_narray((void **)cub->map, 25);
+		ft_free_narray((void **)cub->map, cub->rows);
+	free(cub->no_t);
+	free(cub->so_t);
+	free(cub->ea_t);
+	free(cub->we_t);
 	if (cub)
 		free(cub);
 }
