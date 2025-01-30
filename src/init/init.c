@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:08:45 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:23:41 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ static int	cub_player_init(t_cub *cub)
 
 int	cub_init(t_cub *cub, char **av)
 {
+	cub->map = NULL;
+	cub->no_t = NULL;
+	cub->so_t = NULL;
+	cub->ea_t = NULL;
+	cub->we_t = NULL;
 	cub->filename = ft_strdup(av[1]);
 	if (!cub->filename)
 		return (1);
