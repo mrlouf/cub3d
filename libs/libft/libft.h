@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:45:35 by hmunoz-g          #+#    #+#             */
 /*   Updated: 2025/01/29 15:41:33 by hmunoz-g         ###   ########.fr       */
@@ -106,6 +106,7 @@ ssize_t		ft_write_dec(int n);
 ssize_t		ft_write_uns(unsigned int n);
 
 void		ft_free(char **str);
+void		ft_free_narray(void **array, int n);
 char		*get_next_line(int fd);
 char		*ft_free_gnl(char **str);
 int			ft_array_count(char **ptr);
