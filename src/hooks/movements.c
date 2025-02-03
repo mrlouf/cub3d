@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:40:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 11:23:42 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:14:57 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,16 @@ void	cub_movements(t_cub *cub)
 		cub_move_right(cub, cub->player->speed);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
 		cub_move_left(cub, cub->player->speed);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
-		cub_move_forward(cub, cub->player->speed);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) \
+	if ((mlx_is_key_down(cub->mlx, MLX_KEY_W) \
+		&& mlx_is_key_down(cub->mlx, MLX_KEY_A)) \
+		|| (mlx_is_key_down(cub->mlx, MLX_KEY_W) \
+		&& mlx_is_key_down(cub->mlx, MLX_KEY_D)))
+		cub_move_forward(cub, cub->player->speed * 0.33);
+	else if (mlx_is_key_down(cub->mlx, MLX_KEY_W) \
 		&& mlx_is_key_down(cub->mlx, MLX_KEY_LEFT_SHIFT))
 		cub_move_forward(cub, cub->player->speed * 1.5);
+	else if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
+		cub_move_forward(cub, cub->player->speed);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
 		cub_move_backward(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
