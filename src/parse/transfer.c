@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 09:02:31 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:19:37 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ unsigned int	cub_convert_colors(t_cub *cub, t_parser *parser)
 
 void	cub_set_player(t_cub *cub, t_parser *parser, int i, int j)
 {
-	cub->player->pos.x = i;
-	cub->player->pos.y = j;
+	cub->player->pos.x = i + 0.5;
+	cub->player->pos.y = j + 0.5;
 	if (parser->map[i][j] == 'E')
 	{
 		cub->player->dir.x = 0;

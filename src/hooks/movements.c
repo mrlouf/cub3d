@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:40:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 15:54:09 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:17:18 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,27 @@ void	cub_move_right(t_cub *cub, double speed)
 	if (cub->map[(int)cub->player->pos.x][(int)(cub->player->pos.y \
 		+ -cub->player->dir.x * speed)] == 0)
 		cub->player->pos.y += -cub->player->dir.x * speed;
+}
+
+/*
+	This function regroups the hooks for the player's movements
+	and rotations.
+*/
+void	cub_movements(t_cub *cub)
+{
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
+		cub_move_right(cub, cub->player->speed);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+		cub_move_left(cub, cub->player->speed);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
+		cub_move_forward(cub, cub->player->speed);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) \
+		&& mlx_is_key_down(cub->mlx, MLX_KEY_LEFT_SHIFT))
+		cub_move_forward(cub, cub->player->speed * 1.5);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
+		cub_move_backward(cub);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
+		cub_rotate_left(cub);
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
+		cub_rotate_right(cub);
 }
