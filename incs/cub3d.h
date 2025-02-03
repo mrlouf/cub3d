@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 15:00:52 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:05:13 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 // DEFINES
 
-# define WINDOW_WIDTH	720
-# define WINDOW_HEIGHT	480
+# define WINDOW_WIDTH	1440
+# define WINDOW_HEIGHT	960
 # define MINIMAP_WIDTH	200
 # define MINIMAP_HEIGHT	100
 # define MINIMAP_PX		10
@@ -141,7 +141,6 @@ int		cub_start(t_cub *cub);
 void	cub_draw(t_cub *cub);
 void	cub_hook(void *param);
 int		cub_raycasting(t_cub *cub, t_ray *ray);
-void	cub_update_pixels(t_cub *cub, t_ray *ray, int x);
 void	cub_clean(t_cub *cub);
 void	cub_delete_textures(t_cub *cub);
 

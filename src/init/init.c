@@ -19,7 +19,7 @@ static int	cub_player_init(t_cub *cub)
 	if (!cub->player)
 		return (1);
 	cub->player->plane.x = 0;
-	cub->player->plane.y = 0.66;
+	cub->player->plane.y = -0.66;
 	cub->player->speed = 0.10;
 	cub->player->rotation = 0.05;
 	cub->player->angle = atan2(cub->player->dir.y, cub->player->dir.x);
