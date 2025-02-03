@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 15:05:13 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:26:01 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct s_cub
 
 int		cub_cub3d(char **av);
 int		cub_init(t_cub *cub, char **av);
+void	cub_camera_init(t_cub *cub);
 int		cub_parse(t_cub *cub, char *filename);
 int		cub_start(t_cub *cub);
 void	cub_draw(t_cub *cub);

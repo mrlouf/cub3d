@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:05:41 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 12:49:16 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:17:45 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "cub3d.h"
 
+void	cub_movements(t_cub *cub);
 void	cub_move_right(t_cub *cub, double speed);
 void	cub_move_left(t_cub *cub, double speed);
 void	cub_move_forward(t_cub *cub, double speed);

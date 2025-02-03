@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:05:26 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 10:46:39 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:17:07 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,5 @@ void	cub_hook(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_KP_SUBTRACT))
 		if (cub->minimap_px > 1)
 			cub->minimap_px--;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
-		cub_move_right(cub, cub->player->speed);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
-		cub_move_left(cub, cub->player->speed);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
-		cub_move_forward(cub, cub->player->speed);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) \
-		&& mlx_is_key_down(cub->mlx, MLX_KEY_LEFT_SHIFT))
-		cub_move_forward(cub, cub->player->speed * 1.5);
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
-		cub_move_backward(cub);
+	cub_movements(cub);
 }
