@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 17:04:23 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:55:22 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,12 @@ void	cub_transfer_data(t_cub *cub, t_parser *parser)
 	cub->rows = parser->rows;
 	cub->cols = parser->cols;
 	cub_convert_map(cub, parser);
-	cub->no_t = ft_strdup(parser->no_text);
-	cub->so_t = ft_strdup(parser->so_text);
-	cub->ea_t = ft_strdup(parser->ea_text);
-	cub->we_t = ft_strdup(parser->we_text);
+	cub_texture_transfer(cub, parser);
+	if (!cub->no_t || !cub->so_t || !cub->ea_t || !cub->we_t)
+	{
+		cub_clean(cub);
+		exit(EXIT_FAILURE);
+	}
 	cub_convert_colors(cub, parser);
 	cub_parser_clean(parser);
 }
