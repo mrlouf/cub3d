@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 17:32:25 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:00:55 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	cub_check_content_textures(char *texture)
 	char	*path;
 
 	path = ft_strtrim(texture, "NSOEAW/. \n");
-	if (cub_check_texture_extension(path, ".xpm"))
+	if (cub_check_texture_extension(path, ".png"))
 	{
 		free(path);
 		return (1);
