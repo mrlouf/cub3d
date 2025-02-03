@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:10:23 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/03 09:26:38 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	cub_check_map_borders(t_parser *parser, char **map)
 				return (ft_putendl_fd("Error: Map: player on border", 2), 1);
 			if (trim[0] != '1' || trim[ft_strlen(trim) - 1] != '1')
 				return (ft_putendl_fd("Error: Map: open wall", 2), 1);
+			printf("trim=%s\n", trim);
 			free(trim);
 		}
 		i++;
