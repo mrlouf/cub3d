@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:36:02 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 11:46:53 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:11:53 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 # define MAP_NO_PLAYER_ERR "Error: map: missing player"
 # define MAP_N_PLAYER_ERR "Error: map: more than one player"
 # define MAP_VOID_ERR "Error: map: open void"
+# define MAP_WALL_ERR "Error: map: open wall"
+# define MAP_PLAYER_BORDER_ERR "Error: map: player on wall"
 # define TEXT_CONV_ERR "Error: texture: failed to convert textures to images"
 # define TEXT_LOAD_ERR_N "Error: texture: failed to load NORTH texture"
 # define TEXT_LOAD_ERR_S "Error: texture: failed to load SOUTH texture"
