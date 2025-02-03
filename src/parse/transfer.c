@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transfer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:14:15 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:19:37 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,29 @@ unsigned int	cub_convert_colors(t_cub *cub, t_parser *parser)
 
 void	cub_set_player(t_cub *cub, t_parser *parser, int i, int j)
 {
-	cub->player->pos.x = i;
-	cub->player->pos.y = j;
-	if (parser->map[i][j] == 'N')
+	cub->player->pos.x = i + 0.5;
+	cub->player->pos.y = j + 0.5;
+	if (parser->map[i][j] == 'E')
 	{
 		cub->player->dir.x = 0;
 		cub->player->dir.y = 1;
 	}
-	else if (parser->map[i][j] == 'S')
+	else if (parser->map[i][j] == 'W')
 	{
 		cub->player->dir.x = 0;
 		cub->player->dir.y = -1;
 	}
-	else if (parser->map[i][j] == 'E')
+	else if (parser->map[i][j] == 'S')
 	{
 		cub->player->dir.x = 1;
 		cub->player->dir.y = 0;
 	}
-	else if (parser->map[i][j] == 'W')
+	else if (parser->map[i][j] == 'N')
 	{
 		cub->player->dir.x = -1;
 		cub->player->dir.y = 0;
 	}
+	cub_camera_init(cub);
 	cub->map[i][j] = 0;
 }
 
@@ -86,7 +87,7 @@ void	cub_convert_map(t_cub *cub, t_parser *parser)
 	{
 		allocate_map_row(cub, parser, i);
 		j = -1;
-		while (++j < parser->cols)
+		while (++j < parser->cols && parser->map[i][j])
 		{
 			if (ft_isspace(parser->map[i][j]))
 				cub->map[i][j] = 0;
@@ -103,10 +104,12 @@ void	cub_transfer_data(t_cub *cub, t_parser *parser)
 	cub->rows = parser->rows;
 	cub->cols = parser->cols;
 	cub_convert_map(cub, parser);
-	cub->no_t = ft_strdup(parser->no_text);
-	cub->so_t = ft_strdup(parser->so_text);
-	cub->ea_t = ft_strdup(parser->ea_text);
-	cub->we_t = ft_strdup(parser->we_text);
+	cub_texture_transfer(cub, parser);
+	if (!cub->no_t || !cub->so_t || !cub->ea_t || !cub->we_t)
+	{
+		cub_clean(cub);
+		exit(EXIT_FAILURE);
+	}
 	cub_convert_colors(cub, parser);
 	cub_parser_clean(parser);
 }

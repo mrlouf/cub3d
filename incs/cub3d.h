@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:26:10 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:26:01 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,12 @@
 
 // DEFINES
 
-# define WINDOW_WIDTH	720
-# define WINDOW_HEIGHT	480
+# define WINDOW_WIDTH	1440
+# define WINDOW_HEIGHT	960
 # define MINIMAP_WIDTH	200
 # define MINIMAP_HEIGHT	100
 # define MINIMAP_PX		10
 # define TILE_SIZE		64
-
-// TEST MAP FOR DEVELOPPING, TO BE DELETED BEFORE SUBMISSION
-
-extern int	g_map[24][24];
 
 // STRUCTURES
 
@@ -50,6 +46,30 @@ typedef struct s_player
 	double		speed;
 	double		rotation;
 }	t_player;
+
+typedef struct s_textures
+{
+	mlx_texture_t			*no_t;
+	mlx_texture_t			*so_t;
+	mlx_texture_t			*ea_t;
+	mlx_texture_t			*we_t;
+}	t_textures;
+
+typedef struct s_images
+{
+	mlx_image_t			*no_i;
+	mlx_image_t			*so_i;
+	mlx_image_t			*ea_i;
+	mlx_image_t			*we_i;
+}	t_images;
+
+enum e_texture_index
+{
+	NORTH = 0,
+	SOUTH = 1,
+	EAST = 2,
+	WEST = 3
+};
 
 typedef struct s_ray
 {
@@ -81,6 +101,15 @@ typedef struct s_delta
 	float	step;
 }	t_delta;
 
+typedef struct s_texture_data
+{
+	mlx_image_t	*texture;
+	double		wall_x;
+	int			tex_x;
+	int			tex_y;
+	double		step;
+}	t_texture_data;
+
 typedef struct s_cub
 {
 	int				minimap_px;
@@ -95,6 +124,8 @@ typedef struct s_cub
 	char			*so_t;
 	char			*ea_t;
 	char			*we_t;
+	t_textures		*w_textures;
+	t_images		*w_images;
 	mlx_image_t		*img;
 	mlx_texture_t	*icon;
 	mlx_t			*mlx;
@@ -105,12 +136,13 @@ typedef struct s_cub
 
 int		cub_cub3d(char **av);
 int		cub_init(t_cub *cub, char **av);
+void	cub_camera_init(t_cub *cub);
 int		cub_parse(t_cub *cub, char *filename);
 int		cub_start(t_cub *cub);
 void	cub_draw(t_cub *cub);
 void	cub_hook(void *param);
 int		cub_raycasting(t_cub *cub, t_ray *ray);
-void	cub_update_pixels(t_cub *cub, t_ray *ray, int x);
 void	cub_clean(t_cub *cub);
+void	cub_delete_textures(t_cub *cub);
 
 #endif
