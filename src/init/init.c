@@ -46,6 +46,13 @@ static int	cub_player_init(t_cub *cub)
 
 int	cub_init(t_cub *cub, char **av)
 {
+	cub->map = NULL;
+	cub->no_t = NULL;
+	cub->so_t = NULL;
+	cub->ea_t = NULL;
+	cub->we_t = NULL;
+	cub->w_textures = NULL;
+	cub->w_images = NULL;
 	cub->filename = ft_strdup(av[1]);
 	if (!cub->filename)
 		return (1);

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
 /*   Updated: 2025/02/03 11:26:01 by nponchon         ###   ########.fr       */
@@ -47,6 +47,30 @@ typedef struct s_player
 	double		rotation;
 }	t_player;
 
+typedef struct s_textures
+{
+	mlx_texture_t			*no_t;
+	mlx_texture_t			*so_t;
+	mlx_texture_t			*ea_t;
+	mlx_texture_t			*we_t;
+}	t_textures;
+
+typedef struct s_images
+{
+	mlx_image_t			*no_i;
+	mlx_image_t			*so_i;
+	mlx_image_t			*ea_i;
+	mlx_image_t			*we_i;
+}	t_images;
+
+enum e_texture_index
+{
+	NORTH = 0,
+	SOUTH = 1,
+	EAST = 2,
+	WEST = 3
+};
+
 typedef struct s_ray
 {
 	double	camera_x;
@@ -77,6 +101,15 @@ typedef struct s_delta
 	float	step;
 }	t_delta;
 
+typedef struct s_texture_data
+{
+	mlx_image_t	*texture;
+	double		wall_x;
+	int			tex_x;
+	int			tex_y;
+	double		step;
+}	t_texture_data;
+
 typedef struct s_cub
 {
 	int				minimap_px;
@@ -91,6 +124,8 @@ typedef struct s_cub
 	char			*so_t;
 	char			*ea_t;
 	char			*we_t;
+	t_textures		*w_textures;
+	t_images		*w_images;
 	mlx_image_t		*img;
 	mlx_texture_t	*icon;
 	mlx_t			*mlx;
@@ -108,5 +143,6 @@ void	cub_draw(t_cub *cub);
 void	cub_hook(void *param);
 int		cub_raycasting(t_cub *cub, t_ray *ray);
 void	cub_clean(t_cub *cub);
+void	cub_delete_textures(t_cub *cub);
 
 #endif

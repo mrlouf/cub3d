@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:01:05 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:00:55 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int	cub_check_content_colors(char *color)
 	copy = ft_strtrim(color, "FC ");
 	tab = ft_split(copy, ',');
 	if (ft_array_count(tab) != 3)
-		return (ft_putendl_fd(CINFO_ERR, 2), 1);
+	{
+		ft_free(tab);
+		return (free(copy), ft_putendl_fd(CINFO_ERR, 2), 1);
+	}
 	free(copy);
 	i = 0;
 	while (i < ft_array_count(tab))
@@ -31,12 +34,11 @@ int	cub_check_content_colors(char *color)
 		trim = ft_strtrim(tab[i], " \n");
 		code = ft_atoi(tab[i]);
 		if (trim[0] == '\0' ||!ft_isdigit_str(trim) || code < 0 || code > 255)
-			return (free(trim), ft_putendl_fd(CINFO_ERR, 2), 1);
+			return (free(trim), ft_free(tab), ft_putendl_fd(CINFO_ERR, 2), 1);
 		free(trim);
 		i++;
 	}
-	ft_free(tab);
-	return (0);
+	return (ft_free(tab), 0);
 }
 
 int	cub_check_texture_extension(char *filename, char *extension)
@@ -70,10 +72,16 @@ int	cub_check_content_textures(char *texture)
 	char	*path;
 
 	path = ft_strtrim(texture, "NSOEAW/. \n");
-	if (cub_check_texture_extension(path, ".xpm"))
+	if (cub_check_texture_extension(path, ".png"))
+	{
+		free(path);
 		return (1);
+	}
 	if (ft_strnstr(path, "forbidden", ft_strlen(path)))
+	{
+		free(path);
 		return (ft_putendl_fd(TEXT_FORB_ERR, 2), 1);
+	}
 	free(path);
 	return (0);
 }

@@ -87,7 +87,7 @@ void	cub_convert_map(t_cub *cub, t_parser *parser)
 	{
 		allocate_map_row(cub, parser, i);
 		j = -1;
-		while (++j < parser->cols)
+		while (++j < parser->cols && parser->map[i][j])
 		{
 			if (ft_isspace(parser->map[i][j]))
 				cub->map[i][j] = 0;
@@ -104,10 +104,12 @@ void	cub_transfer_data(t_cub *cub, t_parser *parser)
 	cub->rows = parser->rows;
 	cub->cols = parser->cols;
 	cub_convert_map(cub, parser);
-	cub->no_t = ft_strdup(parser->no_text);
-	cub->so_t = ft_strdup(parser->so_text);
-	cub->ea_t = ft_strdup(parser->ea_text);
-	cub->we_t = ft_strdup(parser->we_text);
+	cub_texture_transfer(cub, parser);
+	if (!cub->no_t || !cub->so_t || !cub->ea_t || !cub->we_t)
+	{
+		cub_clean(cub);
+		exit(EXIT_FAILURE);
+	}
 	cub_convert_colors(cub, parser);
 	cub_parser_clean(parser);
 }

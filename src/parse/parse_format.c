@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 11:03:58 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:30:42 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,14 +125,14 @@ int	cub_check_format_extension(char *filename, char *extension)
 	if (fd == -1)
 	{
 		if (errno == ENOENT)
-			return (ft_putendl_fd(NO_FILE_ERR, 2), 1);
+			return (free(trim), ft_putendl_fd(NO_FILE_ERR, 2), 1);
 		else if (errno == EACCES)
-			return (ft_putendl_fd(NO_PERM_ERR, 2), 1);
-		return (ft_putendl_fd(OPEN_ERR, 2), 1);
+			return (free(trim), ft_putendl_fd(NO_PERM_ERR, 2), 1);
+		return (free(trim), ft_putendl_fd(OPEN_ERR, 2), 1);
 	}
 	close(fd);
 	if (ft_strnstr(trim, "forbidden", ft_strlen(trim)))
-		return (ft_putendl_fd(FORB_ERR, 2), 1);
+		return (free(trim), ft_putendl_fd(FORB_ERR, 2), 1);
 	point = ft_strchr(trim, '.');
 	if (point && !ft_strcmp(point, extension))
 	{
