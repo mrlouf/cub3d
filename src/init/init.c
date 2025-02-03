@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 09:11:14 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:27:24 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	cub_init(t_cub *cub, char **av)
 	cub->img = NULL;
 	cub->mlx = NULL;
 	cub->icon = mlx_load_png("./src/utils/icon.png");
-	cub->minimap_px = 2;
+	cub->minimap_px = 10;
 	if (cub_player_init(cub))
 		return (1);
 	return (0);
