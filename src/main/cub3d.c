@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:24:55 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 09:36:26 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/04 09:05:50 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ int	cub_start(t_cub *cub)
 	cub->img = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!cub->mlx || !cub->img)
 		return (cub_clean(cub), 1);
-	if (cub_prep_wall_textures(cub))
+	if (cub_prep_wall_textures(cub) || cub_prep_player_textures(cub))
 		return (cub_clean(cub), 1);
+	cub_draw_player(cub);
 	mlx_set_icon(cub->mlx, cub->icon);
 	cub_set_mouse(cub);
 	cub_draw(cub);

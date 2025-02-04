@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:32:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 14:23:55 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:53:10 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	cub_dda(t_cub *cub, t_vector start, t_vector end, int colour)
 	}
 }
 
-static void	cub_clean_img(t_cub *cub)
+static void	cub_clean_wall_img(t_cub *cub)
 {
 	if (cub->w_images->no_i)
 		mlx_delete_image(cub->mlx, cub->w_images->no_i);
@@ -59,6 +59,19 @@ static void	cub_clean_img(t_cub *cub)
 	if (cub->w_images->we_i)
 		mlx_delete_image(cub->mlx, cub->w_images->we_i);
 	free(cub->w_images);
+}
+
+static void	cub_clean_player_img(t_cub *cub)
+{
+	if (cub->player_img->p_1)
+		mlx_delete_image(cub->mlx, cub->player_img->p_1);
+	if (cub->player_img->p_2)
+		mlx_delete_image(cub->mlx, cub->player_img->p_2);
+	if (cub->player_img->p_3)
+		mlx_delete_image(cub->mlx, cub->player_img->p_3);
+	if (cub->player_img->p_4)
+		mlx_delete_image(cub->mlx, cub->player_img->p_4);
+	free(cub->player_img);
 }
 
 void	cub_clean(t_cub *cub)
@@ -81,9 +94,9 @@ void	cub_clean(t_cub *cub)
 			mlx_delete_image(cub->mlx, cub->img);
 		mlx_terminate(cub->mlx);
 	}
-	if (cub->w_textures)
-		cub_delete_textures(cub);
-	if (cub->w_images)
-		cub_clean_img(cub);
+	cub_delete_wall_txt(cub);
+	cub_clean_wall_img(cub);
+	cub_delete_player_txt(cub);
+	cub_clean_player_img(cub);
 	free(cub);
 }

@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 11:26:01 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/04 08:43:36 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../libs/libft/libft.h"
 # include "../libs/libft/ft_printf/includes/ft_printf.h"
 # include "../libs/mlx42/include/MLX42/MLX42.h"
+# include "sprites.h"
 
 // DEFINES
 
@@ -47,22 +48,6 @@ typedef struct s_player
 	double		rotation;
 }	t_player;
 
-typedef struct s_textures
-{
-	mlx_texture_t			*no_t;
-	mlx_texture_t			*so_t;
-	mlx_texture_t			*ea_t;
-	mlx_texture_t			*we_t;
-}	t_textures;
-
-typedef struct s_images
-{
-	mlx_image_t			*no_i;
-	mlx_image_t			*so_i;
-	mlx_image_t			*ea_i;
-	mlx_image_t			*we_i;
-}	t_images;
-
 enum e_texture_index
 {
 	NORTH = 0,
@@ -73,6 +58,7 @@ enum e_texture_index
 
 typedef struct s_ray
 {
+	int		hit;
 	double	camera_x;
 	double	dir_x;
 	double	dir_y;
@@ -124,8 +110,10 @@ typedef struct s_cub
 	char			*so_t;
 	char			*ea_t;
 	char			*we_t;
-	t_textures		*w_textures;
-	t_images		*w_images;
+	t_wall_txt		*w_textures;
+	t_player_txt	*player_txt;
+	t_wall_img		*w_images;
+	t_player_img	*player_img;
 	mlx_image_t		*img;
 	mlx_texture_t	*icon;
 	mlx_t			*mlx;
@@ -143,6 +131,7 @@ void	cub_draw(t_cub *cub);
 void	cub_hook(void *param);
 int		cub_raycasting(t_cub *cub, t_ray *ray);
 void	cub_clean(t_cub *cub);
-void	cub_delete_textures(t_cub *cub);
+void	cub_delete_wall_txt(t_cub *cub);
+void	cub_delete_player_txt(t_cub *cub);
 
 #endif

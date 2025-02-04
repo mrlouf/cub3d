@@ -28,9 +28,12 @@ SRC 		:= 	main/main.c					\
 				rendering/raycast.c			\
 				rendering/draw.c			\
 				rendering/draw_utils.c		\
-				rendering/textures.c		\
+				rendering/draw_player.c		\
+				rendering/textures_wall.c	\
+				rendering/textures_player.c	\
 				hooks/hooks.c				\
 				hooks/movements.c			\
+				hooks/shooting.c			\
 				utils/utils.c
 
 SRCDIR		= src

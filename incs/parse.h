@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:36:02 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 15:11:53 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:39:50 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@
 # define TEXT_LOAD_ERR_S "Error: texture: failed to load SOUTH texture"
 # define TEXT_LOAD_ERR_E "Error: texture: failed to load EAST texture"
 # define TEXT_LOAD_ERR_W "Error: texture: failed to load WEST texture"
+# define TEXT_P_ERR "Error: texture: failed to load PLAYER texture"
 # define IMG_LOAD_ERR_N "Error: texture: failed to create NORTH image"
 # define IMG_LOAD_ERR_S "Error: texture: failed to create SOUTH image"
 # define IMG_LOAD_ERR_E "Error: texture: failed to create EAST image"
 # define IMG_LOAD_ERR_W "Error: texture: failed to create WEST image"
+# define IMG_P_ERR "Error: texture: failed to create PLAYER image"
 
 int		cub_parse(t_cub *cub, char *filename);
 

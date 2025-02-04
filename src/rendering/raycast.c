@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 11:11:26 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:34:24 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,14 +68,11 @@ static void	cub_calculate_step(t_ray *ray, t_player *player)
 /*
 	Uses the side distances x and y from the ray to compare with the map
 	to check for a potential collision with a wall.
-	!A non-closed map leads to infinite calculation > OVERFLOW!
 */
 static void	cub_calculate_wall_distance(t_ray *ray, int **map)
 {
-	int	hit;
-
-	hit = 0;
-	while (hit == 0)
+	ray->hit = 0;
+	while (ray->hit == 0)
 	{
 		if (ray->sided_x < ray->sided_y)
 		{
@@ -90,12 +87,14 @@ static void	cub_calculate_wall_distance(t_ray *ray, int **map)
 			ray->side = 1;
 		}
 		if (map[ray->map_x][ray->map_y] > 0)
-			hit = 1;
+			ray->hit = 1;
 	}
 	if (ray->side == 0)
 		ray->wall_d = (ray->sided_x - ray->delta_dx);
 	else
 		ray->wall_d = (ray->sided_y - ray->delta_dy);
+	if (ray->wall_d < 0.2)
+		ray->wall_d = 0.2;
 }
 
 /*
