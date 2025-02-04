@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 08:43:36 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 09:40:54 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define MINIMAP_HEIGHT	100
 # define MINIMAP_PX		10
 # define TILE_SIZE		64
+# define BPP 4
 
 // STRUCTURES
 
@@ -114,10 +115,12 @@ typedef struct s_cub
 	t_player_txt	*player_txt;
 	t_wall_img		*w_images;
 	t_player_img	*player_img;
-	mlx_image_t		*img;
 	mlx_texture_t	*icon;
 	mlx_t			*mlx;
 	t_player		*player;
+	mlx_image_t		*background_img;
+	mlx_image_t		*raycast_img;
+	mlx_image_t		*mini;
 }	t_cub;
 
 // PROTOTYPES

@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 09:05:06 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:18:21 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	cub_draw_minipx(t_cub *cub, int j, int i, int colour)
 	while (i < ii && i < WINDOW_WIDTH && i >= 0)
 	{
 		while (j < jj && j < WINDOW_HEIGHT && j >= 0)
-			mlx_put_pixel(cub->img, j++, i, colour);
+			mlx_put_pixel(cub->mini, j++, i, colour);
 		j -= cub->minimap_px;
 		i++;
 	}
@@ -97,14 +97,14 @@ void	cub_draw_background(t_cub *cub)
 	{
 		j = -1;
 		while (++j < WINDOW_HEIGHT / 2)
-			mlx_put_pixel(cub->img, i, j, cub->c_color);
+			mlx_put_pixel(cub->background_img, i, j, cub->c_color);
 	}
 	i = -1;
 	while (++i < WINDOW_WIDTH)
 	{
 		j = WINDOW_HEIGHT / 2 - 1;
 		while (++j < WINDOW_HEIGHT)
-			mlx_put_pixel(cub->img, i, j, cub->f_color);
+			mlx_put_pixel(cub->background_img, i, j, cub->f_color);
 	}
 }
 
@@ -116,6 +116,9 @@ void	cub_draw(t_cub *cub)
 {
 	t_ray	ray;
 
+	cub_clear_image_fast(cub->background_img);
+	cub_clear_image_fast(cub->raycast_img);
+	cub_clear_image_fast(cub->mini);
 	cub_draw_background(cub);
 	cub_raycasting(cub, &ray);
 	cub_draw_minimap(cub);

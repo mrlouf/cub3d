@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 17:44:23 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:15:03 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,23 @@ static int	cub_player_init(t_cub *cub)
 	return (0);
 }
 
+static int	cub_init_img_buffers(t_cub *cub)
+{
+	cub->background_img = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!cub->background_img)
+		return (1);
+	mlx_image_to_window(cub->mlx, cub->background_img, 0, 0);
+	cub->raycast_img = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!cub->raycast_img)
+		return (1);
+	mlx_image_to_window(cub->mlx, cub->raycast_img, 0, 0);
+	cub->mini = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!cub->mini)
+		return (1);
+	mlx_image_to_window(cub->mlx, cub->mini, 0, 0);
+	return (0);
+}
+
 int	cub_init(t_cub *cub, char **av)
 {
 	cub->map = NULL;
@@ -58,10 +75,14 @@ int	cub_init(t_cub *cub, char **av)
 	cub->filename = ft_strdup(av[1]);
 	if (!cub->filename)
 		return (1);
-	cub->img = NULL;
-	cub->mlx = NULL;
+	cub->mini = NULL;
+	cub->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D", true);
+	if (!cub->mlx)
+		return (1);
 	cub->icon = mlx_load_png("./src/utils/icon.png");
 	cub->minimap_px = 10;
+	if (cub_init_img_buffers(cub))
+		return (1);
 	if (cub_player_init(cub))
 		return (1);
 	return (0);

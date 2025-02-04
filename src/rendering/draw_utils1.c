@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:51 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 15:49:32 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 10:08:23 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,23 @@ void	cub_update_pixels(t_cub *cub, t_ray *ray, int x)
 	t_texture_data	data;
 	double			tex_pos;
 	int				i;
+	uint32_t		color;
+	uint8_t			*pixel_ptr;
 
 	calculate_wall_height(ray);
 	set_texture_and_wall(&data, cub, ray);
 	calculate_texture_position(&data, ray);
-	tex_pos = (ray->start - WINDOW_HEIGHT / 2
-			+ (int)(WINDOW_HEIGHT / ray->wall_d) / 2) * data.step;
+	tex_pos = (ray->start - WINDOW_HEIGHT / 2 + \
+		(int)(WINDOW_HEIGHT / ray->wall_d) / 2) * data.step;
 	i = ray->start;
 	while (i < ray->end)
 	{
 		data.tex_y = (int)tex_pos & (data.texture->height - 1);
 		tex_pos += data.step;
-		mlx_put_pixel(cub->img, x, i++,
-			((uint32_t *)data.texture->pixels)[data.tex_y
-			* data.texture->width + data.tex_x]);
+		pixel_ptr = &data.texture->pixels[(data.tex_y \
+			* data.texture->width + data.tex_x) * BPP];
+		color = (pixel_ptr[0] << 24) | (pixel_ptr[1] << 16)
+			| (pixel_ptr[2] << 8) | 0xFF;
+		mlx_put_pixel(cub->raycast_img, x, i++, color);
 	}
 }

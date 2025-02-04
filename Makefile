@@ -27,14 +27,18 @@ SRC 		:= 	main/main.c					\
 				parse/transfer_utils.c		\
 				rendering/raycast.c			\
 				rendering/draw.c			\
-				rendering/draw_utils.c		\
+				rendering/draw_utils1.c		\
+				rendering/draw_utils2.c		\
 				rendering/draw_player.c		\
 				rendering/textures_wall.c	\
 				rendering/textures_player.c	\
 				hooks/hooks.c				\
 				hooks/movements.c			\
-				hooks/shooting.c			\
-				utils/utils.c
+				hooks/pet.c					\
+				hooks/pet_utils.c			\
+				utils/utils.c				\
+				utils/cleanup1.c			\
+				utils/cleanup2.c			\
 
 SRCDIR		= src
 SRCS		= $(addprefix $(SRCDIR)/, $(SRC))
