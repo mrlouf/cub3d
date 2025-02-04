@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:40:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 12:14:57 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:29:19 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 void	cub_move_backward(t_cub *cub)
 {
 	if (cub->map[(int)(cub->player->pos.x - cub->player->dir.x \
-		* cub->player->speed)][(int)cub->player->pos.y] == 0)
+		* cub->player->speed)][(int)cub->player->pos.y] < 1)
 		cub->player->pos.x -= cub->player->dir.x * cub->player->speed;
 	if (cub->map[(int)cub->player->pos.x][(int)(cub->player->pos.y \
-		- cub->player->dir.y * cub->player->speed)] == 0)
+		- cub->player->dir.y * cub->player->speed)] < 1)
 		cub->player->pos.y -= cub->player->dir.y * cub->player->speed;
 }
 
@@ -34,10 +34,10 @@ void	cub_move_backward(t_cub *cub)
 void	cub_move_forward(t_cub *cub, double speed)
 {
 	if (cub->map[(int)(cub->player->pos.x + cub->player->dir.x \
-		* speed)][(int)cub->player->pos.y] == 0)
+		* speed)][(int)cub->player->pos.y] < 1)
 		cub->player->pos.x += cub->player->dir.x * speed;
 	if (cub->map[(int)cub->player->pos.x][(int)(cub->player->pos.y \
-		+ cub->player->dir.y * speed)] == 0)
+		+ cub->player->dir.y * speed)] < 1)
 		cub->player->pos.y += cub->player->dir.y * speed;
 }
 
@@ -48,10 +48,10 @@ void	cub_move_forward(t_cub *cub, double speed)
 void	cub_move_left(t_cub *cub, double speed)
 {
 	if (cub->map[(int)(cub->player->pos.x + -cub->player->dir.y \
-		* speed)][(int)cub->player->pos.y] == 0)
+		* speed)][(int)cub->player->pos.y] < 1)
 		cub->player->pos.x += -cub->player->dir.y * speed;
 	if (cub->map[(int)cub->player->pos.x][(int)(cub->player->pos.y \
-		+ cub->player->dir.x * speed)] == 0)
+		+ cub->player->dir.x * speed)] < 1)
 		cub->player->pos.y += cub->player->dir.x * speed;
 }
 
@@ -62,10 +62,10 @@ void	cub_move_left(t_cub *cub, double speed)
 void	cub_move_right(t_cub *cub, double speed)
 {
 	if (cub->map[(int)(cub->player->pos.x + cub->player->dir.y \
-		* speed)][(int)cub->player->pos.y] == 0)
+		* speed)][(int)cub->player->pos.y] < 1)
 		cub->player->pos.x += cub->player->dir.y * speed;
 	if (cub->map[(int)cub->player->pos.x][(int)(cub->player->pos.y \
-		+ -cub->player->dir.x * speed)] == 0)
+		+ -cub->player->dir.x * speed)] < 1)
 		cub->player->pos.y += -cub->player->dir.x * speed;
 }
 
