@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 11:26:01 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:04:22 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,11 @@ typedef struct s_ray
 	int		start;
 	int		end;
 	double	wall_x;
+	int		door_hit;
+	double	door_d;
+	int		door_h;
+	int		dstart;
+	int		dend;
 }	t_ray;
 
 typedef struct s_delta
