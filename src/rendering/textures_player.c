@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 17:52:06 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:59:34 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 
 static int	cub_get_player_txt(t_cub *cub)
 {
-	cub->player_txt->p_1 = mlx_load_png("./textures/hands/p_1_390.png");
+	cub->player_txt->p_1 = mlx_load_png("./sprites/hands/p_1_390.png");
 	if (!cub->player_txt->p_1)
 		return (ft_putendl_fd(TEXT_P_ERR, 2), 1);
-	cub->player_txt->p_2 = mlx_load_png("./textures/hands/p_2_390.png");
+	cub->player_txt->p_2 = mlx_load_png("./sprites/hands/p_2_390.png");
 	if (!cub->player_txt->p_2)
 		return (ft_putendl_fd(TEXT_P_ERR, 2), 1);
-	cub->player_txt->p_3 = mlx_load_png("./textures/hands/p_3_390.png");
+	cub->player_txt->p_3 = mlx_load_png("./sprites/hands/p_3_390.png");
 	if (!cub->player_txt->p_3)
 		return (ft_putendl_fd(TEXT_P_ERR, 2), 1);
-	cub->player_txt->p_4 = mlx_load_png("./textures/hands/p_4_390.png");
+	cub->player_txt->p_4 = mlx_load_png("./sprites/hands/p_4_390.png");
 	if (!cub->player_txt->p_4)
 		return (ft_putendl_fd(TEXT_P_ERR, 2), 1);
 	return (0);

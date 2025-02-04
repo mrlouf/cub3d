@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 16:34:24 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:17:59 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ static void	cub_calculate_wall_distance(t_ray *ray, int **map)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (map[ray->map_x][ray->map_y] > 0)
+		if (map[ray->map_x][ray->map_y] > 0
+			&& !ft_isalpha(map[ray->map_x][ray->map_y]))
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
@@ -130,6 +131,7 @@ int	cub_raycasting(t_cub *cub, t_ray *ray)
 		cub_calculate_wall_distance(ray, cub->map);
 		cub_calculate_wall_height(ray);
 		cub_update_pixels(cub, ray, x);
+		cub->zbuffer[x] = ray->wall_d;
 		x++;
 	}
 	return (0);

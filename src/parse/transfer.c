@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transfer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 11:19:37 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:50:35 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,19 @@ void	cub_set_player(t_cub *cub, t_parser *parser, int i, int j)
 	cub->map[i][j] = 0;
 }
 
-int	cub_is_valid_sym(char c)
+void	cub_set_map_value(t_parser *parser, t_cub *cub, int i, int j)
 {
-	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
-		return (1);
-	return (0);
+	char	c;
+
+	c = parser->map[i][j];
+	if (ft_isspace(parser->map[i][j]))
+		cub->map[i][j] = 0;
+	else if (c == 'C' || c == 'H')
+		cub->map[i][j] = parser->map[i][j];
+	else if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		cub_set_player(cub, parser, i, j);
+	else
+		cub->map[i][j] = parser->map[i][j] - 48;
 }
 
 void	cub_convert_map(t_cub *cub, t_parser *parser)
@@ -85,17 +93,10 @@ void	cub_convert_map(t_cub *cub, t_parser *parser)
 	i = -1;
 	while (++i < parser->rows)
 	{
-		allocate_map_row(cub, parser, i);
+		cub_allocate_map_row(cub, parser, i);
 		j = -1;
 		while (++j < parser->cols && parser->map[i][j])
-		{
-			if (ft_isspace(parser->map[i][j]))
-				cub->map[i][j] = 0;
-			else if (cub_is_valid_sym(parser->map[i][j]))
-				cub_set_player(cub, parser, i, j);
-			else
-				cub->map[i][j] = parser->map[i][j] - 48;
-		}
+			cub_set_map_value(parser, cub, i, j);
 	}
 }
 

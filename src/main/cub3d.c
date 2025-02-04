@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:24:55 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 10:18:48 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:39:53 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,13 @@ void	cub_mouse_hook(double xpos, double ypos, void *data)
 */
 int	cub_start(t_cub *cub)
 {
-	if (cub_prep_wall_textures(cub) || cub_prep_player_textures(cub))
+	if (cub_prep_wall_textures(cub) || cub_prep_player_textures(cub)
+		|| cub_prep_cow_textures(cub))
 		return (cub_clean(cub), 1);
 	cub_draw_player(cub);
 	mlx_set_icon(cub->mlx, cub->icon);
 	cub_set_mouse(cub);
+	cub_init_sprites(cub, &cub->sprites);
 	cub_draw(cub);
 	mlx_image_to_window(cub->mlx, cub->mini, 0, 0);
 	mlx_loop_hook(cub->mlx, cub_loop, cub);

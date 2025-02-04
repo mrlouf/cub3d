@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 10:18:21 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:29:52 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,12 @@ static void	cub_draw_minimap(t_cub *cub)
 		j = -1;
 		while (++j < cub->cols)
 		{
-			if (cub->map[i][j] > 0)
+			if (cub->map[i][j] == 1)
 				cub_draw_minipx(cub, j * cub->minimap_px, \
 					i * cub->minimap_px, 0x66CC00FF);
+			else if (cub_is_sprite(cub->map[i][j]))
+				cub_draw_minipx(cub, j * cub->minimap_px, \
+					i * cub->minimap_px, 0x0000FFFF);
 			else
 				cub_draw_minipx(cub, j * cub->minimap_px, \
 					i * cub->minimap_px, 0x003300FF);
@@ -118,8 +121,10 @@ void	cub_draw(t_cub *cub)
 
 	cub_clear_image_fast(cub->background_img);
 	cub_clear_image_fast(cub->raycast_img);
+	cub_clear_image_fast(cub->npc_img);
 	cub_clear_image_fast(cub->mini);
 	cub_draw_background(cub);
 	cub_raycasting(cub, &ray);
+	cub_draw_npcs(cub);
 	cub_draw_minimap(cub);
 }

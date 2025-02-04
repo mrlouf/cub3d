@@ -6,11 +6,12 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 10:15:03 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:39:33 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/init.h"
+#include "../../incs/parse.h"
 #include "math.h"
 
 /*
@@ -54,6 +55,10 @@ static int	cub_init_img_buffers(t_cub *cub)
 	if (!cub->raycast_img)
 		return (1);
 	mlx_image_to_window(cub->mlx, cub->raycast_img, 0, 0);
+	cub->npc_img = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!cub->npc_img)
+		return (1);
+	mlx_image_to_window(cub->mlx, cub->npc_img, 0, 0);
 	cub->mini = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!cub->mini)
 		return (1);
@@ -61,7 +66,7 @@ static int	cub_init_img_buffers(t_cub *cub)
 	return (0);
 }
 
-int	cub_init(t_cub *cub, char **av)
+static void	cub_init_null(t_cub *cub)
 {
 	cub->map = NULL;
 	cub->no_t = NULL;
@@ -72,15 +77,26 @@ int	cub_init(t_cub *cub, char **av)
 	cub->w_images = NULL;
 	cub->player_txt = NULL;
 	cub->player_img = NULL;
+	cub->cow_txt = NULL;
+	cub->cow_img = NULL;
+	cub->mini = NULL;
+	cub->sprites = NULL;
+}
+
+int	cub_init(t_cub *cub, char **av)
+{
+	cub_init_null(cub);
 	cub->filename = ft_strdup(av[1]);
 	if (!cub->filename)
 		return (1);
-	cub->mini = NULL;
 	cub->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D", true);
 	if (!cub->mlx)
 		return (1);
 	cub->icon = mlx_load_png("./src/utils/icon.png");
 	cub->minimap_px = 10;
+	cub->zbuffer = malloc(sizeof(double) * WINDOW_WIDTH);
+	if (!cub->zbuffer)
+		return (ft_putendl_fd(MEM_ERR, 2), 1);
 	if (cub_init_img_buffers(cub))
 		return (1);
 	if (cub_player_init(cub))

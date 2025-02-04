@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:32:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 11:29:20 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:34:14 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	cub_clean_mlx(t_cub *cub)
 			cub_delete_image(cub->mlx, &cub->background_img);
 		if (cub->raycast_img)
 			cub_delete_image(cub->mlx, &cub->raycast_img);
+		if (cub->npc_img)
+			cub_delete_image(cub->mlx, &cub->npc_img);
 		mlx_terminate(cub->mlx);
 		cub->mlx = NULL;
 	}
@@ -64,6 +66,7 @@ void	cub_clean_textures(t_cub *cub)
 	cub_delete_texture(&cub->icon);
 	cub_delete_wall_txt(cub);
 	cub_delete_player_txt(cub);
+	cub_delete_cow_txt(cub);
 }
 
 void	cub_clean(t_cub *cub)
@@ -71,12 +74,17 @@ void	cub_clean(t_cub *cub)
 	if (!cub)
 		return ;
 	cub_clean_strings(cub);
-	ft_free_narray((void **)cub->map, cub->rows);
+	if (cub->map)
+		ft_free_narray((void **)cub->map, cub->rows);
+	if (cub->zbuffer)
+		free(cub->zbuffer);
 	cub->map = NULL;
 	cub_clean_textures(cub);
 	cub_clean_wall_img(cub);
 	cub_clean_player_img(cub);
+	cub_clean_cow_img(cub);
 	cub_clean_mlx(cub);
+	cub_clean_sprite_list(cub);
 	free(cub->player);
 	cub->player = NULL;
 	free(cub);

@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 09:40:54 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:15:48 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define MINIMAP_PX		10
 # define TILE_SIZE		64
 # define BPP 4
+# define M_PI 3.14159265358979323846
 
 // STRUCTURES
 
@@ -97,6 +98,16 @@ typedef struct s_texture_data
 	double		step;
 }	t_texture_data;
 
+typedef struct s_sprite
+{
+	t_vector	pos;
+	double		distance;
+	double		angle;
+	int			screen_x;
+	int			size;
+	int			type;
+}	t_sprite;
+
 typedef struct s_cub
 {
 	int				minimap_px;
@@ -111,16 +122,23 @@ typedef struct s_cub
 	char			*so_t;
 	char			*ea_t;
 	char			*we_t;
+	double			*zbuffer;
 	t_wall_txt		*w_textures;
 	t_player_txt	*player_txt;
+	t_cow_txt		*cow_txt;
+	t_horse_txt		*horse_txt;
 	t_wall_img		*w_images;
 	t_player_img	*player_img;
+	t_cow_img		*cow_img;
+	t_horse_img		*horse_img;
 	mlx_texture_t	*icon;
 	mlx_t			*mlx;
 	t_player		*player;
 	mlx_image_t		*background_img;
 	mlx_image_t		*raycast_img;
+	mlx_image_t		*npc_img;
 	mlx_image_t		*mini;
+	t_list			*sprites;
 }	t_cub;
 
 // PROTOTYPES
@@ -134,7 +152,5 @@ void	cub_draw(t_cub *cub);
 void	cub_hook(void *param);
 int		cub_raycasting(t_cub *cub, t_ray *ray);
 void	cub_clean(t_cub *cub);
-void	cub_delete_wall_txt(t_cub *cub);
-void	cub_delete_player_txt(t_cub *cub);
 
 #endif

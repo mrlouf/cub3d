@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:33:01 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 08:43:10 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:53:15 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,33 @@ typedef struct s_player_img
 	mlx_image_t	*p_3;
 	mlx_image_t	*p_4;
 }	t_player_img;
+
+typedef struct s_cow_txt
+{
+	mlx_texture_t	*cow_1;
+	mlx_texture_t	*cow_2;
+	int				height;
+	int				width;
+	uint8_t			*pixels;
+}	t_cow_txt;
+
+typedef struct s_cow_img
+{
+	mlx_image_t	*cow_1;
+	mlx_image_t	*cow_2;
+}	t_cow_img;
+
+typedef struct s_horse_txt
+{
+	mlx_texture_t	*horse_1;
+	int				height;
+	int				width;
+	uint8_t			*pixels;
+}	t_horse_txt;
+
+typedef struct s_horse_img
+{
+	mlx_image_t	*horse_1;
+}	t_horse_img;
 
 #endif
