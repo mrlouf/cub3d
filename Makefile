@@ -29,6 +29,7 @@ SRC 		:= 	main/main.c					\
 				rendering/draw.c			\
 				rendering/draw_utils.c		\
 				rendering/textures.c		\
+				rendering/doors.c			\
 				hooks/hooks.c				\
 				hooks/movements.c			\
 				utils/utils.c

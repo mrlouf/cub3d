@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:51 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 12:06:08 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:53:06 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	calculate_texture_position(t_texture_data *data, t_ray *ray)
 {
 	int	line_height;
 
-	data->wall_x -= floor(data->wall_x);
+	data->wall_x = fmod(data->wall_x, 1.0);
 	data->tex_x = (int)(data->wall_x * data->texture->width);
 	if (ray->side == 0 && ray->step_x > 0)
 		data->tex_x = data->texture->width - data->tex_x - 1;

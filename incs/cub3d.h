@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 12:04:22 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:07:31 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_textures
 	mlx_texture_t			*so_t;
 	mlx_texture_t			*ea_t;
 	mlx_texture_t			*we_t;
+	mlx_texture_t			*d_t;
 }	t_textures;
 
 typedef struct s_images
@@ -61,6 +62,7 @@ typedef struct s_images
 	mlx_image_t			*so_i;
 	mlx_image_t			*ea_i;
 	mlx_image_t			*we_i;
+	mlx_image_t			*d_i;
 }	t_images;
 
 enum e_texture_index
@@ -71,6 +73,9 @@ enum e_texture_index
 	WEST = 3
 };
 
+/*
+	Ray structure for drawing walls as well as doors.
+*/
 typedef struct s_ray
 {
 	double	camera_x;
@@ -92,6 +97,7 @@ typedef struct s_ray
 	double	wall_x;
 	int		door_hit;
 	double	door_d;
+	int		dside;
 	int		door_h;
 	int		dstart;
 	int		dend;
