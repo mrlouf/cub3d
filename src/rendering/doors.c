@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:31:52 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 13:23:21 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:42:22 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	cub_draw_doors(t_cub *cub, t_ray *ray, int x)
 	{
 		data.tex_y = (int)tex_pos & (data.texture->height - 1);
 		tex_pos += data.step;
-		mlx_put_pixel(cub->obj_img, x, i++,
+		mlx_put_pixel(cub->raycast_img, x, i++,
 			((uint32_t *)data.texture->pixels)[data.tex_y
 			+ data.tex_x * data.texture->width]);
 	}
