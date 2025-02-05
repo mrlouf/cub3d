@@ -6,20 +6,28 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:05:26 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 12:10:00 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:54:50 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/hooks.h"
 
 /*
-	Opens and closes doors. This needs to be time-based instead of frames,
-	so that there is a cooldown between opening and closing.
+	Opens and closes doors with a 0.5 second cooldown in-between to avoid
+	interacting too quickly.
 	TODO
 	Special texture for door, implement sprite animation.
 */
 void	cub_open_close_doors(t_cub *cub)
 {
+	struct timeval	current_time;
+	long			elapsed_time;
+
+	gettimeofday(&current_time, NULL);
+	elapsed_time = (current_time.tv_sec - cub->toggle_door.tv_sec) \
+		* 1000000L + (current_time.tv_usec - cub->toggle_door.tv_usec);
+	if (elapsed_time < COOLDOWN_PERIOD)
+		return ;
 	if (cub->map[(int)(cub->player->pos.x + cub->player->dir.x \
 		* cub->player->speed * 7)][(int)cub->player->pos.y] == 2)
 		cub->map[(int)(cub->player->pos.x + cub->player->dir.x \
@@ -49,11 +57,13 @@ void	cub_rotate_right(t_cub *cub, double nerf)
 
 	olddirx = cub->player->dir.x;
 	oldplanex = cub->player->plane.x;
-	cub->player->dir.x = cub->player->dir.x * cos(-cub->player->rotation * nerf) \
+	cub->player->dir.x = cub->player->dir.x \
+		* cos(-cub->player->rotation * nerf) \
 		- cub->player->dir.y * sin(-cub->player->rotation * nerf);
 	cub->player->dir.y = olddirx * sin(-cub->player->rotation * nerf) \
 		+ cub->player->dir.y * cos(-cub->player->rotation * nerf);
-	cub->player->plane.x = cub->player->plane.x * cos(-cub->player->rotation * nerf) \
+	cub->player->plane.x = cub->player->plane.x \
+		* cos(-cub->player->rotation * nerf) \
 		- cub->player->plane.y * sin(-cub->player->rotation * nerf);
 	cub->player->plane.y = oldplanex * sin(-cub->player->rotation * nerf) \
 		+ cub->player->plane.y * cos(-cub->player->rotation * nerf);
@@ -71,11 +81,13 @@ void	cub_rotate_left(t_cub *cub, double nerf)
 
 	olddirx = cub->player->dir.x;
 	oldplanex = cub->player->plane.x;
-	cub->player->dir.x = cub->player->dir.x * cos(cub->player->rotation * nerf) \
+	cub->player->dir.x = cub->player->dir.x \
+		* cos(cub->player->rotation * nerf) \
 		- cub->player->dir.y * sin(cub->player->rotation * nerf);
 	cub->player->dir.y = olddirx * sin(cub->player->rotation * nerf) \
 		+ cub->player->dir.y * cos(cub->player->rotation * nerf);
-	cub->player->plane.x = cub->player->plane.x * cos(cub->player->rotation * nerf) \
+	cub->player->plane.x = cub->player->plane.x \
+		* cos(cub->player->rotation * nerf) \
 		- cub->player->plane.y * sin(cub->player->rotation * nerf);
 	cub->player->plane.y = oldplanex * sin(cub->player->rotation * nerf) \
 		+ cub->player->plane.y * cos(cub->player->rotation * nerf);

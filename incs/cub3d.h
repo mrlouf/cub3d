@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 17:07:31 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:44:12 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <math.h>
+# include <sys/time.h>
 
 # include "../libs/libft/libft.h"
 # include "../libs/libft/ft_printf/includes/ft_printf.h"
@@ -28,6 +29,10 @@
 # define MINIMAP_HEIGHT	100
 # define MINIMAP_PX		10
 # define TILE_SIZE		64
+
+// COOLDOWN FOR OPENING/CLOSING DOORS
+#define COOLDOWN_PERIOD 500000
+
 
 // STRUCTURES
 
@@ -140,6 +145,7 @@ typedef struct s_cub
 	mlx_image_t		*img;
 	mlx_texture_t	*icon;
 	mlx_t			*mlx;
+	struct timeval 	toggle_door;
 	t_player		*player;
 }	t_cub;
 
