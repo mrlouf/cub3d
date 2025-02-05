@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:33:01 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 16:53:15 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:39:08 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define SPRITES_H
 
 # include "cub3d.h"
+
+enum e_sprite_type
+{
+	COW = 0,
+	HORSE = 1,
+	NPC1 = 2
+};
 
 typedef struct s_wall_txt
 {
@@ -76,5 +83,18 @@ typedef struct s_horse_img
 {
 	mlx_image_t	*horse_1;
 }	t_horse_img;
+
+typedef struct s_npc_1_txt
+{
+	mlx_texture_t	*npc_1_1;
+	int				height;
+	int				width;
+	uint8_t			*pixels;
+}	t_npc_1_txt;
+
+typedef struct s_npc_1_img
+{
+	mlx_image_t	*npc_1_1;
+}	t_npc_1_img;
 
 #endif

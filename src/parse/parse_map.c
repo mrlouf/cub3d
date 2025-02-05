@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 16:55:22 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:41:08 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	cub_check_map_define_symbols(t_parser *parser)
 	parser->symbols[5] = "E";
 	parser->symbols[6] = "C";
 	parser->symbols[7] = "H";
-	parser->symbols[8] = " ";
-	parser->symbols[9] = NULL;
+	parser->symbols[8] = "F";
+	parser->symbols[9] = " ";
+	parser->symbols[10] = NULL;
 }
 
 int	cub_check_map_symbols(t_parser *parser, char **map)
@@ -104,7 +105,7 @@ int	cub_check_content_map(t_parser *parser, char **map)
 {
 	char	**flipped;
 
-	parser->symbols = malloc(sizeof(char *) * (9 + 1));
+	parser->symbols = malloc(sizeof(char *) * (10 + 1));
 	if (!parser->symbols)
 		return (ft_putendl_fd(MEM_ERR, 2), 1);
 	cub_check_map_define_symbols(parser);

@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 16:50:35 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:44:04 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	cub_set_map_value(t_parser *parser, t_cub *cub, int i, int j)
 	c = parser->map[i][j];
 	if (ft_isspace(parser->map[i][j]))
 		cub->map[i][j] = 0;
-	else if (c == 'C' || c == 'H')
+	else if (c == 'C' || c == 'H' || c == 'F')
 		cub->map[i][j] = parser->map[i][j];
 	else if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		cub_set_player(cub, parser, i, j);

@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 17:15:48 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:36:24 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,19 @@ typedef struct s_sprite
 	double		angle;
 	int			screen_x;
 	int			size;
+	int			width;
 	int			type;
+	double		sprite_dx;
+	double		sprite_dy;
+	double		inv_det;	
+	double		transform_x;
+	double		transform_y;
+	int			sprite_screen_x;
+	int			sprite_size;
+	int			draw_start_x;
+	int			draw_end_x;
+	int			x;
+	int			tex_x;
 }	t_sprite;
 
 typedef struct s_cub
@@ -127,16 +139,18 @@ typedef struct s_cub
 	t_player_txt	*player_txt;
 	t_cow_txt		*cow_txt;
 	t_horse_txt		*horse_txt;
+	t_npc_1_txt		*npc_1_txt;
 	t_wall_img		*w_images;
 	t_player_img	*player_img;
 	t_cow_img		*cow_img;
 	t_horse_img		*horse_img;
+	t_npc_1_img		*npc_1_img;
 	mlx_texture_t	*icon;
 	mlx_t			*mlx;
 	t_player		*player;
 	mlx_image_t		*background_img;
 	mlx_image_t		*raycast_img;
-	mlx_image_t		*npc_img;
+	mlx_image_t		*obj_img;
 	mlx_image_t		*mini;
 	t_list			*sprites;
 }	t_cub;

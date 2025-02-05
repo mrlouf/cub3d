@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 17:29:52 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 09:00:24 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,10 @@ void	cub_draw(t_cub *cub)
 
 	cub_clear_image_fast(cub->background_img);
 	cub_clear_image_fast(cub->raycast_img);
-	cub_clear_image_fast(cub->npc_img);
+	cub_clear_image_fast(cub->obj_img);
 	cub_clear_image_fast(cub->mini);
 	cub_draw_background(cub);
 	cub_raycasting(cub, &ray);
-	cub_draw_npcs(cub);
+	cub_draw_obj(cub);
 	cub_draw_minimap(cub);
 }
