@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:36:02 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 15:11:53 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:38:20 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,24 @@
 # define MAP_VOID_ERR "Error: map: open void"
 # define MAP_WALL_ERR "Error: map: open wall"
 # define MAP_PLAYER_BORDER_ERR "Error: map: player on wall"
+# define MAP_SIZE_ERR "Error: map: size too small"
 # define TEXT_CONV_ERR "Error: texture: failed to convert textures to images"
 # define TEXT_LOAD_ERR_N "Error: texture: failed to load NORTH texture"
 # define TEXT_LOAD_ERR_S "Error: texture: failed to load SOUTH texture"
 # define TEXT_LOAD_ERR_E "Error: texture: failed to load EAST texture"
 # define TEXT_LOAD_ERR_W "Error: texture: failed to load WEST texture"
+# define TEXT_COW_ERR "Error: texture: failed to load COW texture"
+# define TEXT_HORSE_ERR "Error: texture: failed to load HORSE texture"
+# define TEXT_NPC1_ERR "Error: texture: failed to load NPC1 texture"
+# define TEXT_P_ERR "Error: texture: failed to load PLAYER texture"
 # define IMG_LOAD_ERR_N "Error: texture: failed to create NORTH image"
 # define IMG_LOAD_ERR_S "Error: texture: failed to create SOUTH image"
 # define IMG_LOAD_ERR_E "Error: texture: failed to create EAST image"
 # define IMG_LOAD_ERR_W "Error: texture: failed to create WEST image"
+# define IMG_P_ERR "Error: texture: failed to create PLAYER image"
+# define IMG_COW_ERR "Error: texture: failed to create COW image"
+# define IMG_HORSE_ERR "Error: texture: failed to create HORSE image"
+# define IMG_NPC1_ERR "Error: texture: failed to create NPC1 image"
 
 int		cub_parse(t_cub *cub, char *filename);
 
@@ -103,7 +112,7 @@ void	cub_check_map_define_symbols(t_parser *parser);
 //TRANSFER functions
 void	cub_transfer_data(t_cub *cub, t_parser *parser);
 void	cub_convert_map(t_cub *cub, t_parser *parser);
-void	allocate_map_row(t_cub *cub, t_parser *parser, int i);
+void	cub_allocate_map_row(t_cub *cub, t_parser *parser, int i);
 void	cub_set_player(t_cub *cub, t_parser *parser, int i, int j);
 void	cub_texture_transfer(t_cub *cub, t_parser *parser);
 void	cub_parser_clean(t_parser *parser);

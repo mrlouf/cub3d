@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 12:58:31 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:12:38 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "../libs/libft/libft.h"
 # include "../libs/libft/ft_printf/includes/ft_printf.h"
 # include "../libs/mlx42/include/MLX42/MLX42.h"
+# include "sprites.h"
 
 // DEFINES
 
@@ -29,9 +30,9 @@
 # define MINIMAP_HEIGHT	100
 # define MINIMAP_PX		10
 # define TILE_SIZE		64
-
-// COOLDOWN FOR OPENING/CLOSING DOORS
 # define COOLDOWN_PERIOD 500000
+# define BPP 4
+# define M_PI 3.14159265358979323846
 
 // STRUCTURES
 
@@ -82,6 +83,7 @@ enum e_texture_index
 */
 typedef struct s_ray
 {
+	int		hit;
 	double	camera_x;
 	double	dir_x;
 	double	dir_y;
@@ -125,6 +127,28 @@ typedef struct s_texture_data
 	double		step;
 }	t_texture_data;
 
+typedef struct s_sprite
+{
+	t_vector	pos;
+	double		distance;
+	double		angle;
+	int			screen_x;
+	int			size;
+	int			width;
+	int			type;
+	double		sprite_dx;
+	double		sprite_dy;
+	double		inv_det;	
+	double		transform_x;
+	double		transform_y;
+	int			sprite_screen_x;
+	int			sprite_size;
+	int			draw_start_x;
+	int			draw_end_x;
+	int			x;
+	int			tex_x;
+}	t_sprite;
+
 typedef struct s_cub
 {
 	int				minimap_px;
@@ -139,13 +163,26 @@ typedef struct s_cub
 	char			*so_t;
 	char			*ea_t;
 	char			*we_t;
-	t_textures		*w_textures;
-	t_images		*w_images;
-	mlx_image_t		*img;
+	double			*zbuffer;
+	t_wall_txt		*w_textures;
+	t_player_txt	*player_txt;
+	t_cow_txt		*cow_txt;
+	t_horse_txt		*horse_txt;
+	t_npc_1_txt		*npc_1_txt;
+	t_wall_img		*w_images;
+	t_player_img	*player_img;
+	t_cow_img		*cow_img;
+	t_horse_img		*horse_img;
+	t_npc_1_img		*npc_1_img;
 	mlx_texture_t	*icon;
 	mlx_t			*mlx;
 	struct timeval	toggle_door;
 	t_player		*player;
+	mlx_image_t		*background_img;
+	mlx_image_t		*raycast_img;
+	mlx_image_t		*obj_img;
+	mlx_image_t		*mini;
+	t_list			*sprites;
 }	t_cub;
 
 // PROTOTYPES
@@ -159,6 +196,5 @@ void	cub_draw(t_cub *cub);
 void	cub_hook(void *param);
 int		cub_raycasting(t_cub *cub, t_ray *ray);
 void	cub_clean(t_cub *cub);
-void	cub_delete_textures(t_cub *cub);
 
 #endif

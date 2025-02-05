@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:05:26 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 12:56:43 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:13:04 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,5 @@ void	cub_hook(void *param)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_SPACE))
 		cub_open_close_doors(cub);
 	cub_movements(cub);
+	cub_pet(cub);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_utils.c                                       :+:      :+:    :+:   */
+/*   draw_utils1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:51 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 16:53:06 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:15:58 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,19 @@ void	set_texture_and_wall(t_texture_data *data, t_cub *cub, t_ray *ray)
 	}
 }
 
+static void	calculate_wall_height(t_ray *ray)
+{
+	int	line_height;
+
+	line_height = (int)(WINDOW_HEIGHT / ray->wall_d);
+	ray->start = -line_height / 2 + WINDOW_HEIGHT / 2;
+	ray->end = line_height / 2 + WINDOW_HEIGHT / 2;
+	if (ray->start < 0)
+		ray->start = 0;
+	if (ray->end >= WINDOW_HEIGHT)
+		ray->end = WINDOW_HEIGHT - 1;
+}
+
 void	calculate_texture_position(t_texture_data *data, t_ray *ray)
 {
 	int	line_height;
@@ -65,7 +78,7 @@ void	calculate_texture_position(t_texture_data *data, t_ray *ray)
 		data->tex_x = data->texture->width - data->tex_x - 1;
 	if (ray->side == 1 && ray->step_y < 0)
 		data->tex_x = data->texture->width - data->tex_x - 1;
-	line_height = ray->end - ray->start;
+	line_height = (int)(WINDOW_HEIGHT / ray->wall_d);
 	data->step = (double)data->texture->height / line_height;
 }
 
@@ -74,18 +87,23 @@ void	cub_update_pixels(t_cub *cub, t_ray *ray, int x)
 	t_texture_data	data;
 	double			tex_pos;
 	int				i;
+	uint32_t		color;
+	uint8_t			*pixel_ptr;
 
+	calculate_wall_height(ray);
 	set_texture_and_wall(&data, cub, ray);
 	calculate_texture_position(&data, ray);
-	tex_pos = (ray->start - WINDOW_HEIGHT / 2
-			+ (ray->end - ray->start) / 2) * data.step;
+	tex_pos = (ray->start - WINDOW_HEIGHT / 2 + \
+		(int)(WINDOW_HEIGHT / ray->wall_d) / 2) * data.step;
 	i = ray->start;
 	while (i < ray->end)
 	{
 		data.tex_y = (int)tex_pos & (data.texture->height - 1);
 		tex_pos += data.step;
-		mlx_put_pixel(cub->img, x, i++,
-			((uint32_t *)data.texture->pixels)[data.tex_y
-			* data.texture->width + data.tex_x]);
+		pixel_ptr = &data.texture->pixels[(data.tex_y \
+			* data.texture->width + data.tex_x) * BPP];
+		color = (pixel_ptr[0] << 24) | (pixel_ptr[1] << 16)
+			| (pixel_ptr[2] << 8) | 0xFF;
+		mlx_put_pixel(cub->raycast_img, x, i++, color);
 	}
 }

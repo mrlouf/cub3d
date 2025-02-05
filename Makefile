@@ -17,6 +17,7 @@ MLX42LIB	:=	$(MLXDIR)/build/libmlx42.a
 SRC 		:= 	main/main.c					\
 				main/cub3d.c				\
 				init/init.c					\
+				init/init_sprites.c			\
 				parse/parse.c				\
 				parse/parse_format.c		\
 				parse/parse_populator.c 	\
@@ -27,12 +28,27 @@ SRC 		:= 	main/main.c					\
 				parse/transfer_utils.c		\
 				rendering/raycast.c			\
 				rendering/draw.c			\
-				rendering/draw_utils.c		\
-				rendering/textures.c		\
-				rendering/doors.c			\
+				rendering/draw_utils1.c		\
+				rendering/draw_utils2.c		\
+				rendering/draw_player.c		\
+				rendering/draw_objs.c		\
+				rendering/draw_animals.c	\
+				rendering/draw_npcs.c		\
+				rendering/textures_wall.c	\
+				rendering/textures_player.c	\
+				rendering/textures_cow.c	\
+				rendering/textures_horse.c	\
+				rendering/textures_npc_1.c	\
 				hooks/hooks.c				\
 				hooks/movements.c			\
-				utils/utils.c
+				hooks/pet.c					\
+				hooks/pet_utils.c			\
+				utils/utils.c				\
+				utils/sprite_utils.c		\
+				utils/sort_sprites.c		\
+				utils/cleanup1.c			\
+				utils/cleanup2.c			\
+				utils/cleanup3.c			\
 
 SRCDIR		= src
 SRCS		= $(addprefix $(SRCDIR)/, $(SRC))

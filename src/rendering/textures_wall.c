@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
+/*   textures_wall.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 14:24:56 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:25:58 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../../incs/parse.h"
 #include "../../incs/utils.h"
 
-static int	cub_get_textures(t_cub *cub)
+static int	cub_get_wall_txt(t_cub *cub)
 {
 	cub->w_textures->no_t = mlx_load_png(cub->no_t);
 	if (!cub->w_textures->no_t)
@@ -32,7 +32,7 @@ static int	cub_get_textures(t_cub *cub)
 	return (0);
 }
 
-void	cub_delete_textures(t_cub *cub)
+void	cub_delete_wall_txt(t_cub *cub)
 {
 	if (cub->w_textures)
 	{
@@ -61,33 +61,33 @@ void	cub_delete_textures(t_cub *cub)
 	}
 }
 
-static int	cub_prep_images(t_cub *cub)
+static int	cub_prep_wall_img(t_cub *cub)
 {
 	cub->w_images->no_i = mlx_texture_to_image(cub->mlx, cub->w_textures->no_t);
 	if (!cub->w_images->no_i)
-		return (cub_delete_textures(cub), ft_putendl_fd(IMG_LOAD_ERR_N, 2), 1);
+		return (cub_delete_wall_txt(cub), ft_putendl_fd(IMG_LOAD_ERR_N, 2), 1);
 	cub->w_images->so_i = mlx_texture_to_image(cub->mlx, cub->w_textures->so_t);
 	if (!cub->w_images->so_i)
-		return (cub_delete_textures(cub), ft_putendl_fd(IMG_LOAD_ERR_S, 2), 1);
+		return (cub_delete_wall_txt(cub), ft_putendl_fd(IMG_LOAD_ERR_S, 2), 1);
 	cub->w_images->ea_i = mlx_texture_to_image(cub->mlx, cub->w_textures->ea_t);
 	if (!cub->w_images->ea_i)
-		return (cub_delete_textures(cub), ft_putendl_fd(IMG_LOAD_ERR_E, 2), 1);
+		return (cub_delete_wall_txt(cub), ft_putendl_fd(IMG_LOAD_ERR_E, 2), 1);
 	cub->w_images->we_i = mlx_texture_to_image(cub->mlx, cub->w_textures->we_t);
 	if (!cub->w_images->we_i)
-		return (cub_delete_textures(cub), ft_putendl_fd(IMG_LOAD_ERR_W, 2), 1);
-	cub_delete_textures(cub);
+		return (cub_delete_wall_txt(cub), ft_putendl_fd(IMG_LOAD_ERR_W, 2), 1);
+	cub_delete_wall_txt(cub);
 	return (0);
 }
 
 int	cub_prep_wall_textures(t_cub *cub)
 {
-	cub->w_textures = malloc(sizeof(t_textures));
+	cub->w_textures = malloc(sizeof(t_wall_txt));
 	if (!cub->w_textures)
 	{
 		ft_putendl_fd(MEM_ERR, 2);
 		return (1);
 	}
-	cub->w_images = malloc(sizeof(t_images));
+	cub->w_images = malloc(sizeof(t_wall_img));
 	if (!cub->w_images)
 	{
 		ft_putendl_fd(MEM_ERR, 2);
@@ -95,14 +95,14 @@ int	cub_prep_wall_textures(t_cub *cub)
 		cub->w_textures = NULL;
 		return (1);
 	}
-	if (cub_get_textures(cub))
+	if (cub_get_wall_txt(cub))
 	{
-		cub_delete_textures(cub);
+		cub_delete_wall_txt(cub);
 		return (free(cub->w_textures), free(cub->w_images), 1);
 	}
-	if (cub_prep_images(cub))
+	if (cub_prep_wall_img(cub))
 	{
-		cub_delete_textures(cub);
+		cub_delete_wall_txt(cub);
 		return (free(cub->w_textures), free(cub->w_images), 1);
 	}
 	return (0);
