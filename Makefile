@@ -27,6 +27,7 @@ SRC 		:= 	main/main.c					\
 				parse/transfer.c			\
 				parse/transfer_utils.c		\
 				rendering/raycast.c			\
+				rendering/doors.c			\
 				rendering/draw.c			\
 				rendering/draw_utils1.c		\
 				rendering/draw_utils2.c		\

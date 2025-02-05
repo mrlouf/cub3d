@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 13:17:41 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:34:05 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ static void	cub_calculate_wall_distance(t_ray *ray, int **map)
 		ray->wall_d = (ray->sided_x - (ray->delta_dx));
 	else
 		ray->wall_d = (ray->sided_y - (ray->delta_dy));
-	if (ray->wall_d < 0.2)
-		ray->wall_d = 0.2;
+	if (ray->wall_d < 0.1)
+		ray->wall_d = 0.1;
 }
 
 /*
