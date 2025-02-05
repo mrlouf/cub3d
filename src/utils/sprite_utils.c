@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:32:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 12:48:54 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:56:54 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 void	cub_select_sprite(t_cub *cub, int x, t_sprite *sprite)
 {
-	printf("type:%d\n", sprite->type);
 	if (sprite->type == COW)
 		cub_draw_cow(cub, x, sprite);
 	else if (sprite->type == HORSE)

@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:31:52 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 13:42:22 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:50:39 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	cub_calculate_door_distance(t_ray *ray)
 		ray->door_d = (ray->sided_x - (ray->delta_dx / 2));
 	else
 		ray->door_d = (ray->sided_y - (ray->delta_dy / 2));
+	if (ray->door_d < 0.1)
+		ray->door_d = 0.1;
 }
 
 void	cub_set_texture_door(t_texture_data *data, t_cub *cub, t_ray *ray)
@@ -57,7 +59,8 @@ void	cub_draw_doors(t_cub *cub, t_ray *ray, int x)
 
 	cub_set_texture_door(&data, cub, ray);
 	cub_calculate_door_texture(&data, ray);
-	tex_pos = (ray->dstart - WINDOW_HEIGHT / 2 + ray->door_h / 2) * data.step;
+	tex_pos = (ray->dstart - WINDOW_HEIGHT / 2 + \
+		(int)(WINDOW_HEIGHT / ray->door_h) / 2) * data.step;
 	i = ray->dstart;
 	while (i < ray->dend)
 	{
