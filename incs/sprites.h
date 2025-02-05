@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:33:01 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 12:39:08 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:39:29 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_wall_txt
 	mlx_texture_t	*so_t;
 	mlx_texture_t	*ea_t;
 	mlx_texture_t	*we_t;
-	mlx_texture_t	*hand_1;
+	mlx_texture_t	*door;
 }	t_wall_txt;
 
 typedef struct s_wall_img
@@ -37,7 +37,7 @@ typedef struct s_wall_img
 	mlx_image_t	*so_i;
 	mlx_image_t	*ea_i;
 	mlx_image_t	*we_i;
-	mlx_image_t	*hand_1;
+	mlx_image_t	*door;
 }	t_wall_img;
 
 typedef struct s_player_txt
@@ -63,6 +63,12 @@ typedef struct s_cow_txt
 	int				height;
 	int				width;
 	uint8_t			*pixels;
+	int				current_frame;
+	double			last_frame_time;
+	double			frame_duration;
+	int				draw_start_y;
+	int				draw_end_y;
+	mlx_texture_t	*c_t;
 }	t_cow_txt;
 
 typedef struct s_cow_img

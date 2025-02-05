@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 13:14:01 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:27:53 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	cub_check_map_define_symbols(t_parser *parser)
 	parser->symbols[4] = "W";
 	parser->symbols[5] = "E";
 	parser->symbols[6] = "C";
-	parser->symbols[7] = "2";
-	parser->symbols[8] = "H";
+	parser->symbols[7] = "H";
 	parser->symbols[8] = "F";
 	parser->symbols[9] = " ";
-	parser->symbols[10] = NULL;
+	parser->symbols[10] = "2";
+	parser->symbols[11] = NULL;
 }
 
 int	cub_check_map_symbols(t_parser *parser, char **map)

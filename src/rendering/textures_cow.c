@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 14:10:05 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:26:11 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ static int	cub_get_cow_txt(t_cub *cub)
 	cub->cow_txt->height = 96;
 	cub->cow_txt->width = 144;
 	cub->cow_txt->pixels = cub->cow_txt->cow_1->pixels;
+	cub->cow_txt->current_frame = 0;
+	cub->cow_txt->last_frame_time = 0;
+	cub->cow_txt->frame_duration = 1.0;
 	return (0);
 }
 

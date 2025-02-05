@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 13:12:38 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:46:09 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,7 @@ typedef struct s_cub
 	t_player		*player;
 	mlx_image_t		*background_img;
 	mlx_image_t		*raycast_img;
+	mlx_image_t		*door_img;
 	mlx_image_t		*obj_img;
 	mlx_image_t		*mini;
 	t_list			*sprites;

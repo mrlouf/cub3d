@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 17:25:58 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:44:47 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ static int	cub_get_wall_txt(t_cub *cub)
 	cub->w_textures->we_t = mlx_load_png(cub->we_t);
 	if (!cub->w_textures->we_t)
 		return (ft_putendl_fd(TEXT_LOAD_ERR_W, 2), 1);
+	cub->w_textures->door = mlx_load_png("./textures/wolfenstein/door.png");
+	if (!cub->w_textures->door)
+		return (ft_putendl_fd(TEXT_LOAD_ERR_D, 2), 1);
 	return (0);
 }
 
@@ -36,26 +39,16 @@ void	cub_delete_wall_txt(t_cub *cub)
 {
 	if (cub->w_textures)
 	{
-		if (cub->w_textures->no_t)
-		{
-			mlx_delete_texture(cub->w_textures->no_t);
-			cub->w_textures->no_t = NULL;
-		}
-		if (cub->w_textures->so_t)
-		{
-			mlx_delete_texture(cub->w_textures->so_t);
-			cub->w_textures->so_t = NULL;
-		}
-		if (cub->w_textures->ea_t)
-		{
-			mlx_delete_texture(cub->w_textures->ea_t);
-			cub->w_textures->ea_t = NULL;
-		}
-		if (cub->w_textures->we_t)
-		{
-			mlx_delete_texture(cub->w_textures->we_t);
-			cub->w_textures->we_t = NULL;
-		}
+		mlx_delete_texture(cub->w_textures->no_t);
+		cub->w_textures->no_t = NULL;
+		mlx_delete_texture(cub->w_textures->so_t);
+		cub->w_textures->so_t = NULL;
+		mlx_delete_texture(cub->w_textures->ea_t);
+		cub->w_textures->ea_t = NULL;
+		mlx_delete_texture(cub->w_textures->we_t);
+		cub->w_textures->we_t = NULL;
+		mlx_delete_texture(cub->w_textures->door);
+		cub->w_textures->door = NULL;
 		free(cub->w_textures);
 		cub->w_textures = NULL;
 	}
@@ -75,6 +68,9 @@ static int	cub_prep_wall_img(t_cub *cub)
 	cub->w_images->we_i = mlx_texture_to_image(cub->mlx, cub->w_textures->we_t);
 	if (!cub->w_images->we_i)
 		return (cub_delete_wall_txt(cub), ft_putendl_fd(IMG_LOAD_ERR_W, 2), 1);
+	cub->w_images->door = mlx_texture_to_image(cub->mlx, cub->w_textures->door);
+	if (!cub->w_images->door)
+		return (cub_delete_wall_txt(cub), ft_putendl_fd(IMG_LOAD_ERR_D, 2), 1);
 	cub_delete_wall_txt(cub);
 	return (0);
 }

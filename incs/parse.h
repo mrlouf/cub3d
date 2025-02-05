@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:36:02 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 12:38:20 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:42:45 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define TEXT_LOAD_ERR_S "Error: texture: failed to load SOUTH texture"
 # define TEXT_LOAD_ERR_E "Error: texture: failed to load EAST texture"
 # define TEXT_LOAD_ERR_W "Error: texture: failed to load WEST texture"
+# define TEXT_LOAD_ERR_D "Error: texture: failed to load DOOR texture"
 # define TEXT_COW_ERR "Error: texture: failed to load COW texture"
 # define TEXT_HORSE_ERR "Error: texture: failed to load HORSE texture"
 # define TEXT_NPC1_ERR "Error: texture: failed to load NPC1 texture"
@@ -55,6 +56,7 @@
 # define IMG_LOAD_ERR_S "Error: texture: failed to create SOUTH image"
 # define IMG_LOAD_ERR_E "Error: texture: failed to create EAST image"
 # define IMG_LOAD_ERR_W "Error: texture: failed to create WEST image"
+# define IMG_LOAD_ERR_D "Error: texture: failed to create DOOR image"
 # define IMG_P_ERR "Error: texture: failed to create PLAYER image"
 # define IMG_COW_ERR "Error: texture: failed to create COW image"
 # define IMG_HORSE_ERR "Error: texture: failed to create HORSE image"

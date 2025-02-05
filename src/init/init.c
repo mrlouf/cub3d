@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 09:00:17 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:47:07 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ static int	cub_init_img_buffers(t_cub *cub)
 	if (!cub->raycast_img)
 		return (1);
 	mlx_image_to_window(cub->mlx, cub->raycast_img, 0, 0);
+	cub->door_img = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!cub->door_img)
+		return (1);
+	mlx_image_to_window(cub->mlx, cub->door_img, 0, 0);
 	cub->obj_img = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!cub->obj_img)
 		return (1);

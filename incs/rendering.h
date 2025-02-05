@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rendering.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:39:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 13:27:14 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:25:40 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ void	cub_draw_npc1(t_cub *cub, int x, t_sprite *sprite);
 void	cub_draw_horse(t_cub *cub, int x, t_sprite *sprite);
 void	cub_init_sprites(t_cub *cub, t_list **sprites);
 int		cub_is_sprite(char c);
+
+//ANIMATING functions
+void	cub_update_cow_animation(t_cub *cub, double current_time);
 
 //BUFFER CLEARING functions
 void	cub_clear_image(mlx_image_t *img);

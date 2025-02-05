@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:45:35 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/02/05 12:04:13 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:24:30 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,6 @@ int			ft_strcmp(char *s1, char *s2);
 char		*ft_strdup_lower(const char *str);
 void		ft_exit_error(char *msg, int code);
 char		**ft_array_flip(char **arr, int rows, int cols);
+double		ft_get_current_time(void);
 
 #endif

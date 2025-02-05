@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 13:34:05 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:05:07 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	cub_calculate_wall_distance(t_ray *ray, int **map)
 		}
 		if (!ray->door_hit && map[ray->map_x][ray->map_y] == 2)
 			cub_calculate_door_distance(ray);
-		else if (map[ray->map_x][ray->map_y] > 0)
+		else if (map[ray->map_x][ray->map_y] == 1)
 			break ;
 	}
 	if (ray->side == 0)
