@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:05:26 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 17:51:04 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:10:00 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,44 +42,44 @@ void	cub_open_close_doors(t_cub *cub)
 	Rotates the player to the right by changing its direction,
 	but also the plane to keep the same POV.
 */
-void	cub_rotate_right(t_cub *cub)
+void	cub_rotate_right(t_cub *cub, double nerf)
 {
 	double	olddirx;
 	double	oldplanex;
 
 	olddirx = cub->player->dir.x;
 	oldplanex = cub->player->plane.x;
-	cub->player->dir.x = cub->player->dir.x * cos(-cub->player->rotation) \
-		- cub->player->dir.y * sin(-cub->player->rotation);
-	cub->player->dir.y = olddirx * sin(-cub->player->rotation) \
-		+ cub->player->dir.y * cos(-cub->player->rotation);
-	cub->player->plane.x = cub->player->plane.x * cos(-cub->player->rotation) \
-		- cub->player->plane.y * sin(-cub->player->rotation);
-	cub->player->plane.y = oldplanex * sin(-cub->player->rotation) \
-		+ cub->player->plane.y * cos(-cub->player->rotation);
-	cub->player->angle -= cub->player->rotation;
+	cub->player->dir.x = cub->player->dir.x * cos(-cub->player->rotation * nerf) \
+		- cub->player->dir.y * sin(-cub->player->rotation * nerf);
+	cub->player->dir.y = olddirx * sin(-cub->player->rotation * nerf) \
+		+ cub->player->dir.y * cos(-cub->player->rotation * nerf);
+	cub->player->plane.x = cub->player->plane.x * cos(-cub->player->rotation * nerf) \
+		- cub->player->plane.y * sin(-cub->player->rotation * nerf);
+	cub->player->plane.y = oldplanex * sin(-cub->player->rotation * nerf) \
+		+ cub->player->plane.y * cos(-cub->player->rotation * nerf);
+	cub->player->angle -= cub->player->rotation * nerf;
 }
 
 /*
 	Rotates the player to the left by changing its direction,
 	but also the plane to keep the camera pointed and keep the same POV.
 */
-void	cub_rotate_left(t_cub *cub)
+void	cub_rotate_left(t_cub *cub, double nerf)
 {
 	double	olddirx;
 	double	oldplanex;
 
 	olddirx = cub->player->dir.x;
 	oldplanex = cub->player->plane.x;
-	cub->player->dir.x = cub->player->dir.x * cos(cub->player->rotation) \
-		- cub->player->dir.y * sin(cub->player->rotation);
-	cub->player->dir.y = olddirx * sin(cub->player->rotation) \
-		+ cub->player->dir.y * cos(cub->player->rotation);
-	cub->player->plane.x = cub->player->plane.x * cos(cub->player->rotation) \
-		- cub->player->plane.y * sin(cub->player->rotation);
-	cub->player->plane.y = oldplanex * sin(cub->player->rotation) \
-		+ cub->player->plane.y * cos(cub->player->rotation);
-	cub->player->angle += cub->player->rotation;
+	cub->player->dir.x = cub->player->dir.x * cos(cub->player->rotation * nerf) \
+		- cub->player->dir.y * sin(cub->player->rotation * nerf);
+	cub->player->dir.y = olddirx * sin(cub->player->rotation * nerf) \
+		+ cub->player->dir.y * cos(cub->player->rotation * nerf);
+	cub->player->plane.x = cub->player->plane.x * cos(cub->player->rotation * nerf) \
+		- cub->player->plane.y * sin(cub->player->rotation * nerf);
+	cub->player->plane.y = oldplanex * sin(cub->player->rotation * nerf) \
+		+ cub->player->plane.y * cos(cub->player->rotation * nerf);
+	cub->player->angle += cub->player->rotation * nerf;
 }
 
 /*
