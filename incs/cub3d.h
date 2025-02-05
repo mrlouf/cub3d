@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 12:57:24 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:58:31 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ typedef struct s_cub
 	mlx_image_t		*img;
 	mlx_texture_t	*icon;
 	mlx_t			*mlx;
-	struct timeval 	toggle_door;
+	struct timeval	toggle_door;
 	t_player		*player;
 }	t_cub;
 
