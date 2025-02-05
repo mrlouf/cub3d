@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 12:36:24 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:12:38 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <math.h>
+# include <sys/time.h>
 
 # include "../libs/libft/libft.h"
 # include "../libs/libft/ft_printf/includes/ft_printf.h"
@@ -29,6 +30,7 @@
 # define MINIMAP_HEIGHT	100
 # define MINIMAP_PX		10
 # define TILE_SIZE		64
+# define COOLDOWN_PERIOD 500000
 # define BPP 4
 # define M_PI 3.14159265358979323846
 
@@ -50,6 +52,24 @@ typedef struct s_player
 	double		rotation;
 }	t_player;
 
+typedef struct s_textures
+{
+	mlx_texture_t			*no_t;
+	mlx_texture_t			*so_t;
+	mlx_texture_t			*ea_t;
+	mlx_texture_t			*we_t;
+	mlx_texture_t			*d_t;
+}	t_textures;
+
+typedef struct s_images
+{
+	mlx_image_t			*no_i;
+	mlx_image_t			*so_i;
+	mlx_image_t			*ea_i;
+	mlx_image_t			*we_i;
+	mlx_image_t			*d_i;
+}	t_images;
+
 enum e_texture_index
 {
 	NORTH = 0,
@@ -58,6 +78,9 @@ enum e_texture_index
 	WEST = 3
 };
 
+/*
+	Ray structure for drawing walls as well as doors.
+*/
 typedef struct s_ray
 {
 	int		hit;
@@ -78,6 +101,12 @@ typedef struct s_ray
 	int		start;
 	int		end;
 	double	wall_x;
+	int		door_hit;
+	double	door_d;
+	int		dside;
+	int		door_h;
+	int		dstart;
+	int		dend;
 }	t_ray;
 
 typedef struct s_delta
@@ -147,6 +176,7 @@ typedef struct s_cub
 	t_npc_1_img		*npc_1_img;
 	mlx_texture_t	*icon;
 	mlx_t			*mlx;
+	struct timeval	toggle_door;
 	t_player		*player;
 	mlx_image_t		*background_img;
 	mlx_image_t		*raycast_img;
