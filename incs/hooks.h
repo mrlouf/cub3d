@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:05:41 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 11:17:45 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:44:05 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	cub_move_right(t_cub *cub, double speed);
 void	cub_move_left(t_cub *cub, double speed);
 void	cub_move_forward(t_cub *cub, double speed);
 void	cub_move_backward(t_cub *cub);
-void	cub_rotate_right(t_cub *cub);
-void	cub_rotate_left(t_cub *cub);
+void	cub_rotate_right(t_cub *cub, double nerf);
+void	cub_rotate_left(t_cub *cub, double nerf);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:24:55 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 09:36:26 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:12:59 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ void	cub_mouse_hook(double xpos, double ypos, void *data)
 		return ;
 	if (xpos < WINDOW_WIDTH / 2)
 	{
-		cub_rotate_left(cub);
+		cub_rotate_left(cub, 0.25);
 		mlx_set_mouse_pos(cub->mlx, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	}
 	if (xpos > WINDOW_WIDTH / 2)
 	{
-		cub_rotate_right(cub);
+		cub_rotate_right(cub, 0.25);
 		mlx_set_mouse_pos(cub->mlx, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	}
 }
@@ -89,20 +89,10 @@ int	cub_cub3d(char **av)
 	if (!cub)
 		return (1);
 	if (cub_init(cub, av))
-	{
-		cub_clean(cub);
-		return (1);
-	}
+		return (cub_clean(cub), 1);
 	if (cub_parse(cub, av[1]))
-	{
-		cub_clean(cub);
-		return (1);
-	}
+		return (cub_clean(cub), 1);
 	if (cub_start(cub))
-	{
-		cub_clean(cub);
-		return (1);
-	}
-	cub_clean(cub);
-	return (0);
+		return (cub_clean(cub), 1);
+	return (cub_clean(cub), 0);
 }

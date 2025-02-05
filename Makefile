@@ -29,6 +29,7 @@ SRC 		:= 	main/main.c					\
 				rendering/draw.c			\
 				rendering/draw_utils.c		\
 				rendering/textures.c		\
+				rendering/doors.c			\
 				hooks/hooks.c				\
 				hooks/movements.c			\
 				utils/utils.c
@@ -64,7 +65,7 @@ LIBS		:=	$(LIBFTDIR)/libft.a $(MLXDIR)/build/libmlx42.a /usr/lib/x86_64-linux-gn
 
 CC			:=	cc
 
-CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g -fsanitize=address #-lglfw
+CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g# -fsanitize=address #-lglfw
 
 DFLAGS		:= 	-MT $@ -MMD -MP
 

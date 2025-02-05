@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:51 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 15:01:50 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:53:06 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	cub_init_pixels(t_cub *cub)
 	return (0);
 }
 
-static void	set_texture_and_wall(t_texture_data *data, t_cub *cub, t_ray *ray)
+void	set_texture_and_wall(t_texture_data *data, t_cub *cub, t_ray *ray)
 {
 	if (ray->side == 0)
 	{
@@ -55,11 +55,11 @@ static void	set_texture_and_wall(t_texture_data *data, t_cub *cub, t_ray *ray)
 	}
 }
 
-static void	calculate_texture_position(t_texture_data *data, t_ray *ray)
+void	calculate_texture_position(t_texture_data *data, t_ray *ray)
 {
 	int	line_height;
 
-	data->wall_x -= floor(data->wall_x);
+	data->wall_x = fmod(data->wall_x, 1.0);
 	data->tex_x = (int)(data->wall_x * data->texture->width);
 	if (ray->side == 0 && ray->step_x > 0)
 		data->tex_x = data->texture->width - data->tex_x - 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 16:12:43 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:26:52 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	cub_check_map_define_symbols(t_parser *parser)
 	parser->symbols[4] = "W";
 	parser->symbols[5] = "E";
 	parser->symbols[6] = " ";
-	parser->symbols[7] = NULL;
+	parser->symbols[7] = "2";
+	parser->symbols[8] = NULL;
 }
 
 int	cub_check_map_symbols(t_parser *parser, char **map)
@@ -102,7 +103,7 @@ int	cub_check_content_map(t_parser *parser, char **map)
 {
 	char	**flipped;
 
-	parser->symbols = malloc(sizeof(char *) * (7 + 1));
+	parser->symbols = malloc(sizeof(char *) * (8 + 1));
 	if (!parser->symbols)
 		return (ft_putendl_fd(MEM_ERR, 2), 1);
 	cub_check_map_define_symbols(parser);
