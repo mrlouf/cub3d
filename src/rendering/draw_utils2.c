@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:51 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 10:18:36 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:57:58 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,21 @@ void	cub_clear_image(mlx_image_t *img)
 		}
 		i++;
 	}
+}
+
+void	cub_update_sprite(t_cub *cub, t_sprite *sprite)
+{
+	double	dx;
+	double	dy;
+	double	sprite_dir;
+
+	dx = sprite->pos.x - cub->player->pos.x;
+	dy = sprite->pos.y - cub->player->pos.y;
+	sprite->distance = sqrt(dx * dx + dy * dy);
+	sprite_dir = atan2(dy, dx);
+	sprite->angle = sprite_dir - cub->player->angle;
+	if (sprite->angle < -M_PI)
+		sprite->angle += 2 * M_PI;
+	if (sprite->angle > M_PI)
+		sprite->angle -= 2 * M_PI;
 }

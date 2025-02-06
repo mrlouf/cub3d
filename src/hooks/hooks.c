@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:05:26 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 13:13:04 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:06:05 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 	Opens and closes doors with a 0.5 second cooldown in-between to avoid
 	interacting too quickly.
 	TODO
-	Special texture for door, implement sprite animation.
+	implement sprite animation.
 */
 void	cub_open_close_doors(t_cub *cub)
 {

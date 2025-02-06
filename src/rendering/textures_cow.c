@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 16:26:11 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:29:23 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@
 static int	cub_get_cow_txt(t_cub *cub)
 {
 	cub->cow_txt->cow_1 = mlx_load_png("./sprites/animals/cow_1.png");
-	if (!cub->cow_txt->cow_1)
-		return (ft_putendl_fd(TEXT_COW_ERR, 2), 1);
 	cub->cow_txt->cow_2 = mlx_load_png("./sprites/animals/cow_2.png");
-	if (!cub->cow_txt->cow_2)
+	cub->cow_txt->cow_3 = mlx_load_png("./sprites/animals/cow_3.png");
+	cub->cow_txt->cow_4 = mlx_load_png("./sprites/animals/cow_4.png");
+	cub->cow_txt->cow_5 = mlx_load_png("./sprites/animals/cow_5.png");
+	cub->cow_txt->cow_6 = mlx_load_png("./sprites/animals/cow_6.png");
+	if (!cub->cow_txt->cow_1 || !cub->cow_txt->cow_2 || !cub->cow_txt->cow_3
+		|| !cub->cow_txt->cow_4 || !cub->cow_txt->cow_5 || !cub->cow_txt->cow_6)
 		return (ft_putendl_fd(TEXT_COW_ERR, 2), 1);
-	cub->cow_txt->height = 96;
-	cub->cow_txt->width = 144;
+	cub->cow_txt->height = 75;
+	cub->cow_txt->width = 120;
 	cub->cow_txt->pixels = cub->cow_txt->cow_1->pixels;
 	cub->cow_txt->current_frame = 0;
 	cub->cow_txt->last_frame_time = 0;
@@ -54,10 +57,13 @@ void	cub_delete_cow_txt(t_cub *cub)
 static int	cub_prep_cow_img(t_cub *cub)
 {
 	cub->cow_img->cow_1 = mlx_texture_to_image(cub->mlx, cub->cow_txt->cow_1);
-	if (!cub->cow_img->cow_1)
-		return (cub_delete_cow_txt(cub), ft_putendl_fd(IMG_COW_ERR, 2), 1);
 	cub->cow_img->cow_2 = mlx_texture_to_image(cub->mlx, cub->cow_txt->cow_2);
-	if (!cub->cow_img->cow_2)
+	cub->cow_img->cow_3 = mlx_texture_to_image(cub->mlx, cub->cow_txt->cow_3);
+	cub->cow_img->cow_4 = mlx_texture_to_image(cub->mlx, cub->cow_txt->cow_4);
+	cub->cow_img->cow_5 = mlx_texture_to_image(cub->mlx, cub->cow_txt->cow_5);
+	cub->cow_img->cow_6 = mlx_texture_to_image(cub->mlx, cub->cow_txt->cow_6);
+	if (!cub->cow_img->cow_1 || !cub->cow_img->cow_2 || !cub->cow_img->cow_3
+		|| !cub->cow_img->cow_4 || !cub->cow_img->cow_5 || !cub->cow_img->cow_6)
 		return (cub_delete_cow_txt(cub), ft_putendl_fd(IMG_COW_ERR, 2), 1);
 	return (0);
 }

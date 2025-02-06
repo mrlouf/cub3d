@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 16:05:07 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:18:51 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 	Initialises a single ray with basic information needed to compute
 	the distance to the wall later like the direction, position and delta.
 */
-static void	cub_init_ray(t_ray *ray, int x, t_player *player)
+void	cub_init_ray(t_ray *ray, int x, t_player *player)
 {
 	ray->camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
 	ray->dir_x = \
@@ -42,7 +42,7 @@ static void	cub_init_ray(t_ray *ray, int x, t_player *player)
 /*
 	Calculates the step of each ray.
 */
-static void	cub_calculate_step(t_ray *ray, t_player *player)
+void	cub_calculate_step(t_ray *ray, t_player *player)
 {
 	if (ray->dir_x < 0)
 	{
@@ -70,7 +70,7 @@ static void	cub_calculate_step(t_ray *ray, t_player *player)
 	Uses the side distances x and y from the ray to compare with the map
 	to check for a potential collision with a wall.
 */
-static void	cub_calculate_wall_distance(t_ray *ray, int **map)
+void	cub_calculate_wall_distance(t_ray *ray, int **map)
 {
 	while (42)
 	{
@@ -104,7 +104,7 @@ static void	cub_calculate_wall_distance(t_ray *ray, int **map)
 	of the ray to be drawn, which gives the start and end points of the ray,
 	that are rounded up to zero or down to WIN_SIZE to avoid pixels out of bound.
 */
-static void	cub_calculate_wall_height(t_ray *ray)
+void	cub_calculate_wall_height(t_ray *ray)
 {
 	ray->wall_h = (int)WINDOW_HEIGHT / ray->wall_d;
 	ray->start = -ray->wall_h / 2 + WINDOW_HEIGHT / 2;
@@ -137,7 +137,7 @@ int	cub_raycasting(t_cub *cub, t_ray *ray)
 		cub_update_pixels(cub, ray, x);
 		if (ray->door_hit && (ray->door_d < ray->wall_d))
 			cub_draw_doors(cub, ray, x);
-		cub->zbuffer[x] = ray->wall_d;
+		cub->zbuffer->wall_dist = ray->wall_d;
 		x++;
 	}
 	return (0);

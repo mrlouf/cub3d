@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 16:24:46 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:49:59 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,12 +123,15 @@ void	cub_draw(t_cub *cub)
 	cub_clear_image_fast(cub->background_img);
 	cub_clear_image_fast(cub->raycast_img);
 	cub_clear_image_fast(cub->door_img);
-	cub_clear_image_fast(cub->obj_img);
+	cub_clear_image_fast(cub->obj_img_b);
+	cub_clear_image_fast(cub->obj_img_f);
 	cub_clear_image_fast(cub->mini);
 	current_time = ft_get_current_time();
 	cub_update_cow_animation(cub, current_time);
 	cub_draw_background(cub);
 	cub_raycasting(cub, &ray);
-	cub_draw_obj(cub);
+	cub_draw_obj_behind_doors(cub);
+	cub_doorcasting(cub, &ray);
+	cub_draw_obj_in_front_doors(cub);
 	cub_draw_minimap(cub);
 }

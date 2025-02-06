@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:31:52 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 15:47:18 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:41:53 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,14 @@ void	cub_draw_doors(t_cub *cub, t_ray *ray, int x)
 	{
 		data.tex_y = (int)tex_pos & (data.texture->height - 1);
 		tex_pos += data.step;
-		pixel_ptr = &data.texture->pixels[(data.tex_y \
-			* data.texture->width + data.tex_x) * BPP];
-		color = (pixel_ptr[0] << 24) | (pixel_ptr[1] << 16)
-			| (pixel_ptr[2] << 8) | 0xFF;
-		mlx_put_pixel(cub->raycast_img, x, i++, color);
+		pixel_ptr = &data.texture->pixels[(data.tex_y
+				* data.texture->width + data.tex_x) * BPP];
+		if (pixel_ptr[3] > 0)
+		{
+			color = (pixel_ptr[0] << 24) | (pixel_ptr[1] << 16)
+				| (pixel_ptr[2] << 8) | pixel_ptr[3];
+			mlx_put_pixel(cub->door_img, x, i, color);
+		}
+		i++;
 	}
 }

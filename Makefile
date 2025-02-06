@@ -27,13 +27,16 @@ SRC 		:= 	main/main.c					\
 				parse/transfer.c			\
 				parse/transfer_utils.c		\
 				rendering/raycast.c			\
+				rendering/doorcast.c		\
 				rendering/doors.c			\
 				rendering/draw.c			\
 				rendering/draw_utils1.c		\
 				rendering/draw_utils2.c		\
 				rendering/draw_player.c		\
-				rendering/draw_objs.c		\
-				rendering/draw_animals.c	\
+				rendering/draw_behind.c		\
+				rendering/draw_front.c		\
+				rendering/draw_cow.c		\
+				rendering/draw_horse.c		\
 				rendering/draw_npcs.c		\
 				rendering/textures_wall.c	\
 				rendering/textures_player.c	\

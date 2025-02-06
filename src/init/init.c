@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 14:47:07 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:08:38 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,18 @@ static int	cub_init_img_buffers(t_cub *cub)
 	if (!cub->raycast_img)
 		return (1);
 	mlx_image_to_window(cub->mlx, cub->raycast_img, 0, 0);
+	cub->obj_img_b = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!cub->obj_img_b)
+		return (1);
+	mlx_image_to_window(cub->mlx, cub->obj_img_b, 0, 0);
 	cub->door_img = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!cub->door_img)
 		return (1);
 	mlx_image_to_window(cub->mlx, cub->door_img, 0, 0);
-	cub->obj_img = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (!cub->obj_img)
+	cub->obj_img_f = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!cub->obj_img_f)
 		return (1);
-	mlx_image_to_window(cub->mlx, cub->obj_img, 0, 0);
+	mlx_image_to_window(cub->mlx, cub->obj_img_f, 0, 0);
 	cub->mini = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!cub->mini)
 		return (1);
@@ -98,7 +102,7 @@ int	cub_init(t_cub *cub, char **av)
 		return (1);
 	cub->icon = mlx_load_png("./src/utils/icon.png");
 	cub->minimap_px = 10;
-	cub->zbuffer = malloc(sizeof(double) * WINDOW_WIDTH);
+	cub->zbuffer = malloc(sizeof(t_zbuffer) * WINDOW_WIDTH);
 	if (!cub->zbuffer)
 		return (ft_putendl_fd(MEM_ERR, 2), 1);
 	if (cub_init_img_buffers(cub))

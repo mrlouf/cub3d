@@ -43,9 +43,13 @@ MAPS=(
 	"wall_none.cub"
 )
 
+chmod 000 maps/bad/filetype_norights.cub
+
 # Loop through each map and run ./cub3d
 for MAP in "${MAPS[@]}"; do
 	echo -e "\e[31mTesting:$MAP_DIR$MAP\e[0m"
 	./cub3D "$MAP_DIR$MAP"
 	echo "-------------------------------------"
 done
+
+chmod 777 maps/bad/filetype_norights.cub

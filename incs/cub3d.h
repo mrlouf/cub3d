@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 14:46:09 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:45:13 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,12 @@ typedef struct s_sprite
 	int			tex_x;
 }	t_sprite;
 
+typedef struct s_zbuffer
+{
+	double	wall_dist;
+	double	door_dist;
+}	t_zbuffer;
+
 typedef struct s_cub
 {
 	int				minimap_px;
@@ -163,7 +169,8 @@ typedef struct s_cub
 	char			*so_t;
 	char			*ea_t;
 	char			*we_t;
-	double			*zbuffer;
+	t_zbuffer		*zbuffer;
+	int				door_distance;
 	t_wall_txt		*w_textures;
 	t_player_txt	*player_txt;
 	t_cow_txt		*cow_txt;
@@ -181,7 +188,8 @@ typedef struct s_cub
 	mlx_image_t		*background_img;
 	mlx_image_t		*raycast_img;
 	mlx_image_t		*door_img;
-	mlx_image_t		*obj_img;
+	mlx_image_t		*obj_img_b;
+	mlx_image_t		*obj_img_f;
 	mlx_image_t		*mini;
 	t_list			*sprites;
 }	t_cub;
@@ -195,7 +203,6 @@ int		cub_parse(t_cub *cub, char *filename);
 int		cub_start(t_cub *cub);
 void	cub_draw(t_cub *cub);
 void	cub_hook(void *param);
-int		cub_raycasting(t_cub *cub, t_ray *ray);
 void	cub_clean(t_cub *cub);
 
 #endif
