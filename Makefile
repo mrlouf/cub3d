@@ -23,7 +23,8 @@ SRC 		:= 	main/main.c					\
 				parse/parse_populator.c 	\
 				parse/parse_content.c		\
 				parse/parse_map.c			\
-				parse/parse_map_utils.c		\
+				parse/parse_map_utils1.c	\
+				parse/parse_map_utils2.c	\
 				parse/transfer.c			\
 				parse/transfer_utils.c		\
 				rendering/raycast.c			\
@@ -85,7 +86,7 @@ LIBS		:=	$(LIBFTDIR)/libft.a $(MLXDIR)/build/libmlx42.a /usr/lib/x86_64-linux-gn
 
 CC			:=	cc
 
-CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g# -fsanitize=address #-lglfw
+CFLAGS		:=	-Werror -Wextra -Wall -Ofast -g -fsanitize=address #-lglfw
 
 DFLAGS		:= 	-MT $@ -MMD -MP
 

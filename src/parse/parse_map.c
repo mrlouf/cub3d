@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 14:27:53 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 17:46:00 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void	cub_check_map_define_symbols(t_parser *parser)
 	parser->symbols[7] = "H";
 	parser->symbols[8] = "F";
 	parser->symbols[9] = " ";
-	parser->symbols[10] = "2";
-	parser->symbols[11] = NULL;
+	parser->symbols[10] = "\n";
+	parser->symbols[11] = "2";
+	parser->symbols[12] = NULL;
 }
 
 int	cub_check_map_symbols(t_parser *parser, char **map)
@@ -45,7 +46,10 @@ int	cub_check_map_symbols(t_parser *parser, char **map)
 				if (map[i][j] == parser->symbols[k][0])
 					break ;
 			if (!parser->symbols[k])
+			{
+				printf("failed:%c\n", map[i][j]);
 				return (ft_putendl_fd(MAP_CHAR_ERR, 2), 1);
+			}
 		}
 	}
 	return (0);
@@ -81,6 +85,7 @@ int	cub_check_map_voids(t_parser *parser, char **map)
 	int	i;
 	int	j;
 
+	ft_print_array(map);
 	i = 0;
 	while (map[i])
 	{
@@ -104,28 +109,13 @@ int	cub_check_map_voids(t_parser *parser, char **map)
 
 int	cub_check_content_map(t_parser *parser, char **map)
 {
-	char	**flipped;
-
-	parser->symbols = malloc(sizeof(char *) * (11 + 1));
+	parser->symbols = malloc(sizeof(char *) * (12 + 1));
 	if (!parser->symbols)
 		return (ft_putendl_fd(MEM_ERR, 2), 1);
 	cub_check_map_define_symbols(parser);
 	if (parser->rows < 3 || parser->cols < 3)
-		return (ft_putendl_fd(MAP_SIZE_ERR, 2), 1);
-	if (cub_check_map_symbols(parser, map))
+		return (ft_putendl_fd(MAP_SIZE_S_ERR, 2), 1);
+	if (cub_map_deep_check(parser, map))
 		return (1);
-	if (cub_check_map_player(map))
-		return (1);
-	if (cub_check_map_voids(parser, map))
-		return (1);
-	if (cub_check_map_borders(parser, map))
-		return (1);
-	flipped = ft_array_flip(map, ft_array_count(map), ft_strlen(map[0]));
-	if (cub_check_map_borders(parser, flipped))
-	{
-		ft_free(flipped);
-		return (1);
-	}
-	ft_free(flipped);
 	return (0);
 }

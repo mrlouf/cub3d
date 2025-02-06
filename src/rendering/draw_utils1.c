@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:51 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 13:15:58 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:59:32 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@ void	set_texture_and_wall(t_texture_data *data, t_cub *cub, t_ray *ray)
 	if (ray->side == 0)
 	{
 		if (ray->step_x > 0)
-			data->texture = cub->w_images->we_i;
+			data->texture = cub->w_images->so_i;
 		else
-			data->texture = cub->w_images->ea_i;
+			data->texture = cub->w_images->no_i;
 		data->wall_x = cub->player->pos.y + ray->wall_d * ray->dir_y;
 	}
 	else
 	{
 		if (ray->step_y > 0)
-			data->texture = cub->w_images->no_i;
+			data->texture = cub->w_images->ea_i;
 		else
-			data->texture = cub->w_images->so_i;
+			data->texture = cub->w_images->we_i;
 		data->wall_x = cub->player->pos.x + ray->wall_d * ray->dir_x;
 	}
 }

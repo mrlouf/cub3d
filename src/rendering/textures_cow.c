@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 14:29:23 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:46:35 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,18 @@ void	cub_delete_cow_txt(t_cub *cub)
 {
 	if (cub->cow_txt)
 	{
-		if (cub->cow_txt->cow_1)
-		{
-			mlx_delete_texture(cub->cow_txt->cow_1);
-			cub->cow_txt->cow_1 = NULL;
-		}
-		if (cub->cow_txt->cow_2)
-		{
-			mlx_delete_texture(cub->cow_txt->cow_2);
-			cub->cow_txt->cow_2 = NULL;
-		}
+		mlx_delete_texture(cub->cow_txt->cow_1);
+		cub->cow_txt->cow_1 = NULL;
+		mlx_delete_texture(cub->cow_txt->cow_2);
+		cub->cow_txt->cow_2 = NULL;
+		mlx_delete_texture(cub->cow_txt->cow_3);
+		cub->cow_txt->cow_3 = NULL;
+		mlx_delete_texture(cub->cow_txt->cow_4);
+		cub->cow_txt->cow_4 = NULL;
+		mlx_delete_texture(cub->cow_txt->cow_5);
+		cub->cow_txt->cow_5 = NULL;
+		mlx_delete_texture(cub->cow_txt->cow_6);
+		cub->cow_txt->cow_6 = NULL;
 		free(cub->cow_txt);
 		cub->cow_txt = NULL;
 	}

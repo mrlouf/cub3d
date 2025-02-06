@@ -19,6 +19,7 @@ MAPS=(
 	"filetype_wrong.buc"
 	"forbidden.cub"
 	"map_bad_characters.cub"
+	"map_bad_door.cub"
 	"map_first.cub"
 	"map_middle.cub"
 	"map_missing.cub"

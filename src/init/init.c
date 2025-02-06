@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 19:37:16 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 15:08:38 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:34:13 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,10 @@ static void	cub_init_null(t_cub *cub)
 	cub->player_img = NULL;
 	cub->cow_txt = NULL;
 	cub->cow_img = NULL;
+	cub->horse_txt = NULL;
+	cub->horse_img = NULL;
+	cub->npc_1_txt = NULL;
+	cub->npc_1_img = NULL;
 	cub->mini = NULL;
 	cub->sprites = NULL;
 }

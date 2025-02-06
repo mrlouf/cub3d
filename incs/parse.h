@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:36:02 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 15:42:45 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:09:33 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@
 # define MAP_VOID_ERR "Error: map: open void"
 # define MAP_WALL_ERR "Error: map: open wall"
 # define MAP_PLAYER_BORDER_ERR "Error: map: player on wall"
-# define MAP_SIZE_ERR "Error: map: size too small"
+# define MAP_SIZE_S_ERR "Error: map: size too small"
+# define MAP_SIZE_L_ERR "Error: map: size too big"
+# define MAP_DOOR_ERR "Error: map: bad door"
 # define TEXT_CONV_ERR "Error: texture: failed to convert textures to images"
 # define TEXT_LOAD_ERR_N "Error: texture: failed to load NORTH texture"
 # define TEXT_LOAD_ERR_S "Error: texture: failed to load SOUTH texture"
@@ -104,12 +106,15 @@ int		cub_check_content_colors(char *color);
 int		cub_check_content_textures(char *texture);
 int		cub_check_texture_extension(char *filename, char *extension);
 int		cub_check_content_map(t_parser *parser, char **map);
+int		cub_map_deep_check(t_parser *parser, char **map);
 int		cub_check_map_voids(t_parser *parser, char **map);
 int		cub_check_map_borders(t_parser *parser, char **map);
 int		cub_check_map_space(t_parser *parser, char **map, int i, int j);
 int		cub_check_map_player(char **map);
 int		cub_check_map_symbols(t_parser *parser, char **map);
 void	cub_check_map_define_symbols(t_parser *parser);
+int		cub_check_doors(char **map);
+int		cub_door_comprobation(int i, unsigned long j, char **map);
 
 //TRANSFER functions
 void	cub_transfer_data(t_cub *cub, t_parser *parser);
