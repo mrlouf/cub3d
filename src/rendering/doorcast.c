@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   doorcast.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 12:14:01 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:09:04 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/rendering.h"
-
-#include <math.h>
-#include <stdlib.h>
 
 int	cub_doorcasting(t_cub *cub, t_ray *ray)
 {

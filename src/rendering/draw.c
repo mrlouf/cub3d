@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:29:11 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 12:49:59 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:46:08 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	cub_draw_fov(t_cub *cub)
 	leftcone.y = cub->player->pos.y + sin(cub->player->angle + 0.58) * 5;
 	rightcone.x = cub->player->pos.x + cos(cub->player->angle - 0.58) * 5;
 	rightcone.y = cub->player->pos.y + sin(cub->player->angle - 0.58) * 5;
-	cub_dda(cub, start, leftcone, 0xFF000050);
-	cub_dda(cub, start, rightcone, 0xFF000050);
+	cub_dda(cub, start, leftcone, 0xFF0000FF);
+	cub_dda(cub, start, rightcone, 0xFF0000FF);
 }
 
 /*

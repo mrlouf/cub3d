@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   doors.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 12:31:52 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 12:41:53 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:41:18 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	cub_calculate_door_texture(t_texture_data *data, t_ray *ray)
 {
 	data->wall_x -= floor(data->wall_x);
 	data->tex_x = (int)(data->wall_x * data->texture->width);
-	data->step = (double)data->texture->height / (ray->dend - ray->dstart);
+	data->step = (double)data->texture->height \
+		/ (int)(WINDOW_HEIGHT / ray->door_d);
 }
 
 void	cub_calculate_door_height(t_ray *ray)
@@ -38,6 +39,8 @@ void	cub_calculate_door_distance(t_ray *ray)
 		ray->door_d = (ray->sided_x - (ray->delta_dx / 2));
 	else
 		ray->door_d = (ray->sided_y - (ray->delta_dy / 2));
+	if (ray->door_d < 0.01)
+		ray->door_d = 0.01;
 }
 
 void	cub_set_texture_door(t_texture_data *data, t_cub *cub, t_ray *ray)
@@ -59,7 +62,8 @@ void	cub_draw_doors(t_cub *cub, t_ray *ray, int x)
 
 	cub_set_texture_door(&data, cub, ray);
 	cub_calculate_door_texture(&data, ray);
-	tex_pos = (ray->dstart - WINDOW_HEIGHT / 2 + ray->door_h / 2) * data.step;
+	tex_pos = (ray->dstart - WINDOW_HEIGHT / 2 + (int)(WINDOW_HEIGHT / \
+	ray->door_h) / 2) * data.step + (data.texture->height / 2);
 	i = ray->dstart;
 	while (i < ray->dend)
 	{

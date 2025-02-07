@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 14:00:51 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 18:59:32 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:41:22 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	cub_init_pixels(t_cub *cub)
 	return (0);
 }
 
-void	set_texture_and_wall(t_texture_data *data, t_cub *cub, t_ray *ray)
+void	cub_set_texture_and_wall(t_texture_data *data, t_cub *cub, t_ray *ray)
 {
 	if (ray->side == 0)
 	{
@@ -55,20 +55,7 @@ void	set_texture_and_wall(t_texture_data *data, t_cub *cub, t_ray *ray)
 	}
 }
 
-static void	calculate_wall_height(t_ray *ray)
-{
-	int	line_height;
-
-	line_height = (int)(WINDOW_HEIGHT / ray->wall_d);
-	ray->start = -line_height / 2 + WINDOW_HEIGHT / 2;
-	ray->end = line_height / 2 + WINDOW_HEIGHT / 2;
-	if (ray->start < 0)
-		ray->start = 0;
-	if (ray->end >= WINDOW_HEIGHT)
-		ray->end = WINDOW_HEIGHT - 1;
-}
-
-void	calculate_texture_position(t_texture_data *data, t_ray *ray)
+void	cub_calculate_texture_position(t_texture_data *data, t_ray *ray)
 {
 	int	line_height;
 
@@ -90,9 +77,9 @@ void	cub_update_pixels(t_cub *cub, t_ray *ray, int x)
 	uint32_t		color;
 	uint8_t			*pixel_ptr;
 
-	calculate_wall_height(ray);
-	set_texture_and_wall(&data, cub, ray);
-	calculate_texture_position(&data, ray);
+	cub_calculate_wall_height(ray);
+	cub_set_texture_and_wall(&data, cub, ray);
+	cub_calculate_texture_position(&data, ray);
 	tex_pos = (ray->start - WINDOW_HEIGHT / 2 + \
 		(int)(WINDOW_HEIGHT / ray->wall_d) / 2) * data.step;
 	i = ray->start;
