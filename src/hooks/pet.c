@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:40:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/04 11:36:01 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:12:56 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	cub_pet(t_cub *cub)
 	static int		is_petting = 0;
 	const double	frame_duration = 0.05;
 
-	if (mlx_is_mouse_down(cub->mlx, MLX_MOUSE_BUTTON_LEFT) && !is_petting)
+	if ((mlx_is_mouse_down(cub->mlx, MLX_MOUSE_BUTTON_LEFT)
+			|| mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT_CONTROL)) && !is_petting)
 		cub_start_shooting(&is_petting, &frame, &last_time);
 	if (!is_petting)
 		return ;

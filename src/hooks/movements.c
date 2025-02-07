@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 18:40:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 13:13:14 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:02:52 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	cub_movements(t_cub *cub)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
 		cub_move_backward(cub);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
-		cub_rotate_left(cub, 1.0);
+		cub_rotate_left(cub, 2.0);
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
-		cub_rotate_right(cub, 1.0);
+		cub_rotate_right(cub, 2.0);
 }

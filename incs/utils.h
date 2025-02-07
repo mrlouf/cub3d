@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:33:01 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 12:53:38 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:46:48 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	cub_delete_horse_txt(t_cub *cub);
 void	cub_delete_npc1_txt(t_cub *cub);
 void	cub_clean_sprite_list(t_cub *cub);
 
-void	cub_select_sprite(t_cub *cub, int x, t_sprite *sprite);
+void	cub_select_sprite(t_cub *cub, int x, t_sprite *sprite, int layer);
 void	cub_get_sprite_width(t_cub *cub, t_sprite *sprite);
 void	cub_sort_sprites(t_list **sprites);
 

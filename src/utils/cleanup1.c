@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:32:42 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/05 12:52:59 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:33:35 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,12 @@ void	cub_clean_mlx(t_cub *cub)
 			cub_delete_image(cub->mlx, &cub->background_img);
 		if (cub->raycast_img)
 			cub_delete_image(cub->mlx, &cub->raycast_img);
-		if (cub->obj_img)
-			cub_delete_image(cub->mlx, &cub->obj_img);
+		if (cub->door_img)
+			cub_delete_image(cub->mlx, &cub->door_img);
+		if (cub->obj_img_f)
+			cub_delete_image(cub->mlx, &cub->obj_img_f);
+		if (cub->obj_img_b)
+			cub_delete_image(cub->mlx, &cub->obj_img_b);
 		mlx_terminate(cub->mlx);
 		cub->mlx = NULL;
 	}
