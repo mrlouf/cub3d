@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 18:10:33 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 09:19:28 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,23 +52,28 @@ int	find_map_start(int fd, char **line)
 
 int	cub_check_map_space(t_parser *parser, char **map, int i, int j)
 {
-	if (i > 0 && j > 0 && map[i - 1][j - 1] != '1' && map[i - 1][j - 1] != ' ')
+	if (i > 0 && j > 0 && map[i - 1][j - 1] && map[i - 1][j - 1] != '1'
+		&& map[i - 1][j - 1] != ' ')
 		return (1);
-	if (i > 0 && map[i - 1][j] != '1' && map[i - 1][j] != ' ')
+	if (i > 0 && map[i - 1][j] && map[i - 1][j] != '1' && map[i - 1][j] != ' ')
 		return (1);
-	if (i > 0 && j < parser->rows - 1
+	if (i > 0 && j < parser->rows - 1 && !(j + 2 > (int)ft_strlen(map[i + 1]))
 		&& map[i - 1][j + 1] != '1' && map[i - 1][j + 1] != ' ')
 		return (1);
-	if (j > 0 && map[i][j - 1] != '1' && map[i][j - 1] != ' ')
+	if (j > 0 && !(j + 2 > (int)ft_strlen(map[i + 1]))
+		&& map[i][j - 1] != '1' && map[i][j - 1] != ' ')
 		return (1);
-	if (j < parser->rows - 1 && map[i][j + 1] != '1' && map[i][j + 1] != ' ')
+	if (j < parser->rows - 1 && !(j + 2 > (int)ft_strlen(map[i + 1]))
+		&& map[i][j + 1] != '1' && map[i][j + 1] != ' ')
 		return (1);
-	if (i < parser->rows - 1 && j > 0
+	if (i < parser->rows - 1 && j > 0 && !(j + 2 > (int)ft_strlen(map[i + 1]))
 		&& map[i + 1][j - 1] != '1' && map[i + 1][j - 1] != ' ')
 		return (1);
-	if (i < parser->rows - 1 && map[i + 1][j] != '1' && map[i + 1][j] != ' ')
+	if (i < parser->rows - 1 && !(j + 2 > (int)ft_strlen(map[i + 1]))
+		&& map[i + 1][j] != '1' && map[i + 1][j] != ' ' )
 		return (1);
 	if (i < parser->rows - 1 && j < parser->cols - 1
+		&& !(j + 2 > (int)ft_strlen(map[i + 1]))
 		&& map[i + 1][j + 1] != '1' && map[i + 1][j + 1] != ' ')
 		return (1);
 	return (0);

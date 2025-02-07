@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 18:39:07 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 09:19:59 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ void	cub_populate_map(t_parser *parser, char *filename)
 	int		i;
 	char	*line;
 
-	printf("cols:%d\n", parser->cols);
 	fd = open(filename, O_RDONLY);
 	cub_skip_header(fd, &i);
 	i = -1;

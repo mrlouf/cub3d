@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 18:42:42 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 09:47:57 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,12 @@ void	cub_init_parser(t_parser *parser, char *filename)
 int	cub_parse(t_cub *cub, char *filename)
 {
 	t_parser	parser;
+	double		ratio;
 
 	cub_init_parser(&parser, filename);
+	ratio = WINDOW_HEIGHT / parser.rows;
+	if (ratio < 9.00)
+		return (ft_putendl_fd("caca", 2), 1);
 	if (cub_format_checks(&parser, filename))
 		return (1);
 	cub_populate_parser(&parser, filename);

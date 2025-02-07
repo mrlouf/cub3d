@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 17:46:00 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 09:19:51 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	cub_check_map_voids(t_parser *parser, char **map)
 	int	i;
 	int	j;
 
-	ft_print_array(map);
 	i = 0;
 	while (map[i])
 	{
