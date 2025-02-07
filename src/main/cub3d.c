@@ -6,7 +6,7 @@
 /*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:24:55 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 09:36:26 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:53:34 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,6 @@ void	cub_loop(void *param)
 		return ;
 	cub_hook(cub);
 	cub_draw(cub);
-	printf("pos_x=%f pos_y=%f dir_x=%f dir_y=%f plane_x=%f plane_y=%f\n", \
-	cub->player->pos.x, cub->player->pos.y, cub->player->dir.x, \
-	cub->player->dir.y, cub->player->plane.x, cub->player->plane.y);
 }
 
 void	cub_set_mouse(t_cub *cub)
@@ -49,12 +46,12 @@ void	cub_mouse_hook(double xpos, double ypos, void *data)
 		return ;
 	if (xpos < WINDOW_WIDTH / 2)
 	{
-		cub_rotate_left(cub);
+		cub_rotate_left(cub, 0.25);
 		mlx_set_mouse_pos(cub->mlx, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	}
 	if (xpos > WINDOW_WIDTH / 2)
 	{
-		cub_rotate_right(cub);
+		cub_rotate_right(cub, 0.25);
 		mlx_set_mouse_pos(cub->mlx, WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2);
 	}
 }
@@ -65,16 +62,16 @@ void	cub_mouse_hook(double xpos, double ypos, void *data)
 */
 int	cub_start(t_cub *cub)
 {
-	cub->mlx = mlx_init(WINDOW_WIDTH, WINDOW_HEIGHT, "Cub3D", true);
-	cub->img = mlx_new_image(cub->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (!cub->mlx || !cub->img)
+	if (cub_prep_wall_textures(cub) || cub_prep_player_textures(cub)
+		|| cub_prep_cow_textures(cub) || cub_prep_horse_textures(cub)
+		|| cub_prep_npc1_textures(cub))
 		return (cub_clean(cub), 1);
-	if (cub_prep_wall_textures(cub))
-		return (cub_clean(cub), 1);
+	cub_draw_player(cub);
 	mlx_set_icon(cub->mlx, cub->icon);
 	cub_set_mouse(cub);
+	cub_init_sprites(cub, &cub->sprites);
 	cub_draw(cub);
-	mlx_image_to_window(cub->mlx, cub->img, 0, 0);
+	mlx_image_to_window(cub->mlx, cub->mini, 0, 0);
 	mlx_loop_hook(cub->mlx, cub_loop, cub);
 	mlx_cursor_hook(cub->mlx, cub_mouse_hook, cub);
 	mlx_loop(cub->mlx);
@@ -89,20 +86,10 @@ int	cub_cub3d(char **av)
 	if (!cub)
 		return (1);
 	if (cub_init(cub, av))
-	{
-		cub_clean(cub);
-		return (1);
-	}
+		return (cub_clean(cub), 1);
 	if (cub_parse(cub, av[1]))
-	{
-		cub_clean(cub);
-		return (1);
-	}
+		return (cub_clean(cub), 1);
 	if (cub_start(cub))
-	{
-		cub_clean(cub);
-		return (1);
-	}
-	cub_clean(cub);
-	return (0);
+		return (cub_clean(cub), 1);
+	return (cub_clean(cub), 0);
 }

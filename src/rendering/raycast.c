@@ -3,23 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 11:11:26 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:00:24 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/rendering.h"
 
-#include <math.h>
-#include <stdlib.h>
-
 /*
 	Initialises a single ray with basic information needed to compute
 	the distance to the wall later like the direction, position and delta.
 */
-static void	cub_init_ray(t_ray *ray, int x, t_player *player)
+void	cub_init_ray(t_ray *ray, int x, t_player *player)
 {
 	ray->camera_x = 2 * x / (double)WINDOW_WIDTH - 1;
 	ray->dir_x = \
@@ -29,19 +26,20 @@ static void	cub_init_ray(t_ray *ray, int x, t_player *player)
 	ray->map_x = (int)player->pos.x;
 	ray->map_y = (int)player->pos.y;
 	if (ray->dir_x == 0)
-		ray->delta_dx = 1.0E30;
+		ray->delta_dx = INFINITY;
 	else
 		ray->delta_dx = fabs(1 / ray->dir_x);
 	if (ray->dir_y == 0)
-		ray->delta_dy = 1.0E30;
+		ray->delta_dy = INFINITY;
 	else
 		ray->delta_dy = fabs(1 / ray->dir_y);
+	ray->door_hit = 0;
 }
 
 /*
 	Calculates the step of each ray.
 */
-static void	cub_calculate_step(t_ray *ray, t_player *player)
+void	cub_calculate_step(t_ray *ray, t_player *player)
 {
 	if (ray->dir_x < 0)
 	{
@@ -68,14 +66,10 @@ static void	cub_calculate_step(t_ray *ray, t_player *player)
 /*
 	Uses the side distances x and y from the ray to compare with the map
 	to check for a potential collision with a wall.
-	!A non-closed map leads to infinite calculation > OVERFLOW!
 */
-static void	cub_calculate_wall_distance(t_ray *ray, int **map)
+void	cub_calculate_wall_distance(t_ray *ray, int **map)
 {
-	int	hit;
-
-	hit = 0;
-	while (hit == 0)
+	while (42)
 	{
 		if (ray->sided_x < ray->sided_y)
 		{
@@ -89,13 +83,17 @@ static void	cub_calculate_wall_distance(t_ray *ray, int **map)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (map[ray->map_x][ray->map_y] > 0)
-			hit = 1;
+		if (!ray->door_hit && map[ray->map_x][ray->map_y] == 2)
+			cub_calculate_door_distance(ray);
+		else if (map[ray->map_x][ray->map_y] == 1)
+			break ;
 	}
 	if (ray->side == 0)
-		ray->wall_d = (ray->sided_x - ray->delta_dx);
+		ray->wall_d = (ray->sided_x - (ray->delta_dx));
 	else
-		ray->wall_d = (ray->sided_y - ray->delta_dy);
+		ray->wall_d = (ray->sided_y - (ray->delta_dy));
+	if (ray->wall_d < 0.1)
+		ray->wall_d = 0.1;
 }
 
 /*
@@ -103,7 +101,7 @@ static void	cub_calculate_wall_distance(t_ray *ray, int **map)
 	of the ray to be drawn, which gives the start and end points of the ray,
 	that are rounded up to zero or down to WIN_SIZE to avoid pixels out of bound.
 */
-static void	cub_calculate_wall_height(t_ray *ray)
+void	cub_calculate_wall_height(t_ray *ray)
 {
 	ray->wall_h = (int)WINDOW_HEIGHT / ray->wall_d;
 	ray->start = -ray->wall_h / 2 + WINDOW_HEIGHT / 2;
@@ -112,12 +110,15 @@ static void	cub_calculate_wall_height(t_ray *ray)
 	ray->end = ray->wall_h / 2 + WINDOW_HEIGHT / 2;
 	if (ray->end >= WINDOW_HEIGHT)
 		ray->end = WINDOW_HEIGHT;
+	if (ray->door_hit)
+		cub_calculate_door_height(ray);
 }
 
 /*
 	The incredible ray-casting machinery.
 	It calculates each ray needed depending on the FOV, then the step,
-	wall distance and wall height of the ray before updating the pixels.
+	wall distance and wall height of the ray before drawing the wall
+	and, if present, the door.
 */
 int	cub_raycasting(t_cub *cub, t_ray *ray)
 {
@@ -131,6 +132,7 @@ int	cub_raycasting(t_cub *cub, t_ray *ray)
 		cub_calculate_wall_distance(ray, cub->map);
 		cub_calculate_wall_height(ray);
 		cub_update_pixels(cub, ray, x);
+		cub->zbuffer->wall_dist = ray->wall_d;
 		x++;
 	}
 	return (0);

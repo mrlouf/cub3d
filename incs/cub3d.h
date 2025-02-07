@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 18:30:23 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 11:26:01 by nponchon         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:07:05 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 # include <stdio.h>
 # include <math.h>
+# include <sys/time.h>
 
 # include "../libs/libft/libft.h"
 # include "../libs/libft/ft_printf/includes/ft_printf.h"
 # include "../libs/mlx42/include/MLX42/MLX42.h"
+# include "sprites.h"
 
 // DEFINES
 
@@ -28,6 +30,9 @@
 # define MINIMAP_HEIGHT	100
 # define MINIMAP_PX		10
 # define TILE_SIZE		64
+# define COOLDOWN_PERIOD 500000
+# define BPP 4
+# define M_PI 3.14159265358979323846
 
 // STRUCTURES
 
@@ -53,6 +58,7 @@ typedef struct s_textures
 	mlx_texture_t			*so_t;
 	mlx_texture_t			*ea_t;
 	mlx_texture_t			*we_t;
+	mlx_texture_t			*d_t;
 }	t_textures;
 
 typedef struct s_images
@@ -61,6 +67,7 @@ typedef struct s_images
 	mlx_image_t			*so_i;
 	mlx_image_t			*ea_i;
 	mlx_image_t			*we_i;
+	mlx_image_t			*d_i;
 }	t_images;
 
 enum e_texture_index
@@ -71,8 +78,12 @@ enum e_texture_index
 	WEST = 3
 };
 
+/*
+	Ray structure for drawing walls as well as doors.
+*/
 typedef struct s_ray
 {
+	int		hit;
 	double	camera_x;
 	double	dir_x;
 	double	dir_y;
@@ -90,6 +101,12 @@ typedef struct s_ray
 	int		start;
 	int		end;
 	double	wall_x;
+	int		door_hit;
+	double	door_d;
+	int		dside;
+	int		door_h;
+	int		dstart;
+	int		dend;
 }	t_ray;
 
 typedef struct s_delta
@@ -110,6 +127,34 @@ typedef struct s_texture_data
 	double		step;
 }	t_texture_data;
 
+typedef struct s_sprite
+{
+	t_vector	pos;
+	double		distance;
+	double		angle;
+	int			screen_x;
+	int			size;
+	int			width;
+	int			type;
+	double		sprite_dx;
+	double		sprite_dy;
+	double		inv_det;	
+	double		transform_x;
+	double		transform_y;
+	int			sprite_screen_x;
+	int			sprite_size;
+	int			draw_start_x;
+	int			draw_end_x;
+	int			x;
+	int			tex_x;
+}	t_sprite;
+
+typedef struct s_zbuffer
+{
+	double	wall_dist;
+	double	door_dist;
+}	t_zbuffer;
+
 typedef struct s_cub
 {
 	int				minimap_px;
@@ -124,12 +169,29 @@ typedef struct s_cub
 	char			*so_t;
 	char			*ea_t;
 	char			*we_t;
-	t_textures		*w_textures;
-	t_images		*w_images;
-	mlx_image_t		*img;
+	t_zbuffer		*zbuffer;
+	int				door_distance;
+	t_wall_txt		*w_textures;
+	t_player_txt	*player_txt;
+	t_cow_txt		*cow_txt;
+	t_horse_txt		*horse_txt;
+	t_npc_1_txt		*npc_1_txt;
+	t_wall_img		*w_images;
+	t_player_img	*player_img;
+	t_cow_img		*cow_img;
+	t_horse_img		*horse_img;
+	t_npc_1_img		*npc_1_img;
 	mlx_texture_t	*icon;
 	mlx_t			*mlx;
+	struct timeval	toggle_door;
 	t_player		*player;
+	mlx_image_t		*background_img;
+	mlx_image_t		*raycast_img;
+	mlx_image_t		*door_img;
+	mlx_image_t		*obj_img_b;
+	mlx_image_t		*obj_img_f;
+	mlx_image_t		*mini;
+	t_list			*sprites;
 }	t_cub;
 
 // PROTOTYPES
@@ -141,8 +203,6 @@ int		cub_parse(t_cub *cub, char *filename);
 int		cub_start(t_cub *cub);
 void	cub_draw(t_cub *cub);
 void	cub_hook(void *param);
-int		cub_raycasting(t_cub *cub, t_ray *ray);
 void	cub_clean(t_cub *cub);
-void	cub_delete_textures(t_cub *cub);
 
 #endif

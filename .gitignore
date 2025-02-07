@@ -2,6 +2,8 @@
 
 cub3D
 
+*.cpp
+
 # Prerequisites
 *.d
 

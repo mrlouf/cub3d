@@ -5,11 +5,22 @@ MAP_DIR="./maps/good/"
 
 # List of all .cub files (based on the screenshot)
 MAPS=(
+	"big.cub"
+	"bigger.cub"
+	"bigger2.cub"
+	"bigger3_1080.cub"
 	"cheese_maze.cub"
+	"cows_2.cub"
+	"cows_3.cub"
+	"cows_horse_1.cub"
+	"cows_horse_2.cub"
+	"explotation.cub"
 	"creepy.cub"
 	"dungeon.cub"
+	"example.cub"
 	"library.cub"
 	"matrix.cub"
+	"order.cub"
 	"sad_face.cub"
 	"square_map.cub"
 	"subject_map.cub"
@@ -22,7 +33,6 @@ MAPS=(
 	"test_whitespace.cub"
 	"test_spiral.cub"
 	"works.cub"
-	"example.cub"
 )
 
 # Loop through each map and run ./cub3d

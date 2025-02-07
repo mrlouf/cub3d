@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/03 11:49:28 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:16:54 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	cub_print_map(t_cub *cub)
 	}
 }
 
-void	allocate_map_row(t_cub *cub, t_parser *parser, int i)
+void	cub_allocate_map_row(t_cub *cub, t_parser *parser, int i)
 {
 	cub->map[i] = malloc(sizeof(int) * parser->cols);
 	if (!cub->map[i])

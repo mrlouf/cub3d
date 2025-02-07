@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 12:45:35 by hmunoz-g          #+#    #+#             */
-/*   Updated: 2025/01/29 15:41:33 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/06 18:37:50 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,7 @@ int			ft_strcmp(char *s1, char *s2);
 char		*ft_strdup_lower(const char *str);
 void		ft_exit_error(char *msg, int code);
 char		**ft_array_flip(char **arr, int rows, int cols);
+double		ft_get_current_time(void);
+char		*ft_strcpy_pad(const char *src, size_t size);
 
 #endif

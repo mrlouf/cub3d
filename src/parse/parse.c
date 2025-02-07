@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/01/30 17:27:42 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 09:53:21 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,20 @@
 
 void	cub_populate_parser(t_parser *parser, char *filename)
 {
+	int	i;
+
 	cub_allocate_parser_map(parser, filename);
 	cub_populate_map(parser, filename);
 	cub_populate_textures(parser, filename);
 	cub_populate_colors(parser, filename);
 	parser->rows = ft_array_count(parser->map);
+	i = -1;
 	parser->cols = ft_strlen(parser->map[0]);
+	while (++i < parser->rows)
+	{
+		if (ft_strlen(parser->map[i]) > (size_t)parser->cols)
+			parser->cols = ft_strlen(parser->map[i]);
+	}
 }
 
 int	cub_content_checks(t_parser *parser)
@@ -56,9 +64,11 @@ int	cub_format_checks(t_parser *parser, char *filename)
 	return (0);
 }
 
-void	cub_init_parser(t_parser *parser)
+void	cub_init_parser(t_parser *parser, char *filename)
 {
-	int	i;
+	int		i;
+	int		fd;
+	char	*line;
 
 	i = -1;
 	while (++i < 4)
@@ -68,15 +78,32 @@ void	cub_init_parser(t_parser *parser)
 		parser->n_c[i] = 0;
 	parser->map = NULL;
 	parser->symbols = NULL;
+	parser->rows = 0;
+	parser->cols = 0;
+	fd = open(filename, O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
+	{
+		parser->rows++;
+		if ((int)ft_strlen(line) > parser->cols)
+			parser->cols = ft_strlen(line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
 }
 
 int	cub_parse(t_cub *cub, char *filename)
 {
 	t_parser	parser;
+	double		ratio;
 
-	cub_init_parser(&parser);
+	cub_init_parser(&parser, filename);
 	if (cub_format_checks(&parser, filename))
 		return (1);
+	ratio = WINDOW_HEIGHT / parser.rows;
+	if (ratio < 9.00)
+		return (ft_putendl_fd(MAP_SIZE_L_ERR, 2), 1);
 	cub_populate_parser(&parser, filename);
 	if (cub_content_checks(&parser))
 	{
