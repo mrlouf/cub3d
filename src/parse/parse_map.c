@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/07 09:19:51 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:06:33 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ int	cub_check_map_symbols(t_parser *parser, char **map)
 				if (map[i][j] == parser->symbols[k][0])
 					break ;
 			if (!parser->symbols[k])
-			{
-				printf("failed:%c\n", map[i][j]);
 				return (ft_putendl_fd(MAP_CHAR_ERR, 2), 1);
-			}
 		}
 	}
 	return (0);
@@ -93,7 +90,7 @@ int	cub_check_map_voids(t_parser *parser, char **map)
 		{
 			if (map[i][j] == ' ')
 			{
-				if (cub_check_map_space(parser, map, i, j))
+				if (cub_check_map_space_1(parser, map, i, j))
 				{
 					ft_putendl_fd(MAP_VOID_ERR, 2);
 					return (1);

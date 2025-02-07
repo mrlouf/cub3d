@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/07 09:19:28 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:06:16 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,44 +28,8 @@ void	cub_skip_header(int fd, int *i)
 	free(line);
 }
 
-int	check_line_start(char *line)
+int	cub_check_map_space_2(t_parser *parser, char **map, int i, int j)
 {
-	int	i;
-
-	i = 0;
-	while (ft_isspace(line[i]))
-		i++;
-	return (line[i] == '1');
-}
-
-int	find_map_start(int fd, char **line)
-{
-	while (*line)
-	{
-		if (check_line_start(*line))
-			return (1);
-		free(*line);
-		*line = get_next_line(fd);
-	}
-	return (0);
-}
-
-int	cub_check_map_space(t_parser *parser, char **map, int i, int j)
-{
-	if (i > 0 && j > 0 && map[i - 1][j - 1] && map[i - 1][j - 1] != '1'
-		&& map[i - 1][j - 1] != ' ')
-		return (1);
-	if (i > 0 && map[i - 1][j] && map[i - 1][j] != '1' && map[i - 1][j] != ' ')
-		return (1);
-	if (i > 0 && j < parser->rows - 1 && !(j + 2 > (int)ft_strlen(map[i + 1]))
-		&& map[i - 1][j + 1] != '1' && map[i - 1][j + 1] != ' ')
-		return (1);
-	if (j > 0 && !(j + 2 > (int)ft_strlen(map[i + 1]))
-		&& map[i][j - 1] != '1' && map[i][j - 1] != ' ')
-		return (1);
-	if (j < parser->rows - 1 && !(j + 2 > (int)ft_strlen(map[i + 1]))
-		&& map[i][j + 1] != '1' && map[i][j + 1] != ' ')
-		return (1);
 	if (i < parser->rows - 1 && j > 0 && !(j + 2 > (int)ft_strlen(map[i + 1]))
 		&& map[i + 1][j - 1] != '1' && map[i + 1][j - 1] != ' ')
 		return (1);
@@ -75,6 +39,28 @@ int	cub_check_map_space(t_parser *parser, char **map, int i, int j)
 	if (i < parser->rows - 1 && j < parser->cols - 1
 		&& !(j + 2 > (int)ft_strlen(map[i + 1]))
 		&& map[i + 1][j + 1] != '1' && map[i + 1][j + 1] != ' ')
+		return (1);
+	return (0);
+}
+
+int	cub_check_map_space_1(t_parser *parser, char **map, int i, int j)
+{
+	if (i > 0 && j > 0 && !(j + 2 > (int)ft_strlen(map[i - 1]))
+		&& map[i - 1][j - 1] != '1' && map[i - 1][j - 1] != ' ')
+		return (1);
+	if (i > 0 && !(j + 2 > (int)ft_strlen(map[i - 1]))
+		&& map[i - 1][j] != '1' && map[i - 1][j] != ' ')
+		return (1);
+	if (i > 0 && j < parser->rows - 1 && !(j + 2 > (int)ft_strlen(map[i - 1]))
+		&& map[i - 1][j + 1] != '1' && map[i - 1][j + 1] != ' ')
+		return (1);
+	if (j > 0 && !(j + 2 > (int)ft_strlen(map[i + 1]))
+		&& map[i][j - 1] != '1' && map[i][j - 1] != ' ')
+		return (1);
+	if (j < parser->rows - 1 && !(j + 2 > (int)ft_strlen(map[i + 1]))
+		&& map[i][j + 1] != '1' && map[i][j + 1] != ' ')
+		return (1);
+	if (cub_check_map_space_2(parser, map, i, j))
 		return (1);
 	return (0);
 }

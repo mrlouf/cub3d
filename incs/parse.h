@@ -6,7 +6,7 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:36:02 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 16:09:33 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:07:01 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,8 @@ int		cub_check_content_map(t_parser *parser, char **map);
 int		cub_map_deep_check(t_parser *parser, char **map);
 int		cub_check_map_voids(t_parser *parser, char **map);
 int		cub_check_map_borders(t_parser *parser, char **map);
-int		cub_check_map_space(t_parser *parser, char **map, int i, int j);
+int		cub_check_map_space_1(t_parser *parser, char **map, int i, int j);
+int		cub_check_map_space_2(t_parser *parser, char **map, int i, int j);
 int		cub_check_map_player(char **map);
 int		cub_check_map_symbols(t_parser *parser, char **map);
 void	cub_check_map_define_symbols(t_parser *parser);

@@ -6,11 +6,33 @@
 /*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:35:04 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 16:09:24 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 10:06:04 by hmunoz-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/parse.h"
+
+int	check_line_start(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (ft_isspace(line[i]))
+		i++;
+	return (line[i] == '1');
+}
+
+int	find_map_start(int fd, char **line)
+{
+	while (*line)
+	{
+		if (check_line_start(*line))
+			return (1);
+		free(*line);
+		*line = get_next_line(fd);
+	}
+	return (0);
+}
 
 int	cub_door_comprobation(int i, unsigned long j, char **map)
 {
