@@ -132,7 +132,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME) $(PRINTFDIR)libftprintf.a $(LIBFTDIR)libft.a
 	@echo "$(RED)Cleaned all binaries$(DEF_COLOR)"
-	@$(RM) MLX42/build
+	@$(RM) $(MLXDIR)
 
 re: fclean all
 
