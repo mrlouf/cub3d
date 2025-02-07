@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hmunoz-g <hmunoz-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nponchon <nponchon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:41:12 by nponchon          #+#    #+#             */
-/*   Updated: 2025/02/06 12:18:51 by hmunoz-g         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:00:24 by nponchon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../incs/rendering.h"
-
-#include <math.h>
-#include <stdlib.h>
 
 /*
 	Initialises a single ray with basic information needed to compute
@@ -135,8 +132,6 @@ int	cub_raycasting(t_cub *cub, t_ray *ray)
 		cub_calculate_wall_distance(ray, cub->map);
 		cub_calculate_wall_height(ray);
 		cub_update_pixels(cub, ray, x);
-		if (ray->door_hit && (ray->door_d < ray->wall_d))
-			cub_draw_doors(cub, ray, x);
 		cub->zbuffer->wall_dist = ray->wall_d;
 		x++;
 	}
